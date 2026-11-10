@@ -1,0 +1,37 @@
+# Python environments and interpreter artifacts
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# IDE and operating system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Generated reports, logs, and prototype output
+reports/output/
+reports/generated/
+*.log
+*.tmp
+
+# Large/generated binaries; retain the versioned v0.2 map artifacts
+*.mp4
+*.zip
+*.npy
+*.png
+!data/maps/department_v0_2/department_map.npy
+!data/maps/department_v0_2/map_preview.png
+!assets/floor_plans/
+!assets/floor_plans/**
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example

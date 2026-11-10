@@ -135,7 +135,7 @@ report["rooms"] = rooms_rep
 print(json.dumps(report, indent=2))
 
 # ---------------- save ----------------
-OUTPUT_DIR = Path(__file__).resolve().parents[1] / "assets" / "original_floor_plan"
+OUTPUT_DIR = Path(__file__).resolve().parents[2] / "data" / "maps" / "department_v0_2"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 np.save(OUTPUT_DIR / "department_map.npy", grid)
 meta = {"cell_m": CELL_M, "origin_px": [XMIN, YMIN], "ppm": PPM, "start_cell": list(start),
