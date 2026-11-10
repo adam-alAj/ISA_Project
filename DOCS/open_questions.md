@@ -16,6 +16,10 @@ Hello, we are confirming the project requirements before implementation. The SRS
 | Confirm live-demo duration, required workflow, and whether a recorded backup is accepted. | Team lead `<TBD>` | HUMAN ACTION — unanswered |
 | Identify project team members, communication channel, and decision owner. | Team | HUMAN ACTION — names `<TBD>` |
 | Supply the original, highest-quality floor-plan photo/vector/PDF for preservation. | Map owner `<TBD>` | HUMAN ACTION — source photo missing from workspace |
+| Confirm the 4.8 m and 2 m labels map to the candidate spans in the current trace. | Map owner `<TBD>` | HUMAN ACTION — source photo review pending |
+| Resolve the traced room-size mismatch: current R6 area is about 101.5% larger than R4, while the confirmed order says R4 > R6. | Team/map owner `<TBD>` | HUMAN ACTION — do not freeze or edit geometry before decision |
+| Approve the permanently-open door policy and the proposed demo goal set, including the alternate start for the around-column case. | Team/instructor `<TBD>` | HUMAN ACTION — review checklist pending |
+| Approve provisional robot size, speed, cleaning width, battery/lifetime, and energy assumptions. | Team/instructor `<TBD>` | HUMAN ACTION — parameter sheet pending |
 
 ## Decisions awaiting answers
 

@@ -11,5 +11,6 @@
 | ADR-0007 | Human-assisted map pipeline | Proposed |
 | ADR-0008 | 0.10 m map cell size | Proposed |
 | ADR-0009 | IDFS interpreted as IDDFS/IDS | Proposed, instructor confirmation pending |
+| ADR-0010 | Preserve department map v0.2 at 0.10 m resolution | Proposed, source review pending |
 
 Each ADR records context, decision, consequences, and status. Human decisions remain provisional until the named owner or instructor confirms them.
