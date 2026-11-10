@@ -1,0 +1,19 @@
+{
+  "cell_m": 0.1,
+  "origin_px": [
+    80,
+    160
+  ],
+  "ppm": 108.0,
+  "start_cell": [
+    118,
+    54
+  ],
+  "states": {
+    "FREE": 0,
+    "OCCUPIED": 1,
+    "UNKNOWN": 2,
+    "DOOR": 3
+  },
+  "version": "0.2-draft"
+}
