@@ -19,3 +19,4 @@
 
 Each ADR records context, decision, consequences, and status. Human decisions remain provisional until the named owner or instructor confirms them.
 | ADR-0015 | SearchResult and trace contract | Draft; validation pending |
+| ADR-0016 | Simulation event/snapshot contract | Draft; validation pending |
