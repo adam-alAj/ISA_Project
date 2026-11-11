@@ -5,6 +5,7 @@ from hashlib import sha256
 import json
 import time
 import threading
+from pathlib import Path
 
 from src.algorithms.problem import SearchProblem
 from src.robot.state import StopReason
@@ -27,12 +28,13 @@ class CoverageResult:
 
 class CoverageController:
     def __init__(self, robot, cleanable, policy, planner, algorithm_id, *, options=None, max_iterations=100000,
-                 snapshot_cadence=1, snapshot_capacity=256):
+                 snapshot_cadence=1, snapshot_capacity=256, event_sink_path: str | Path | None = None):
         self.robot, self.cleanable, self.policy, self.planner = robot, cleanable, policy, planner
         self.algorithm_id, self.options = algorithm_id, options
         self.max_iterations, self.snapshot_cadence = max_iterations, max(1, snapshot_cadence)
         self.snapshots = __import__('collections').deque(maxlen=snapshot_capacity)
-        self.events = EventLog(); self._cancel = threading.Event(); self.paused = False
+        self.event_sink_path = event_sink_path
+        self.events = EventLog(sink_path=event_sink_path); self._cancel = threading.Event(); self.paused = False
         config = {"algorithm": algorithm_id, "policy": policy.policy_id,
                   "cleanable_cells": sorted(cleanable.cells),
                   "robot": asdict(robot.config), "cell_m": robot.grid_map.cell_m}
@@ -42,7 +44,7 @@ class CoverageController:
     def pause(self): self.paused = True
     def resume(self): self.paused = False
     def reset(self):
-        self.robot.reset(); self.events = EventLog(); self.snapshots.clear(); self._cancel.clear()
+        self.robot.reset(); self.events = EventLog(sink_path=self.event_sink_path); self.snapshots.clear(); self._cancel.clear()
 
     def run(self):
         self.events.emit("RunStarted", self.robot.state.elapsed_time_s, run_id=self.run_id, algorithm=self.algorithm_id)
