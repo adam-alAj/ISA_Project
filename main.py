@@ -1,10 +1,10 @@
-"""Runnable phase-zero entry point for the Smart Vacuum project skeleton."""
+"""Run the Smart Vacuum desktop application."""
 
 
 def main() -> None:
-    """Report that the project skeleton is ready for implementation."""
-    print("Smart Vacuum Cleaner simulation skeleton is ready.")
-    print("See README.md for setup and docs/ for the P0 baseline.")
+    """Launch the Qt desktop application."""
+    from src.app.app import main as app_main
+    raise SystemExit(app_main())
 
 
 if __name__ == "__main__":

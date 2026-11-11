@@ -5,7 +5,7 @@ class RouteExecutor:
     def __init__(self, robot, event_log):
         self.robot, self.events = robot, event_log
 
-    def execute(self, path):
+    def execute(self, path, action_boundary=None):
         executed = []
         for target in tuple(path)[1:]:
             result = self.robot.step(target)
@@ -24,4 +24,6 @@ class RouteExecutor:
             if reason:
                 self.events.emit("RunStopped", self.robot.state.elapsed_time_s, reason=reason.value)
                 break
+            if action_boundary is not None:
+                action_boundary()
         return tuple(executed)

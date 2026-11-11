@@ -180,6 +180,10 @@ def test_map_bundle_round_trip_and_schema_validation(tmp_path: Path) -> None:
     assert metadata["schema_version"] == 1 and metadata["spec_sha256"]
     assert set(hashes) == {"map.json", "grid.npz"}
     document = json.loads((tmp_path / "map.json").read_text())
+    document["grid_npz_sha256"] = document["grid_npz_sha256"].upper()
+    (tmp_path / "map.json").write_text(json.dumps(document))
+    load_map(tmp_path)  # hexadecimal digest casing does not affect integrity
+    document = json.loads((tmp_path / "map.json").read_text())
     document["schema_version"] = 99
     (tmp_path / "map.json").write_text(json.dumps(document))
     with pytest.raises(ValueError):

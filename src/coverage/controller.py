@@ -35,14 +35,36 @@ class CoverageController:
         self.snapshots = __import__('collections').deque(maxlen=snapshot_capacity)
         self.event_sink_path = event_sink_path
         self.events = EventLog(sink_path=event_sink_path); self._cancel = threading.Event(); self.paused = False
+        self._control = threading.Condition(); self._step_requested = False
         config = {"algorithm": algorithm_id, "policy": policy.policy_id,
                   "cleanable_cells": sorted(cleanable.cells),
                   "robot": asdict(robot.config), "cell_m": robot.grid_map.cell_m}
         self.run_id = sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
 
-    def cancel(self): self._cancel.set()
-    def pause(self): self.paused = True
-    def resume(self): self.paused = False
+    def cancel(self):
+        self._cancel.set()
+        with self._control: self._control.notify_all()
+    def pause(self):
+        with self._control: self.paused = True
+    def resume(self):
+        with self._control:
+            self.paused = False; self._step_requested = False; self._control.notify_all()
+    def step_once(self):
+        with self._control:
+            self.paused = True; self._step_requested = True; self._control.notify_all()
+
+    def _wait_to_select(self):
+        with self._control:
+            while self.paused and not self._cancel.is_set() and not self._step_requested:
+                self._control.wait(.1)
+
+    def _action_boundary(self):
+        with self._control:
+            while self.paused and not self._cancel.is_set():
+                if self._step_requested:
+                    self._step_requested = False
+                    return
+                self._control.wait(.1)
     def reset(self):
         self.robot.reset(); self.events = EventLog(sink_path=self.event_sink_path); self.snapshots.clear(); self._cancel.clear()
 
@@ -63,8 +85,7 @@ class CoverageController:
         while stop is None and iterations < self.max_iterations:
             if self._cancel.is_set():
                 stop = StopReason.USER_STOP; break
-            while self.paused and not self._cancel.is_set():
-                time.sleep(.01)
+            self._wait_to_select()
             if self._cancel.is_set():
                 stop = StopReason.USER_STOP; break
             cleaned_cells = set(map(tuple, __import__('numpy').argwhere(cleaned))) | excluded
@@ -95,7 +116,7 @@ class CoverageController:
                 self.events.emit("TargetUnreachable", self.robot.state.elapsed_time_s, target=target,
                                  reason="unreachable_for_planner")
             else:
-                executor.execute(result.path)
+                executor.execute(result.path, self._action_boundary)
             iterations += 1
             if iterations % self.snapshot_cadence == 0:
                 raw = len(set(map(tuple, __import__('numpy').argwhere(cleaned))) & self.cleanable.cells)

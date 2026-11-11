@@ -1,6 +1,6 @@
 # P6 UI design (provisional until ADR-0016 is accepted)
 
-**Status:** P6.01 draft only. The P5 event/snapshot API is not frozen; no UI code may consume it until the P5 gate passes.
+**Status:** P6.01 design. ADR-0016 is accepted and this design targets its frozen event/snapshot contract.
 
 ## Navigation
 

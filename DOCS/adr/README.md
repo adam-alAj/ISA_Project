@@ -19,4 +19,6 @@
 
 Each ADR records context, decision, consequences, and status. Human decisions remain provisional until the named owner or instructor confirms them.
 | ADR-0015 | SearchResult and trace contract | Draft; validation pending |
-| ADR-0016 | Simulation event/snapshot contract | Draft; validation pending |
+| ADR-0016 | Simulation event/snapshot contract | Accepted; Freeze point 4 |
+| ADR-0017 | Safe-action pause and single-step control | Accepted for P6 integration |
+| ADR-0018 | QGraphicsView map renderer | Accepted for P6 |

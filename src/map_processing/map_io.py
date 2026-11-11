@@ -61,6 +61,6 @@ def load_map(directory: str | Path) -> tuple[np.ndarray, dict[str, Any]]:
     if grid.ndim != 2 or list(grid.shape) != metadata.get("grid_shape"):
         raise ValueError("grid dimensions do not match map metadata")
     actual_hash = hashlib.sha256((target / "grid.npz").read_bytes()).hexdigest()
-    if metadata.get("grid_npz_sha256") != actual_hash:
+    if str(metadata.get("grid_npz_sha256", "")).lower() != actual_hash.lower():
         raise ValueError("grid archive hash does not match map metadata")
     return grid, metadata

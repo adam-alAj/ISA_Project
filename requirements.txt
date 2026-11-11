@@ -10,4 +10,5 @@ reportlab
 python-docx
 networkx
 pytest
+pytest-qt
 ruff
