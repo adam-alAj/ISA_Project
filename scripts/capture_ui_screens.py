@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -16,9 +17,10 @@ from src.visualization.two_d.map_canvas import MapCanvas
 
 def main():
     root=ROOT
-    app=QApplication([]); controller=AppController(data_root=root/"data")
+    app=QApplication([]); scratch=tempfile.TemporaryDirectory(prefix="vacuum-ui-capture-")
+    controller=AppController(data_root=Path(scratch.name)/"data")
     window=MainWindow(controller); window.resize(1440,900)
-    controller.load_department_map()
+    controller.load_map(root/"data"/"maps"/"department_v1")
     window.show(); app.processEvents()
     out=root/"docs"/"img"; out.mkdir(parents=True,exist_ok=True)
     names=("project_home","map_editor","robot_configuration","algorithm_setup","2d_simulation",
@@ -35,7 +37,7 @@ def main():
     golden.show(); app.processEvents()
     image=golden.render_content(480,400,include_marker_labels=False)
     image.save(str(out/"map_canvas_golden.png")); golden.close()
-    window.close()
+    window.close(); scratch.cleanup()
 
 
 if __name__=="__main__": main()

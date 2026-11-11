@@ -1,4 +1,4 @@
-# P6 UI design (provisional until ADR-0016 is accepted)
+# P6 UI design
 
 **Status:** P6.01 design. ADR-0016 is accepted and this design targets its frozen event/snapshot contract.
 
@@ -86,4 +86,4 @@ Occupancy uses both color and texture: occupied cells are dark crosshatch, unkno
                   └────────────► [Ready]
 ```
 
-Invalid configuration stays on its screen with field-level feedback. A worker owns the run; queued, rate-limited signals deliver events/snapshots to the controller and view. Window close requests cancellation and waits for worker teardown before exit. This lifecycle is a design constraint only until ADR-0016 and P6 implementation are accepted.
+Invalid configuration stays on its screen with field-level feedback. A worker owns the run; queued, rate-limited signals deliver events/snapshots to the controller and view. Window close requests cancellation and waits for worker teardown before exit. ADR-0016 is accepted. The current implementation uses a worker thread, cancellation at safe action boundaries, and a bounded 10 Hz presentation cadence (capped at 30 Hz by playback speed).

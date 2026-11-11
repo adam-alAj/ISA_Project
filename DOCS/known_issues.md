@@ -10,3 +10,9 @@
 - `SearchProblem.step_cost` now supports both the documented two-argument callback and mapping-style callbacks keyed by `(source, target)`.
 - Metric-to-cell conversion snaps floating-point values within `1e-12` of grid lines before flooring, preserving exact boundaries such as 6.0 m at 0.1 m resolution.
 - The weighted-search and seeded-oracle fixtures now exercise the intended callback and RNG APIs. Coverage tie-break assertions now test nearest Manhattan targets, and the footprint reachability fixture checks the first safe centre beyond the cabinet (column 27).
+## P6 remaining limitations
+
+- `reports/qa/p6_status.md` records the current P6 verification. The automated suite passes, but the human usability session has not been run.
+- Project Home lists recent maps, configurations and run summaries from `data/experiments/`. The playback slider changes presentation refresh cadence only; it does not pace worker execution.
+- A calibration residual cannot be estimated from only one known reference segment; the UI says this explicitly rather than reporting a misleading zero.
+- Some UI strings remain inline. The 3D screen is a launcher placeholder awaiting P7 integration.

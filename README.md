@@ -23,7 +23,7 @@ python scripts/smoke_test.py
 pytest
 ```
 
-The current `main.py` is a runnable phase-zero skeleton. Core algorithms, simulation, and the production UI are not implemented yet. The smoke script checks the dependency stack, and the separate prototype tests PySide6/Ursina process integration.
+The current `main.py` launches the PySide6 desktop application. The P2?P5 environment, robot, search and simulation layers are implemented; P6 provides the 2D workflow and UI. The 3D screen is currently a launcher placeholder while P7 integration proceeds. Run `pytest` for the automated checks.
 
 ## Structure
 
@@ -40,4 +40,4 @@ Use the `main` / `develop` / `feature/*` workflow and Conventional Commit messag
 
 ## Known limitations
 
-This baseline has no installed Python runtime in the current workspace environment, so dependency installation, smoke results, pytest, and the ten-cycle graphical feasibility measurement are pending. The original floor-plan photo is not present. Dependency versions remain unpinned until the specified smoke checks pass. The IDFS terminology and project rubric questions remain for the instructor.
+The original source floor-plan photo is not present. The usability session with an unfamiliar participant remains a human action. The course terminology and project rubric questions remain for instructor clarification.

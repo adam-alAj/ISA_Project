@@ -21,12 +21,12 @@ from src.visualization.two_d.map_canvas import MapCanvas
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_eight_screens_and_department_map_load(qtbot):
-    window = MainWindow(AppController(data_root=ROOT / "data"))
+def test_eight_screens_and_department_map_load(qtbot,tmp_path):
+    window = MainWindow(AppController(data_root=tmp_path/"data"))
     qtbot.addWidget(window); window.show()
     assert window.stack.count() == 8
     assert window.nav.count() == 8
-    window.controller.load_department_map()
+    window.controller.load_map(ROOT/"data"/"maps"/"department_v1")
     assert window.controller.map.shape == (127, 120)
     assert window.controller.start == (118, 54)
     assert "1.0-draft" in window.statusBar().currentMessage()
@@ -55,8 +55,8 @@ def test_map_canvas_matches_fixed_golden_image(qtbot):
     assert actual.constBits().tobytes()[:size] == golden.constBits().tobytes()[:size]
 
 
-def test_displayed_point_to_point_metrics_match_engine(qtbot):
-    controller=AppController(); controller.import_grid(np.zeros((7,7),dtype=np.uint8),.1)
+def test_displayed_point_to_point_metrics_match_engine(qtbot, tmp_path):
+    controller=AppController(data_root=tmp_path/"data"); controller.import_grid(np.zeros((7,7),dtype=np.uint8),.1)
     assert controller.set_start((3,3)); assert controller.set_goal((3,5))
     controller.mode="point_to_point"; controller.algorithm="bfs"
     window=MainWindow(controller); qtbot.addWidget(window)
@@ -68,6 +68,22 @@ def test_displayed_point_to_point_metrics_match_engine(qtbot):
     assert controller.search_result.path_length_steps == controller.robot.state.step_count == 2
     assert f"Path steps: {controller.search_result.path_length_steps}" in window.results_text.text()
     assert f"{controller.search_result.execution_time_s:.4f} s" in window.results_text.text()
+    assert list((tmp_path/"data"/"experiments").glob("run_*.json"))
+
+
+def test_experiment_config_round_trip_and_recent_run_list(tmp_path):
+    data_root=tmp_path/"data"; controller=AppController(data_root=data_root)
+    controller.load_map(ROOT/"data"/"maps"/"department_v1"); controller.algorithm="astar"; controller.mode="point_to_point"
+    assert controller.recent_map_records()[0]["version"]==controller.map_version
+    controller.paint((0,0),int(0))  # Edited map is embedded, not silently reloaded from the original bundle.
+    config=data_root/"experiments"/"saved.json"; controller.save_experiment(config)
+    restored=AppController(data_root=data_root); restored.load_experiment(config)
+    assert restored.algorithm=="astar" and restored.mode=="point_to_point"
+    assert restored.start==controller.start and restored.map_version==controller.map_version
+    assert np.array_equal(restored.map.grid,controller.map.grid)
+    run_path=restored.record_completed_run(type("Result",(),{"coverage_percent":12.5,"raw_coverage_percent":10.0,"stop_reason":type("Stop",(),{"value":"user_stop"})(),"planner_wall_time_s":.02})())
+    recent=restored.recent_experiments()
+    assert {Path(row["_path"]).name for row in recent}=={"saved.json",run_path.name}
 
 
 def test_cancelled_worker_exits_at_safe_boundary(qtbot):
@@ -81,8 +97,19 @@ def test_cancelled_worker_exits_at_safe_boundary(qtbot):
     assert coverage.events.events[-1].payload["reason"] == "user_stop"
 
 
-def test_gui_timer_latency_stays_under_100ms_during_coverage(qtbot):
-    controller=AppController(data_root=ROOT/"data"); controller.load_department_map()
+def test_window_stop_tears_down_coverage_worker(qtbot,tmp_path):
+    controller=AppController(data_root=tmp_path/"data"); controller.load_map(ROOT/"data"/"maps"/"department_v1")
+    window=MainWindow(controller); qtbot.addWidget(window); window.show()
+    window._start_run()
+    qtbot.waitUntil(lambda: controller.coverage_controller is not None,timeout=3000)
+    window._stop()
+    qtbot.waitUntil(lambda: window._worker is not None and not window._worker.isRunning(),timeout=5000)
+    window.close()
+    assert not window._worker.isRunning()
+
+
+def test_gui_timer_latency_stays_under_100ms_during_coverage(qtbot,tmp_path):
+    controller=AppController(data_root=tmp_path/"data"); controller.load_map(ROOT/"data"/"maps"/"department_v1")
     controller.mode="coverage"; controller.algorithm="bfs"
     window=MainWindow(controller); qtbot.addWidget(window); window.show()
     qtbot.wait(100)  # Let the initial full-map paint complete before measuring run-time latency.

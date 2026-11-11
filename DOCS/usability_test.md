@@ -1,4 +1,4 @@
-# P6 usability test (provisional until ADR-0016 is accepted)
+# P6 usability test (human session pending)
 
 **Human action required:** run this script with a participant unfamiliar with the project, then record observations and questionnaire answers. Do not present the following as completed research.
 

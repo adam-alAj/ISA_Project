@@ -25,6 +25,7 @@ class MapCanvas(QGraphicsView):
         self.start = self.goal = self.robot = None
         self.cleaned = np.zeros((0, 0), dtype=bool)
         self.explored: set[tuple[int, int]] = set()
+        self.frontier: set[tuple[int, int]] = set()
         self._base_image = QImage()
         self._cleaned_image = QImage()
         self._explored_image = QImage()
@@ -35,7 +36,17 @@ class MapCanvas(QGraphicsView):
         self._pan_origin: QPoint | None = None
 
     def set_map(self, grid, start=None, goal=None):
-        self.grid = None if grid is None else np.array(grid, dtype=np.uint8, copy=True)
+        incoming = None if grid is None else np.array(grid, dtype=np.uint8, copy=True)
+        if (incoming is not None and self.grid is not None and incoming.shape==self.grid.shape
+                and np.array_equal(incoming,self.grid)):
+            self.start,self.goal=start,goal
+            self.robot=start; self.cleaned=np.zeros(incoming.shape,dtype=bool)
+            self.explored.clear(); self.frontier.clear(); self.path=()
+            if not self._cleaned_image.isNull():self._cleaned_image.fill(Qt.GlobalColor.transparent)
+            if not self._explored_image.isNull():self._explored_image.fill(Qt.GlobalColor.transparent)
+            self.viewport().update()
+            return
+        self.grid = incoming
         self.start, self.goal = start, goal
         if self.grid is None:
             self.cleaned = np.zeros((0, 0), dtype=bool); self.scene().setSceneRect(QRectF(0,0,1,1))
@@ -47,10 +58,10 @@ class MapCanvas(QGraphicsView):
             self._cleaned_image=QImage(cols*8,rows*8,QImage.Format.Format_ARGB32); self._cleaned_image.fill(Qt.GlobalColor.transparent)
             self._explored_image=QImage(cols*4,rows*4,QImage.Format.Format_ARGB32); self._explored_image.fill(Qt.GlobalColor.transparent)
             if self._zoom == 1.0: self.fitInView(self.sceneRect(), Qt.AspectRatioMode.KeepAspectRatio)
-        self.explored.clear(); self.path = (); self.robot = start
+        self.explored.clear(); self.frontier.clear(); self.path = (); self.robot = start
         self.viewport().update()
 
-    def set_overlay(self, *, cleaned=None, explored=None, path=None, robot=None):
+    def set_overlay(self, *, cleaned=None, explored=None, frontier=None, path=None, robot=None):
         if cleaned is not None and self.grid is not None:
             new_cleaned=np.asarray(cleaned,dtype=bool)
             if new_cleaned.shape==self.grid.shape and not np.array_equal(new_cleaned,self.cleaned):
@@ -74,6 +85,8 @@ class MapCanvas(QGraphicsView):
                 painter.setPen(QPen(Qt.PenStyle.NoPen)); painter.setBrush(QColor("#E67E22"))
                 for r,c in added:painter.drawEllipse(QRectF(c*4+1,r*4+1,2,2))
                 painter.end(); self.explored=new_explored
+        if frontier is not None:
+            self.frontier=set(tuple(cell) for cell in list(frontier)[-2000:])
         if path is not None: self.path = tuple(tuple(cell) for cell in path)
         if robot is not None: self.robot = tuple(robot)
         self.viewport().update()
@@ -147,6 +160,10 @@ class MapCanvas(QGraphicsView):
             points=QPolygonF([QPointF(c+.5,r+.5) for r,c in self.path])
             if len(points) > 1:
                 painter.drawPolyline(points)
+        if self.frontier:
+            painter.setPen(QPen(QColor("#7A3E9D"),.06)); painter.setBrush(Qt.BrushStyle.NoBrush)
+            for r,c in self.frontier:
+                painter.drawPolygon(QPolygonF((QPointF(c+.5,r+.12),QPointF(c+.88,r+.5),QPointF(c+.5,r+.88),QPointF(c+.12,r+.5))))
         self._marker(painter,self.start,"S",QColor("#155EEF"),False)
         self._marker(painter,self.goal,"G",QColor("#7A3E9D"),False)
         self._marker(painter,self.robot,"R",QColor("#D92D20"),True)

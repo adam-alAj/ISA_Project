@@ -11,7 +11,7 @@ from PySide6.QtGui import QKeySequence, QShortcut
 from PySide6.QtWidgets import (
     QComboBox, QDoubleSpinBox, QFileDialog, QFormLayout, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QListWidget, QMainWindow, QMessageBox, QPushButton,
-    QProgressBar, QScrollArea, QSlider, QSpinBox, QStackedWidget, QTabWidget,
+    QProgressBar, QScrollArea, QSlider, QSpinBox, QStackedWidget, QTabWidget, QListWidgetItem,
     QVBoxLayout, QWidget,
 )
 
@@ -99,11 +99,17 @@ class MainWindow(QMainWindow):
         page,lay=self._page("Project Home","Load a map, configure a run, and inspect results.")
         self.home_map_button=QPushButton(T.LOAD_DEPARTMENT); self.home_open_button=QPushButton("Open map folder…")
         self.home_new_button=QPushButton("Create experiment configuration")
-        row=QHBoxLayout(); row.addWidget(self.home_map_button); row.addWidget(self.home_open_button); row.addWidget(self.home_new_button); row.addStretch()
+        self.home_load_config=QPushButton("Load experiment JSON…")
+        row=QHBoxLayout(); row.addWidget(self.home_map_button); row.addWidget(self.home_open_button); row.addWidget(self.home_new_button); row.addWidget(self.home_load_config); row.addStretch()
         lay.addLayout(row)
         card=QFrame(); card.setStyleSheet("QFrame{background:white;border:1px solid #eaecf0;border-radius:10px;padding:14px}")
         cardlay=QVBoxLayout(card); cardlay.addWidget(QLabel("Project overview")); cardlay.addWidget(QLabel("Smart Vacuum — route planning, resource simulation, and coverage control."))
-        self.home_summary=QLabel("No map loaded."); cardlay.addWidget(self.home_summary); lay.addWidget(card); lay.addStretch()
+        self.home_summary=QLabel("No map loaded."); cardlay.addWidget(self.home_summary); lay.addWidget(card)
+        cardlay.addWidget(QLabel("Recent experiments and runs"))
+        self.recent_list=QListWidget(); self.recent_list.setMaximumHeight(220); cardlay.addWidget(self.recent_list)
+        cardlay.addWidget(QLabel("Recent maps"))
+        self.recent_maps_list=QListWidget(); self.recent_maps_list.setMaximumHeight(140); cardlay.addWidget(self.recent_maps_list)
+        lay.addStretch()
         return page
 
     def _editor_page(self):
@@ -149,7 +155,16 @@ class MainWindow(QMainWindow):
         self.heuristic=QLabel("Manhattan distance × minimum step cost (A* / Greedy)")
         self.neighbor_order=QLabel("Up → Right → Down → Left")
         self.policy_label=QLabel("Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)")
-        form.addRow("Algorithm",self.algorithm_combo); form.addRow("Mission mode",self.mode_combo); form.addRow("Heuristic",self.heuristic); form.addRow("Neighbor order",self.neighbor_order); form.addRow("Coverage policy",self.policy_label)
+        self.quick_goal=QComboBox(); self.quick_goal.addItem("Choose a demo goal…",None)
+        goals_path=Path(__file__).resolve().parents[2]/"docs"/"map_spec"/"demo_goals.csv"
+        try:
+            with goals_path.open(encoding="utf-8",newline="") as stream:
+                for row in csv.DictReader(stream):
+                    if row.get("synthetic_only") == "true" or row.get("scenario") == "unreachable_synthetic": continue
+                    self.quick_goal.addItem(row["scenario"].replace("_"," ").title(),
+                        {"start":(int(row["start_row"]),int(row["start_col"])),"goal":(int(row["goal_row"]),int(row["goal_col"]))})
+        except (OSError,KeyError,ValueError): pass
+        form.addRow("Algorithm",self.algorithm_combo); form.addRow("Mission mode",self.mode_combo); form.addRow("Heuristic",self.heuristic); form.addRow("Neighbor order",self.neighbor_order); form.addRow("Coverage policy",self.policy_label); form.addRow("Demo goal",self.quick_goal)
         lay.addLayout(form); lay.addWidget(QLabel("Choose start and goal in Map Editor. Coverage mode does not require a goal.")); lay.addStretch()
         return page
 
@@ -163,7 +178,9 @@ class MainWindow(QMainWindow):
         lay.addLayout(body,1); lay.addWidget(QLabel(T.LEGEND))
         controls=QHBoxLayout(); self.run_button=QPushButton(T.RUN); self.pause_button=QPushButton(T.PAUSE); self.resume_button=QPushButton(T.RESUME); self.step_button=QPushButton(T.STEP); self.reset_button=QPushButton(T.RESET); self.stop_button=QPushButton(T.STOP)
         for button in (self.run_button,self.pause_button,self.resume_button,self.step_button,self.reset_button,self.stop_button): controls.addWidget(button)
-        controls.addWidget(QLabel("Playback")); self.speed_slider=QSlider(Qt.Orientation.Horizontal); self.speed_slider.setRange(0,6); self.speed_slider.setValue(3); controls.addWidget(self.speed_slider,1)
+        controls.addWidget(QLabel("Playback")); self.speed_slider=QSlider(Qt.Orientation.Horizontal); self.speed_slider.setRange(0,6); self.speed_slider.setValue(2); controls.addWidget(self.speed_slider,1)
+        self.speed_label=QLabel("1×"); controls.addWidget(self.speed_label)
+        self.skip_to_end=QPushButton("Show latest state"); controls.addWidget(self.skip_to_end)
         lay.addLayout(controls); self.stop_reason=QLabel(""); self.stop_reason.setStyleSheet("color:#B42318;font-weight:700"); lay.addWidget(self.stop_reason)
         return page
 
@@ -189,20 +206,27 @@ class MainWindow(QMainWindow):
         self.nav.currentRowChanged.connect(self.stack.setCurrentIndex)
         self.home_map_button.clicked.connect(self._load_department); self.home_open_button.clicked.connect(self._open_map)
         self.home_new_button.clicked.connect(lambda: self.nav.setCurrentRow(3))
+        self.home_load_config.clicked.connect(self._load_config)
+        self.recent_list.itemDoubleClicked.connect(self._open_recent)
+        self.recent_maps_list.itemDoubleClicked.connect(self._open_recent_map)
         self.controller.changed.connect(self._refresh)
         self.controller.message.connect(self.statusBar().showMessage)
         self.pick_start.clicked.connect(lambda:self.editor_canvas.set_pick_mode("start"))
         self.pick_goal.clicked.connect(lambda:self.editor_canvas.set_pick_mode("goal"))
         self.paint_button.clicked.connect(lambda:self.editor_canvas.set_pick_mode("paint"))
+        self.validation.itemClicked.connect(self._jump_to_validation_cell)
         self.undo_button.clicked.connect(self.controller.undo); self.redo_button.clicked.connect(self.controller.redo)
         self.robot_save.clicked.connect(self._apply_robot_config)
         self.preset_default.clicked.connect(self._set_default); self.preset_low.clicked.connect(lambda:self._preset(battery=15))
         self.preset_short.clicked.connect(lambda:self._preset(lifetime=90))
         self.algorithm_combo.currentIndexChanged.connect(lambda _:setattr(self.controller,"algorithm",self.algorithm_combo.currentData()))
         self.mode_combo.currentIndexChanged.connect(lambda _:setattr(self.controller,"mode",self.mode_combo.currentData()))
+        self.quick_goal.currentIndexChanged.connect(self._select_quick_goal)
         self.run_button.clicked.connect(self._start_run); self.pause_button.clicked.connect(self._pause)
         self.resume_button.clicked.connect(self._resume); self.step_button.clicked.connect(self._step)
         self.stop_button.clicked.connect(self._stop); self.reset_button.clicked.connect(self._reset)
+        self.speed_slider.valueChanged.connect(self._apply_playback_speed)
+        self.skip_to_end.clicked.connect(self._skip_to_end)
         self.export_config.clicked.connect(self._save_config); self.export_csv.clicked.connect(self._save_csv)
         self.cal_open.clicked.connect(self._load_calibration_image); self.cal_image.point_clicked.connect(lambda _:self._update_calibration())
         self.cal_distance.valueChanged.connect(self._update_calibration)
@@ -215,7 +239,29 @@ class MainWindow(QMainWindow):
         c=self.controller; self.statusBar().showMessage(f"Map: {c.map_version}  |  {c.run_state.title()}")
         self.home_summary.setText(f"Map: {c.map_version}\nDimensions: {c.map.shape if c.map else '—'}\nStart: {c.start or 'not set'}")
         for canvas in (self.editor_canvas,self.sim_canvas): canvas.set_map(c.map.grid if c.map else None,c.start,c.goal)
-        self.validation.clear(); self.validation.addItems(c.validation_messages())
+        self.validation.clear()
+        issues=c.validation_issues()
+        if issues:
+            for issue in issues:
+                item=QListWidgetItem(issue.message)
+                item.setData(Qt.ItemDataRole.UserRole,issue.cells[0] if issue.cells else None)
+                self.validation.addItem(item)
+        else:self.validation.addItems(c.validation_messages())
+        self._refresh_recent_list()
+
+    def _refresh_recent_list(self):
+        self.recent_list.clear()
+        for record in self.controller.recent_experiments()[:12]:
+            kind = "Run" if record.get("kind") == "run_record" else "Config"
+            label = f"{kind}: {record.get('algorithm', '—')} · {record.get('mode', '—')} · {record.get('map_version', '—')}"
+            item = QListWidgetItem(label)
+            item.setData(Qt.ItemDataRole.UserRole, record["_path"])
+            self.recent_list.addItem(item)
+        self.recent_maps_list.clear()
+        for record in self.controller.recent_map_records()[:8]:
+            item=QListWidgetItem(f"{record.get('version','Map')} · {Path(record['path']).name}")
+            item.setData(Qt.ItemDataRole.UserRole,record["path"])
+            self.recent_maps_list.addItem(item)
 
     def _editor_cell_clicked(self, cell):
         mode=self.editor_canvas.pick_mode
@@ -223,6 +269,18 @@ class MainWindow(QMainWindow):
         elif mode=="goal": self.controller.set_goal(cell); self.editor_canvas.set_pick_mode("none")
         elif mode=="paint": self.controller.paint(cell,self.brush.currentData())
         self._refresh()
+
+    def _jump_to_validation_cell(self,item):
+        cell=item.data(Qt.ItemDataRole.UserRole)
+        if cell:
+            r,c=cell; self.editor_canvas.centerOn(c+.5,r+.5); self.nav.setCurrentRow(1)
+
+    def _select_quick_goal(self, index):
+        spec=self.quick_goal.itemData(index)
+        if not spec or self.controller.map is None:return
+        start,goal=spec["start"],spec["goal"]
+        if start!=self.controller.start and not self.controller.set_start(start):return
+        if self.controller.set_goal(goal):self.nav.setCurrentRow(4)
 
     def _load_department(self):
         try: self.controller.load_department_map()
@@ -283,7 +341,7 @@ class MainWindow(QMainWindow):
         cleaned=snap.cleaned if snap else c.robot.cleaning.cleaned
         path=snap.current_path if snap else ()
         explored=c.trace_cells()
-        self.sim_canvas.set_overlay(cleaned=cleaned,explored=explored,path=path,robot=c.robot.state.position)
+        self.sim_canvas.set_overlay(cleaned=cleaned,explored=explored,frontier=c.frontier_cells(),path=path,robot=c.robot.state.position)
         self.hud['battery'].setText(f"{c.robot.state.battery_remaining:.2f} / {c.robot.config.battery_capacity_units:.2f}")
         self.hud['elapsed'].setText(f"{c.robot.state.elapsed_time_s:.2f} s")
         self.hud['lifetime'].setText(f"{c.robot.state.lifetime_remaining_s:.2f} s")
@@ -294,9 +352,13 @@ class MainWindow(QMainWindow):
 
     def _run_finished(self,result):
         self.controller.run_result=result; self.controller.run_state="complete"; self.timer.stop()
+        try:self.controller.record_completed_run(result)
+        except OSError as exc:self.statusBar().showMessage(f"Run finished; could not save recent-run summary: {exc}")
+        self._refresh_recent_list()
         self.hud['status'].setText("Complete"); self._set_controls(False); self._poll_run()
         if self.controller.mode=="point_to_point" and self.controller.search_result is not None:
             self.sim_canvas.set_overlay(path=self.controller.search_result.path,explored=self.controller.trace_cells(),
+                frontier=self.controller.frontier_cells(),
                 cleaned=self.controller.robot.cleaning.cleaned,robot=self.controller.robot.state.position)
             if not self.controller.search_result.found:self.stop_reason.setText("No path found")
         self._show_results()
@@ -353,10 +415,62 @@ class MainWindow(QMainWindow):
         self.results_text.setText(text)
 
     def _save_config(self):
-        path,_=QFileDialog.getSaveFileName(self,"Save experiment configuration","experiment.json","JSON (*.json)")
+        self.controller.experiments_dir.mkdir(parents=True, exist_ok=True)
+        path,_=QFileDialog.getSaveFileName(self,"Save experiment configuration",str(self.controller.experiments_dir/"experiment.json"),"JSON (*.json)")
         if path:
-            try:self.controller.save_experiment(path); self.statusBar().showMessage(f"Saved {path}")
+            try:self.controller.save_experiment(path); self._refresh(); self.statusBar().showMessage(f"Saved {path}")
             except Exception as exc:QMessageBox.warning(self,"Save failed",str(exc))
+
+    def _load_config(self):
+        path,_=QFileDialog.getOpenFileName(self,"Load experiment configuration",str(self.controller.experiments_dir),"JSON (*.json)")
+        if not path:return
+        try:
+            self.controller.load_experiment(path)
+            self._sync_configuration_widgets()
+            self.statusBar().showMessage(f"Loaded {path}")
+        except Exception as exc:QMessageBox.warning(self,"Load failed",str(exc))
+
+    def _open_recent(self, item):
+        path=Path(item.data(Qt.ItemDataRole.UserRole))
+        try:
+            document=json.loads(path.read_text(encoding="utf-8"))
+            if document.get("kind")=="experiment_config":
+                self.controller.load_experiment(path)
+                self._sync_configuration_widgets()
+            else:
+                fields=("map_version","algorithm","mode","coverage_percent","raw_coverage_percent","steps",
+                        "energy_used","simulated_time_s","stop_reason","planner_wall_time_s")
+                self.results_text.setText("\n".join(f"{key.replace('_',' ').title()}: {document.get(key, '—')}" for key in fields))
+                self.nav.setCurrentRow(6)
+        except Exception as exc:QMessageBox.warning(self,"Open recent item failed",str(exc))
+
+    def _open_recent_map(self,item):
+        try:self.controller.load_map(Path(item.data(Qt.ItemDataRole.UserRole)))
+        except Exception as exc:QMessageBox.warning(self,"Open recent map failed",str(exc))
+
+    def _sync_configuration_widgets(self):
+        self.algorithm_combo.setCurrentIndex(self.algorithm_combo.findData(self.controller.algorithm))
+        self.mode_combo.setCurrentIndex(self.mode_combo.findData(self.controller.mode))
+        for key,widget in self.robot_fields.items():widget.setValue(getattr(self.controller.robot_config,key))
+        self._refresh()
+
+    def _apply_playback_speed(self, value):
+        speeds=(.25,.5,1,2,4,8,16); speed=speeds[value]
+        self.speed_label.setText(f"{speed:g}×")
+        # Presentation cadence only; simulation time and planner time do not change.
+        self.timer.setInterval(max(34,int(100/speed)))  # capped at 30 UI updates/second
+
+    def _skip_to_end(self):
+        self._poll_run()
+        if self.controller.run_state in ("complete","idle","error") and self.controller.robot:
+            snapshots=(self.controller.coverage_controller.snapshots
+                       if self.controller.coverage_controller else ())
+            snapshot=snapshots[-1] if snapshots else None
+            self.sim_canvas.set_overlay(explored=self.controller.trace_cells(),
+                frontier=self.controller.frontier_cells(),
+                path=getattr(self.controller.search_result,"path",()) or (snapshot.current_path if snapshot else ()),
+                cleaned=self.controller.robot.cleaning.cleaned,
+                robot=self.controller.robot.state.position)
 
     def _save_csv(self):
         path,_=QFileDialog.getSaveFileName(self,"Export run metrics","run.csv","CSV (*.csv)")
@@ -374,14 +488,11 @@ class MainWindow(QMainWindow):
         path,_=QFileDialog.getOpenFileName(self,"Load floor plan image",str(Path.cwd()),"Images (*.png *.jpg *.jpeg *.bmp)")
         if path:self.cal_image.load(path); self._update_calibration()
 
-    def _calibration_click(self,event):
-        pass
-
     def _update_calibration(self):
         if len(self.cal_image.points)<2:self.cal_result.setText("Scale: click two points\nResidual: —"); return
         a,b=self.cal_image.points; pixels=((a[0]-b[0])**2+(a[1]-b[1])**2)**.5
         scale=pixels/max(self.cal_distance.value(),1e-9)
-        self.cal_result.setText(f"Scale: {scale:.2f} px/m\nResidual: 0.00 px (single reference segment)")
+        self.cal_result.setText(f"Scale: {scale:.2f} px/m\nResidual: n/a (one reference segment; no independent check)")
 
     def closeEvent(self,event):
         if self._worker is not None and self._worker.isRunning():

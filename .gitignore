@@ -26,6 +26,7 @@ reports/generated/
 *.zip
 *.npy
 *.png
+!docs/img/*.png
 !data/maps/department_v0_2/department_map.npy
 !data/maps/department_v0_2/map_preview.png
 !assets/floor_plans/
