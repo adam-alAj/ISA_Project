@@ -1,59 +1,45 @@
-# Geometry and dimension consistency
+﻿# Geometry and dimension consistency — department map v0.3 draft
 
 ## Method and limits
 
-The traced rectangles and pixel-to-metre comparisons below come from `legacy_build_map.py` using `PPM = 108 px/m`. These are comparisons of the current model to the dimensions recorded in the project context, not a fresh measurement of the paper plan. The source photo is absent, so the label-to-segment associations for 4.8 m and 2 m cannot be visually confirmed. Deviations are `(traced metres - stated metres) / stated metres × 100`.
+Room areas are estimates from traced rectangle proportions at 108 px/m, constrained by the user-confirmed ordering. They are not measured from the drawing. The source photo is not yet present, so source-dependent checks remain pending. Areas use the interior rectangle dimensions before raster wall stamping.
 
-## Labelled dimension checks
+## Calibration
 
-| Stated dimension | Traced segment | Traced size | Deviation | Status |
-|---|---|---:|---:|---|
-| 4.8 m | Candidate entrance span, x=340..860 (520 px) | 4.815 m | +0.31% | Candidate match; verify label position on source photo |
-| 5 m | Hall right wall, y=310..855 (545 px) | 5.046 m | +0.93% | Consistent; user-confirmed dimension |
-| 6 m | R6 corner to modeled floor bottom, y=855..1503 (648 px) | 6.000 m | 0.00% | Consistent; user-confirmed combined span |
-| 2 m | Candidate R8 interior height, y=950..1160 (210 px) | 1.944 m | -2.78% | Candidate only; confirm the drawing reference |
-| 0.9 m | Doors D2-D9 (97 px opening span) | 0.898 m | -0.21% | Consistent at stated precision |
-| 1.2 m | Door D1 (130 px opening span) | 1.204 m | +0.31% | Consistent at stated precision |
-| 0.5 × 0.5 m | Column rectangle (54 × 54 px) | 0.500 × 0.500 m | 0.00% | Consistent |
-| 75 cm / 60 cm | Cabinet along-wall spans (81 / 65 px) | 75.0 / 60.2 cm | 0.00 / +0.31% | Consistent at stated precision |
-| 10 cm protrusion | Cabinet protrusion (11 px) | 10.2 cm | +1.85% | Consistent at stated precision |
+Only confirmed values calibrate the model: right hall wall 5 m; lower span from the R6 corner to the floor bottom 6 m; doors 0.9 m/1.2 m; column 0.5 m; cabinets 75 cm/60 cm. The 4.8 m and 2 m labels are informational only and are excluded from calibration and geometry.
 
-No directly matched dimension exceeds the 15% review threshold. The 4.8 m and 2 m comparisons remain candidates rather than verified associations. The 10 m, 3.6 m, 4.5 m, and 1.4 m legacy labels are marked superseded in `dimensions.csv` and are not used as acceptance measurements.
+| Confirmed value | Traced extent | Implied scale | Residual vs 108 px/m | Traced extent at model scale |
+|---|---:|---:|---:|---:|
+| 5 m right hall wall | 545 px | 109 px/m | +0.93% | 5.046 m (+0.93%) |
+| 6 m lower span | 648 px | 108 px/m | 0.00% | 6.000 m (0.00%) |
+| 0.9 m doors D2-D9 | 97 px | 107.778 px/m | -0.21% | 0.898 m (-0.21%) |
+| 1.2 m door D1 | 130 px | 108.333 px/m | +0.31% | 1.204 m (+0.31%) |
+| 0.5 m column | 54 px | 108 px/m | 0.00% | 0.500 m (0.00%) |
+| 75 cm cabinet | 81 px | 108 px/m | 0.00% | 75.0 cm (0.00%) |
+| 60 cm cabinet | 65 px | 108.333 px/m | +0.31% | 60.2 cm (+0.31%) |
 
-## Calibration anchors and residuals
+The 10 cm cabinet protrusion traces to 11 px = 10.2 cm (+1.85%). The 0.10 m cell is provisional. The 4.8 m and 2 m drawing labels are not used; photo review remains a low-priority human action. The old 10 m, 3.6 m, 4.5 m and 1.4 m labels are superseded.
 
-The legacy builder comment says `PPM=108 px/m` was based on a “10 m corridor ~ 4.8 m width ~ 2 m.” It does not store the dimension-line endpoints, and the source photo is missing. The two candidate spans that can be compared to traced geometry are:
+## Room areas before and after geometry correction
 
-| Legacy label | Candidate traced span | Implied scale | Scale residual vs 108 px/m | Dimension residual at 108 px/m | Confidence |
-|---|---:|---:|---:|---:|---|
-| 4.8 m width | 520 px entrance span | 108.333 px/m | +0.31% | +0.31% (4.815 m) | Candidate only |
-| 2 m | 210 px R8 height | 105.000 px/m | -2.78% | -2.78% (1.944 m) | Candidate only |
-| 10 m corridor | Superseded; no matching corridor segment in the confirmed open-hall model | — | Not computable | Not applicable | Retired anchor |
+Interior areas are calculated as `(x1-x0)*(y1-y0)/108²`. R7b belongs to R7 and is listed for reference only, excluded from the order comparison. Only the outer sides of R4, R5, and R6 changed; R1 and R7 remain as traced. Hall zones, doors, column, cabinets, and start remain fixed.
 
-The signed scale residual is `(implied scale - 108) / 108 × 100`. These comparisons show a plausible scale consistency, not proof of the annotation locations. Confirm all three labels against the drawing before freezing calibration.
+| Room | v0.2 area (m²) | v0.3 area (m²) | v0.3 bounds (photo px) |
+|---|---:|---:|---|
+| R7 | 10.6481 | 10.6481 | (905,1105)-(1365,1375) |
+| R1 | 6.9659 | 6.9659 | (85,165)-(335,490) |
+| R4 | 2.8292 | 4.7154 | (1130,215)-(1330,490) |
+| R6 | 5.7013 | 3.8259 | (905,855)-(1160,1030) |
+| R2 | 2.4863 | 2.4863 | (395,165)-(595,310) |
+| R3 | 2.5484 | 2.5484 | (780,165)-(985,310) |
+| R5 | 2.4005 | 2.6063 | (1130,590)-(1320,750) |
+| R8 | 2.6106 | 2.6106 | (195,950)-(340,1160) |
+| R7b (excluded) | 2.3620 | 2.3620 | (1175,1375)-(1365,1520) |
 
-For future maps without a reliable dimension or scale, use abstract grid units and label all resulting distances and reports as grid units; do not imply metric calibration.
+The equal group R2/R3/R5/R8 ranges from 2.4863 to 2.6106 m², within 2.47–2.73 m² (2.6 m² ±5%). Strict order is R7 > R1 > R4 > R6 > max(R2,R3,R5,R8). No room rectangles overlap or leave map bounds.
 
-## Traced room dimensions
+## Regression evidence and remaining limits
 
-Room sizes are **estimated from traced proportions**, not independently measured from the missing drawing. Values use rectangle edge differences divided by 108 px/m; this describes the model only.
+The added regression test compares v0.2 and v0.3 hall-zone states and door-cell sets, checks fixed start/obstacle positions, bounds and room overlap, area ordering, and room reachability with and without the 0.35 m footprint. Independent raster reproduction produced 6,722 hall cells with zero state changes and zero door-cell symmetric difference. Reachability is recorded in `validation.md`.
 
-| Room | Traced size (m), width × height | Pixel rectangle |
-|---|---:|---|
-| R1 | 2.315 × 3.009 | (85,165)–(335,490) |
-| R2 | 1.852 × 1.343 | (395,165)–(595,310) |
-| R3 | 1.898 × 1.343 | (780,165)–(985,310) |
-| R4 | 1.111 × 2.546 | (1130,215)–(1250,490) |
-| R5 | 1.620 × 1.481 | (1130,590)–(1305,750) |
-| R6 | 3.519 × 1.620 | (905,855)–(1285,1030) |
-| R7 | 4.259 × 2.500 | (905,1105)–(1365,1375) |
-| R7b | 1.759 × 1.343 | (1175,1375)–(1365,1520) |
-| R8 | 1.343 × 1.944 | (195,950)–(340,1160) |
-
-## Findings for review
-
-- The builder's geometry and the accepted layout decisions agree on the open hall, the 5 m east wall, the combined 6 m lower span, nine open doors, one column, and two cabinets.
-- The traced room areas conflict with the confirmed room-size order `R7 > R1 > R4 > R6 > the rest`: R6 is 380 × 175 = 66,500 px² (5.701 m²), while R4 is 120 × 275 = 33,000 px² (2.829 m²). The current R6 is about 101.5% larger than R4, despite the confirmed order placing R4 above R6. This is a material geometry discrepancy; do not freeze or silently alter it. The source photo and a user/map-owner decision are needed.
-- The 0.10 m grid and obstacle inflation are modeling choices. They do not establish that the real robot fits through a real doorway.
-- Because the source photo is missing, this report cannot confirm page orientation, image quality, marks/logos, the location of all written dimensions, or whether any omitted drawing detail was interpreted incorrectly.
-- The directly matched linear labels are within 15%, but the R4/R6 area-order discrepancy is flagged for human review. Source-dependent checks remain pending rather than being treated as passed.
+The source image is absent, so orientation, exact label association, drawing marks, and omitted features cannot yet be checked. Geometry estimates do not claim measured room dimensions. The map remains unfrozen pending source review, review checklist sign-off, and the signed freeze statement.

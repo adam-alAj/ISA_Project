@@ -1,5 +1,5 @@
 ﻿schema_version: 1
-source: "src/map_processing/legacy_build_map.py (v0.2 traced geometry)"
+source: "src/map_processing/build_department_map_v03.py (v0.3 traced geometry)"
 coordinate_system: "Photo pixels (x,y); origin (80,160); y increases downward; PPM 108; grid cell 10.8 px."
 geometry_status: "Traced/modelled coordinates; original photo absent, so not visually revalidated."
 rasterization:
@@ -41,18 +41,18 @@ rooms:
     drawing_reference: "ROOMS rectangle in legacy builder; verify on source photo"
   - id: R4
     name: "R4 Shereen + Nader"
-    geometry_px: [1130, 215, 1250, 490]
-    estimated_size_m: [1.111, 2.546]  # width x height; proportion-derived
+    geometry_px: [1130, 215, 1330, 490]
+    estimated_size_m: [1.852, 2.546]  # width x height; proportion-derived
     drawing_reference: "ROOMS rectangle in legacy builder; verify on source photo"
   - id: R5
     name: "R5 Ghattas"
-    geometry_px: [1130, 590, 1305, 750]
-    estimated_size_m: [1.62, 1.481]  # width x height; proportion-derived
+    geometry_px: [1130, 590, 1320, 750]
+    estimated_size_m: [1.759, 1.481]  # width x height; proportion-derived
     drawing_reference: "ROOMS rectangle in legacy builder; verify on source photo"
   - id: R6
     name: "R6 Johnny (dept admin)"
-    geometry_px: [905, 855, 1285, 1030]
-    estimated_size_m: [3.519, 1.62]  # width x height; proportion-derived
+    geometry_px: [905, 855, 1160, 1030]
+    estimated_size_m: [2.361, 1.62]  # width x height; proportion-derived
     drawing_reference: "ROOMS rectangle in legacy builder; verify on source photo"
   - id: R7
     name: "R7 Suhail"
@@ -143,14 +143,14 @@ walls:
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R4_N
-    segment_px: [[1130, 215], [1250, 215]]
-    length_m: 1.111
+    segment_px: [[1130, 215], [1330, 215]]
+    length_m: 1.852
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R4_S
-    segment_px: [[1130, 490], [1250, 490]]
-    length_m: 1.111
+    segment_px: [[1130, 490], [1330, 490]]
+    length_m: 1.852
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
@@ -161,20 +161,20 @@ walls:
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R4_E
-    segment_px: [[1250, 215], [1250, 490]]
+    segment_px: [[1330, 215], [1330, 490]]
     length_m: 2.546
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R5_N
-    segment_px: [[1130, 590], [1305, 590]]
-    length_m: 1.62
+    segment_px: [[1130, 590], [1320, 590]]
+    length_m: 1.620
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R5_S
-    segment_px: [[1130, 750], [1305, 750]]
-    length_m: 1.62
+    segment_px: [[1130, 750], [1320, 750]]
+    length_m: 1.620
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
@@ -185,32 +185,32 @@ walls:
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R5_E
-    segment_px: [[1305, 590], [1305, 750]]
+    segment_px: [[1320, 590], [1320, 750]]
     length_m: 1.481
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R6_N
-    segment_px: [[905, 855], [1285, 855]]
-    length_m: 3.519
+    segment_px: [[905, 855], [1160, 855]]
+    length_m: 2.361
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R6_S
-    segment_px: [[905, 1030], [1285, 1030]]
-    length_m: 3.519
+    segment_px: [[905, 1030], [1160, 1030]]
+    length_m: 2.361
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R6_W
     segment_px: [[905, 855], [905, 1030]]
-    length_m: 1.62
+    length_m: 1.620
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
   - id: W_R6_E
-    segment_px: [[1285, 855], [1285, 1030]]
-    length_m: 1.62
+    segment_px: [[1160, 855], [1160, 1030]]
+    length_m: 1.620
     thickness_px: 12
     thickness_m: 0.111
     drawing_reference: "ROOMS perimeter or EXTRA_WALLS segment in legacy builder; verify source photo"
@@ -397,3 +397,4 @@ start:
   cell_rc: [118, 54]
   state: FREE
   drawing_reference: "START_PX in legacy builder; source photo check pending"
+

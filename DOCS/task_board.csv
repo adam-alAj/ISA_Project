@@ -30,8 +30,8 @@
 "P1.13","Decide how to represent doors and openings so no accidental wall gaps appear.","P1","P0","<TBD>","Done","P0"
 "P1.14","Define robot starting position and any target/goal points required for course demonstrations.","P1","P0","<TBD>","Done","P0"
 "P1.15","Define candidate robot diameter, cleaning width, movement speed, battery capacity and lifetime values for prototype testing.","P1","P1","<TBD>","Done","P0"
-"P1.16","Prepare a marked-up copy of the floor plan showing all interpreted geometry.","P1","P1","<TBD>","In Progress","P0"
-"P1.17","Review the interpretation with the team/instructor or map owner.","P1","P0","<TBD>","Done","P0"
+"P1.16","Prepare a marked-up copy of the floor plan showing all interpreted geometry.","P1","P1","<TBD>","In Review","P0"
+"P1.17","Review the interpretation with the team/instructor or map owner.","P1","P0","<TBD>","In Review","P0"
 "P1.18","Record unresolved assumptions and obtain confirmation before freezing the map specification.","P1","P0","<TBD>","In Review","P0"
 "P2.01","Implement image loading for PNG/JPG; add PDF page rasterization if PDF input is required.","P2","P0","<TBD>","Not Started","P1"
 "P2.02","Implement image orientation correction, cropping and optional resizing without losing source coordinates.","P2","P1","<TBD>","Not Started","P1"
@@ -220,3 +220,4 @@
 "P10.18","Create final release tag and archive source code.","P10","P1","<TBD>","Not Started","P9"
 "P10.19","Conduct a complete rehearsal on the presentation machine.","P10","P1","<TBD>","Not Started","P9"
 "P10.20","Deliver source code, documentation, map assets, reports, test evidence and presentation.","P10","P0","<TBD>","Not Started","P9"
+

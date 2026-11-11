@@ -1,0 +1,11 @@
+﻿map_version: department_v0_3
+provisional: true
+default_start:
+  id: S
+  cell_rc: [118, 54]
+scenario_variants:
+  around_column:
+    variant_id: around_column_alternate_start
+    start_cell_rc: [36, 68]
+    goal_cell_rc: [36, 78]
+    note: "Named scenario variant; default remains S."

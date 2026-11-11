@@ -1,9 +1,9 @@
 value,unit,where,used_in_model,note
 10,m,"Legacy corridor label / prior calibration note",no,"Superseded by the confirmed open-hall layout; there is no separate 10 m corridor in v0.2. Exact source annotation cannot be inspected until the photo is supplied."
-4.8,m,"Legacy width/calibration label; candidate entrance span",yes,"PPM=108 gives candidate entrance width 520/108=4.815 m (+0.31%); association with this exact span is provisional pending photo review."
+4.8,m,"Drawing label; segment association unverified",no,"Informational only; excluded from calibration and geometry by user decision dated 2026-11-11. Check against source photo later."
 5,m,"Right wall of hall, R4/R5 side",yes,"Traced vertical segment is 545 px = 5.046 m at 108 px/m (+0.93%); replaces obsolete 3.6 m label."
 6,m,"R6 corner (y=855) to modeled floor bottom (y=1503)",yes,"648 px = 6.000 m at 108 px/m; replaces the former 4.5 m + 1.4 m labels."
-2,m,"Legacy scale-check label; candidate R8 interior height",yes,"Candidate traced height is 210 px = 1.944 m (-2.78%); the photo is needed to confirm that this is the label's actual dimension line."
+2,m,"Drawing label; segment association unverified",no,"Informational only; excluded from calibration and geometry by user decision dated 2026-11-11. Check against source photo later."
 0.9,m,"Doors D2-D9",yes,"Opening span is 97 px = 0.898 m at 108 px/m (-0.21%); all modeled as open."
 1.2,m,"Door D1 / R1",yes,"Opening span is 130 px = 1.204 m at 108 px/m (+0.31%); modeled as open."
 0.5 x 0.5,m,"Hall column obstacle",yes,"Traced rectangle is 54 x 54 px = 0.50 x 0.50 m at 108 px/m."

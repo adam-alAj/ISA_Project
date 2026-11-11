@@ -1,6 +1,7 @@
-schema_version: 1
+﻿schema_version: 1
 status: provisional
-units_note: "Simulation assumptions only; not appliance measurements. Confirm with team/instructor."
+units_note: "Simulation assumptions only; not appliance measurements."
+editable_in_ui: true
 parameters:
   diameter_m:
     value: 0.35

@@ -1,26 +1,36 @@
-# Open questions for the instructor and team
+﻿# Open questions and recorded decisions
+
+**Decision update date: 2026-11-11.** User answers below are authoritative for project work. Items still marked HUMAN ACTION remain open and must not block unrelated implementation.
+
+## Decisions received
+
+| Item | Decision | Status |
+|---|---|---|
+| Room areas | Preserve `R7 > R1 > R4 > R6 > {R2,R3,R5,R8}`; the four smaller rooms target about 2.6 mÂ² within Â±5%. R7b is part of R7 and excluded from this comparison. Change only outer room sides; preserve the hall, doors, obstacles, and start. | Applied to v0.3; regression tests added. Independent raster checks reproduced successfully; pytest awaits a Python runtime. |
+| 4.8 m and 2 m labels | Informational only; do not use them for calibration or geometry. Confirm against the photo later. | Accepted as a non-blocking working decision. |
+| Calibration | Use confirmed dimensions only: 5 m east hall wall, 6 m lower span, door widths, column, and cabinet dimensions. | Applied in the v0.3 calibration notes. |
+| Door policy | All doors are permanently open passages in v1.0. | Approved 2026-11-11. |
+| Demo goals | Default start is S. The around-column alternate start is allowed only as a named scenario variant in configuration. | Provisionally approved; recorded in `docs/map_spec/demo_config.yaml`. |
+| Robot parameters | Values in `robot_params.yaml` are provisional simulation assumptions and must be editable from the UI. | Provisionally approved 2026-11-11. |
+| Python and grid | Python 3.12 and 0.10 m cell size remain provisional choices. | Accepted 2026-11-11. |
+| Algorithm name | Use canonical ID `iddfs` and alias `idfs` for Iterative Deepening DFS. | Working assumption until instructor reply; registry added. Do not freeze terminology. |
+| Map version | Preserve v0.2 and produce adjusted geometry as v0.3. | Applied; v0.3 is not frozen pending human sign-off. |
+
+## Remaining human actions
+
+| Question/action | Owner | Status |
+|---|---|---|
+| Send the instructor message and record replies about algorithms, grading rubric, submission format, demo format, and backup recording. | Team lead `<TBD>` | HUMAN ACTION â€” open, non-blocking; IDDFS working assumption is recorded. |
+| Assign team member names, communication channel, and decision owner. | Team | HUMAN ACTION â€” keep names `<TBD>`; non-blocking for independent work. |
+| Copy `WhatsApp_Image_2026-11-10_at_4_27_44_PM.jpeg` into `assets/floor_plans/`. | User/map owner | HUMAN ACTION â€” file not present yet. P1.01/P1.02 remain blocked on this file; other work continues. |
+| Check the informational 4.8 m and 2 m labels against the photo. | User/map owner | HUMAN ACTION â€” low priority, non-blocking; not used in calibration or geometry. |
+| Review and sign the map checklist and freeze statement. | Authorized reviewer `<TBD>` | HUMAN ACTION â€” required before freeze; does not block P2 work under the stated assumptions. |
 
 ## Instructor message ready to send
 
-Hello, we are confirming the project requirements before implementation. The SRS lists BFS, DFS, UCS, Greedy Best-First, A*, and “IDFS/IDDFS.” Please confirm that the six required algorithms are these, and that “IDFS” means Iterative Deepening Depth-First Search (IDDFS/IDS). Also, could you clarify the grading rubric, required submission format/files, and what you expect to see in the live demonstration? We will use the answer to freeze the project scope and acceptance checks. Thank you.
+Hello, we are confirming the project requirements before implementation. The working six algorithms are BFS, DFS, UCS, Greedy Best-First, A*, and Iterative Deepening DFS (canonical ID `iddfs`, alias `idfs`). Please confirm that â€œIDFSâ€ means IDDFS/IDS. Could you also clarify the grading rubric, required submission format/files, live-demo expectations, and whether a backup recording is accepted? We will use your answer to freeze terminology and final submission/demo scope. Thank you.
 
-**HUMAN ACTION:** A team member must send this message and record the instructor’s reply here.
+## Freeze rule
 
-## Questions to resolve
+The department map remains **unfrozen** until the v0.3 geometry and regression checks are complete, the review checklist is ready, and an authorized reviewer signs the freeze statement. Regression tests are written; independent raster checks are reproduced, while pytest awaits a Python runtime. Algorithm terminology and final submission/demo scope also remain provisional until the instructor replies. Unanswered HUMAN ACTION items do not block unrelated implementation.
 
-| Question | Owner | Status |
-|---|---|---|
-| Confirm the six algorithms and interpret IDFS as IDDFS/IDS. | Team lead `<TBD>` | HUMAN ACTION — not sent |
-| Obtain the grading rubric and identify scored deliverables. | Team lead `<TBD>` | HUMAN ACTION — unanswered |
-| Confirm accepted submission format, naming, and required source/report files. | Team lead `<TBD>` | HUMAN ACTION — unanswered |
-| Confirm live-demo duration, required workflow, and whether a recorded backup is accepted. | Team lead `<TBD>` | HUMAN ACTION — unanswered |
-| Identify project team members, communication channel, and decision owner. | Team | HUMAN ACTION — names `<TBD>` |
-| Supply the original, highest-quality floor-plan photo/vector/PDF for preservation. | Map owner `<TBD>` | HUMAN ACTION — source photo missing from workspace |
-| Confirm the 4.8 m and 2 m labels map to the candidate spans in the current trace. | Map owner `<TBD>` | HUMAN ACTION — source photo review pending |
-| Resolve the traced room-size mismatch: current R6 area is about 101.5% larger than R4, while the confirmed order says R4 > R6. | Team/map owner `<TBD>` | HUMAN ACTION — do not freeze or edit geometry before decision |
-| Approve the permanently-open door policy and the proposed demo goal set, including the alternate start for the around-column case. | Team/instructor `<TBD>` | HUMAN ACTION — review checklist pending |
-| Approve provisional robot size, speed, cleaning width, battery/lifetime, and energy assumptions. | Team/instructor `<TBD>` | HUMAN ACTION — parameter sheet pending |
-
-## Decisions awaiting answers
-
-Do not freeze algorithm terminology or final submission/demo scope until the instructor replies. The Python version and 0.10 m cell size are provisional ADR decisions and can be revisited if the team or instructor identifies a conflict.

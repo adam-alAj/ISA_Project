@@ -4,10 +4,10 @@
 The SRS course label is “IDFS/IDDFS” but explicitly requests instructor confirmation.
 
 ## Decision
-Provisionally interpret IDFS as Iterative Deepening Depth-First Search (IDDFS/IDS).
+Use canonical algorithm ID `iddfs` for Iterative Deepening Depth-First Search and accept `idfs` as an alias. This is a working assumption until the instructor confirms the course terminology.
 
 ## Consequences
-P4 planning uses repeated depth-limited DFS and accounts for repeated expansions. Confirm terminology with the instructor before implementation freeze.
+The name registry maps `idfs` to `iddfs`; P4 planning uses repeated depth-limited DFS and accounts for repeated expansions. Keep the alias so a later naming correction does not require changing every call site. Confirm terminology with the instructor before freezing the algorithm interface.
 
 ## Status
-Proposed — HUMAN ACTION pending.
+Working assumption accepted by the user on 2026-11-11; instructor confirmation remains HUMAN ACTION and non-blocking.

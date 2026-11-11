@@ -10,4 +10,4 @@ Target Python 3.12, with 3.11 as a fallback. This is provisional until dependenc
 Setup docs and CI should prefer 3.12 and retain a 3.11 compatibility check where practical. Dependency versions remain unpinned until verified.
 
 ## Status
-Proposed — team confirmation pending.
+Accepted provisionally by the user on 2026-11-11. Revisit only if a dependency or platform conflict appears.

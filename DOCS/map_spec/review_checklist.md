@@ -1,13 +1,13 @@
-# Department map review checklist
+﻿# Department map review checklist
 
-Review the original untouched floor-plan drawing alongside the v0.2 preview and annotated overlay. Mark each item after checking it against the source. Do not sign off unresolved image or label questions as verified.
+Review the original untouched floor-plan drawing alongside the v0.3 draft preview and annotated overlay. Mark each item after checking it against the source. Do not sign off unresolved image or label questions as verified.
 
 ## Drawing and scale
 
 - [ ] Source photo is present, unchanged, and SHA-256 is recorded.
 - [ ] Photo orientation, dimensions, page boundary, readability, logos, and watermarks are recorded.
-- [ ] Simulated boundary includes the open hall, entrance, R1–R8, and inner room R7b; excluded outside areas are clear.
-- [ ] Calibration labels 4.8 m, 2 m, and 5 m are matched to the intended drawing segments; residuals are acceptable.
+- [ ] Simulated boundary includes the open hall, entrance, R1â€“R8, and inner room R7b; excluded outside areas are clear.
+- [ ] Confirmed calibration dimensions (5 m, 6 m, 0.9/1.2 m doors, 0.5 m column, and 75/60 cm cabinets) match the source; 4.8 m and 2 m are informational only.
 - [ ] Superseded 10 m corridor, 3.6 m, 4.5 m, and 1.4 m labels are visibly understood.
 
 ## Room and element geometry
@@ -21,7 +21,7 @@ Review the original untouched floor-plan drawing alongside the v0.2 preview and 
 - [ ] R7 room outline.
 - [ ] R7b inner room outline.
 - [ ] R8 room outline.
-- [ ] Traced room areas agree with the confirmed room-size order, especially R4 versus R6.
+- [ ] Corrected room areas follow R7 > R1 > R4 > R6 > {R2,R3,R5,R8}; equal group is within 2.6 m² ±5%.
 - [ ] D1 (R1, 1.2 m) opening.
 - [ ] D2 (R2, 0.9 m) opening.
 - [ ] D3 (R3, 0.9 m) opening.
@@ -73,7 +73,7 @@ Review the original untouched floor-plan drawing alongside the v0.2 preview and 
 - [ ] W_R8_W west wall.
 - [ ] W_R8_E east wall.
 - [ ] Raster OCCUPIED exterior/untraced complement is appropriate.
-- [ ] C1 column obstacle location and 0.5 × 0.5 m dimensions.
+- [ ] C1 column obstacle location and 0.5 Ã— 0.5 m dimensions.
 - [ ] CB1 upper cabinet width and 10 cm protrusion.
 - [ ] CB2 entrance cabinet width and 10 cm protrusion.
 - [ ] Start point S is at cell (118,54) and corresponds to the intended floor location.
@@ -82,12 +82,12 @@ Review the original untouched floor-plan drawing alongside the v0.2 preview and 
 
 - [ ] All nine doors are intended to be permanently open passages in v1.0.
 - [ ] Wall boundaries are closed except at the nine modeled door openings.
-- [ ] No cleaning exclusion zones are present in v0.2; the former hatched zone is removed.
+- [ ] No cleaning exclusion zones are present in v0.3; the former hatched zone is removed.
 - [ ] `UNKNOWN` is not traversable; `CLEANED` is maintained as a separate boolean layer.
-- [ ] No `UNKNOWN` cells are present in the v0.2 grid (state reserved for later review workflows).
+- [ ] No `UNKNOWN` cells are present in the v0.3 grid (state reserved for later review workflows).
 - [ ] The 0.10 m grid and 0.35 m robot diameter provide acceptable clearance at the narrowest passage.
-- [ ] Proposed demo goals are appropriate and safe to use for comparisons.
-- [ ] Provisional robot parameters are acceptable for demonstration or updated with rationale.
+- [ ] Review demo goals: straight_line, around_column (scenario variant), deepest_room, top_room_R2, top_room_R3, top_room_R1, long_diagonal_R4, west_room_R8, unreachable_synthetic. Default start is S.
+- [ ] Provisional robot assumptions remain editable from the UI and are not real-appliance specifications.
 
 ## Sign-off
 
@@ -98,3 +98,4 @@ Decision:  [ ] Approved  [ ] Approved with changes  [ ] Rejected
 Changes / conditions: ______________________________________________________
 
 Signature: ______________________________  Date: __________________________
+
