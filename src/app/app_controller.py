@@ -47,6 +47,7 @@ class AppController(QObject):
         self.engine: SimulationEngine | None = None
         self.coverage_controller: CoverageController | None = None
         self.search_result = None
+        self.search_events = None
         self.run_result = None
         self.run_state = "idle"
         self._undo: list[tuple[tuple[int, int], int]] = []
@@ -202,7 +203,7 @@ class AppController(QObject):
         self._trace_event_count = 0
         options = SearchOptions(max_expansions=20000, time_budget_s=2.0,
                                 trace_callback=self._trace_event, frontier_sample_every=100)
-        self.search_result, _events = self.engine.run_point_to_point(
+        self.search_result, self.search_events = self.engine.run_point_to_point(
             PointToPointMission(self.robot.state.position, self.goal), REGISTRY[self.algorithm], options)
         return self.search_result
 

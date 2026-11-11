@@ -1,224 +1,223 @@
-task_id,task,phase,priority,owner,status,depends_on
-P0.01,Read and review the Project Description and SRS in full.,P0,P0,<TBD>,Done,
-P0.02,"Create a requirements traceability matrix mapping every FR/NFR to phase, module and test case.",P0,P0,<TBD>,Done,
-P0.03,Confirm the six required algorithms and confirm whether the course term IDFS means IDDFS/Iterative Deepening DFS.,P0,P0,<TBD>,Blocked,
-P0.04,"Confirm project deliverables, grading rubric, submission format and demonstration expectations with the instructor.",P0,P0,<TBD>,Blocked,
-P0.05,"Identify team members, responsibilities, communication channel and decision owner.",P0,P0,<TBD>,Blocked,
-P0.06,Create Git repository and define main/develop/feature branch workflow.,P0,P0,<TBD>,Done,
-P0.07,Create initial folder structure matching the SRS architecture.,P0,P0,<TBD>,In Progress,
-P0.08,Select supported Python version and create virtual environment.,P0,P0,<TBD>,In Progress,
-P0.09,"Create requirements.txt or pyproject.toml with pinned, tested dependencies.",P0,P0,<TBD>,In Progress,
-P0.10,"Install and smoke-test Python, PySide6, OpenCV, NumPy, Matplotlib, Pandas, Ursina and pytest.",P0,P0,<TBD>,Blocked,
-P0.11,"Create README with setup, run, test and contribution instructions.",P0,P0,<TBD>,Done,
-P0.12,"Define code style, naming conventions, type hints and docstring expectations.",P0,P0,<TBD>,Done,
-P0.13,"Configure logging, error-handling conventions and application configuration location.",P0,P0,<TBD>,Done,
-P0.14,"Create issue/task board with phase labels, priorities, owners and statuses.",P0,P0,<TBD>,Done,
-P0.15,Create a small technical prototype to confirm PySide6 and Ursina can coexist reliably (separate window/process is acceptable).,P0,P0,<TBD>,In Progress,
-P0.16,Record architectural decisions and known risks in an Architecture Decision Record (ADR) log.,P0,P0,<TBD>,Done,
-P1.01,Collect the original highest-quality floor-plan file or scan and preserve an untouched source copy.,P1,P0,<TBD>,Blocked,P0
-P1.02,"Inspect drawing format, resolution, orientation, page size and image quality.",P1,P1,<TBD>,Blocked,P0
-P1.03,Identify the building/dept boundary and the exact area included in the simulation.,P1,P1,<TBD>,Done,P0
-P1.04,"Extract all available dimensions, scale notation and measurement units.",P1,P0,<TBD>,In Review,P0
-P1.05,"Identify rooms, corridors, entrances, doors, wall segments and fixed obstacles.",P1,P0,<TBD>,Done,P0
-P1.06,"Clarify which doors/passages are open, closed or conditionally traversable.",P1,P0,<TBD>,Done,P0
-P1.07,"Identify areas excluded from cleaning (stairs, shafts, furniture zones, restricted rooms or unknown regions).",P1,P1,<TBD>,Done,P0
-P1.08,"Check drawing consistency: dimensions, wall thickness, gaps, overlaps and unclear symbols.",P1,P0,<TBD>,In Review,P0
-P1.09,Choose calibration method using known dimension(s); define fallback to abstract grid units if scale is unknown.,P1,P0,<TBD>,In Review,P0
-P1.10,Estimate candidate grid resolutions and compare narrowest corridor/door widths against robot footprint.,P1,P0,<TBD>,In Progress,P0
-P1.11,Choose initial movement model: four-neighbor grid; document any later diagonal extension.,P1,P0,<TBD>,Done,P0
-P1.12,"Define representation for wall, free, unknown, door/passage and cleaned state.",P1,P0,<TBD>,Done,P0
-P1.13,Decide how to represent doors and openings so no accidental wall gaps appear.,P1,P0,<TBD>,Done,P0
-P1.14,Define robot starting position and any target/goal points required for course demonstrations.,P1,P0,<TBD>,Done,P0
-P1.15,"Define candidate robot diameter, cleaning width, movement speed, battery capacity and lifetime values for prototype testing.",P1,P1,<TBD>,Done,P0
-P1.16,Prepare a marked-up copy of the floor plan showing all interpreted geometry.,P1,P1,<TBD>,In Review,P0
-P1.17,Review the interpretation with the team/instructor or map owner.,P1,P0,<TBD>,In Review,P0
-P1.18,Record unresolved assumptions and obtain confirmation before freezing the map specification.,P1,P0,<TBD>,In Review,P0
-P2.01,Implement image loading for PNG/JPG; add PDF page rasterization if PDF input is required.,P2,P0,<TBD>,In Progress,P1
-P2.02,"Implement image orientation correction, cropping and optional resizing without losing source coordinates.",P2,P1,<TBD>,In Progress,P1
-P2.03,Implement scale calibration from user-entered known distance and selected image points.,P2,P0,<TBD>,In Progress,P1
-P2.04,Implement grid overlay generation using configurable cell size.,P2,P0,<TBD>,In Progress,P1
-P2.05,"Implement manual map editing/tracing for walls, free regions, doors and unknown cells.",P2,P0,<TBD>,In Progress,P1
-P2.06,Add optional image thresholding/edge-detection helpers as suggestions only; require human confirmation.,P2,P3,<TBD>,In Progress,P1
-P2.07,Convert confirmed geometry into occupancy-grid data.,P2,P0,<TBD>,In Progress,P1
-P2.08,Keep occupancy data separate from cleaning-state data.,P2,P0,<TBD>,In Progress,P1
-P2.09,"Implement coordinate transforms between image pixels, grid row/column and real-world units.",P2,P0,<TBD>,In Progress,P1
-P2.10,Implement map-to-graph conversion for traversable cells.,P2,P0,<TBD>,In Progress,P1
-P2.11,"Implement neighbor generation with fixed order (Up, Right, Down, Left).",P2,P0,<TBD>,In Progress,P1
-P2.12,Implement transition validation to prevent crossing occupied or unknown cells.,P2,P0,<TBD>,In Progress,P1
-P2.13,Implement optional robot-footprint obstacle inflation or clearance validation.,P2,P0,<TBD>,In Progress,P1
-P2.14,Implement connected-component analysis to identify disconnected walkable regions.,P2,P0,<TBD>,In Progress,P1
-P2.15,Validate start and target cells against traversability.,P2,P0,<TBD>,In Progress,P1
-P2.16,"Detect invalid map states: no free cells, invalid dimensions, unclassified areas, accidental openings and invalid start.",P2,P0,<TBD>,In Progress,P1
-P2.17,"Create map preview with grid overlay, legend and editable cell states.",P2,P1,<TBD>,In Progress,P1
-P2.18,"Implement save/load format for map geometry, calibration, cell size and metadata.",P2,P0,<TBD>,In Progress,P1
-P2.19,"Create small synthetic maps for unit tests: open room, corridor, wall detour, disconnected regions and narrow passage.",P2,P1,<TBD>,In Progress,P1
-P2.20,Test map connectivity and coordinate conversion against known dimensions.,P2,P0,<TBD>,In Progress,P1
-P2.21,Freeze and version the first validated department map.,P2,P0,<TBD>,Blocked,P1
-P3.01,"Define robot state data structure: position, heading, battery, elapsed time, lifetime remaining, status and cleaned cells.",P3,P1,<TBD>,In Progress,P2
-P3.02,Define robot configuration schema and defaults.,P3,P1,<TBD>,In Progress,P2
-P3.03,Implement independent battery capacity and operational lifetime fields.,P3,P1,<TBD>,In Progress,P2
-P3.04,Implement movement speed and movement duration calculation.,P3,P1,<TBD>,In Progress,P2
-P3.05,Implement movement energy consumption per step or per meter.,P3,P1,<TBD>,In Progress,P2
-P3.06,Implement cleaning energy consumption per cell or unit time.,P3,P1,<TBD>,In Progress,P2
-P3.07,Implement optional idle energy consumption.,P3,P3,<TBD>,In Progress,P2
-P3.08,Implement battery remaining calculation and lower bound at zero.,P3,P1,<TBD>,In Progress,P2
-P3.09,Implement elapsed time and operational lifetime countdown.,P3,P1,<TBD>,In Progress,P2
-P3.10,Implement robot footprint and collision/clearance checks.,P3,P1,<TBD>,In Progress,P2
-P3.11,Implement movement action validation for adjacent traversable cells.,P3,P1,<TBD>,In Progress,P2
-P3.12,"Implement step execution that updates position, time and energy atomically.",P3,P1,<TBD>,In Progress,P2
-P3.13,Implement cleaning action based on cleaning width/footprint.,P3,P1,<TBD>,In Progress,P2
-P3.14,"Implement stop conditions: mission complete, battery depleted, lifetime expired, no reachable target, user stop and error.",P3,P1,<TBD>,In Progress,P2
-P3.15,Define behavior when a resource limit is reached mid-route (stop at last valid state; do not teleport).,P3,P1,<TBD>,In Progress,P2
-P3.16,Add optional safety reserve/return-to-safe-state policy only if required; otherwise explicitly omit it.,P3,P3,<TBD>,In Progress,P2
-P3.17,Implement reset and state snapshot functionality.,P3,P1,<TBD>,In Progress,P2
-P3.18,Unit-test battery and lifetime independently and simultaneously.,P3,P1,<TBD>,In Progress,P2
-P3.19,"Test collision, wall boundaries, narrow passages and invalid movement.",P3,P1,<TBD>,In Progress,P2
-P3.20,Document all model units and coefficients as simulation assumptions.,P3,P1,<TBD>,In Progress,P2
-P4.01,"Define common SearchProblem interface for map, start, goal, neighbors and transition costs.",P4,P0,<TBD>,In Progress,P2
-P4.02,"Define SearchResult schema: found, path, expanded/generated counts, path cost, execution time, termination and optional trace.",P4,P0,<TBD>,In Progress,P2
-P4.03,Define deterministic neighbor order and tie-breaking rules.,P4,P0,<TBD>,In Progress,P2
-P4.04,"Define counter semantics for expanded, generated and repeated states.",P4,P0,<TBD>,In Progress,P2
-P4.05,Implement BFS using FIFO queue and parent reconstruction.,P4,P0,<TBD>,In Progress,P2
-P4.06,Implement DFS using stack/recursion and visited-state handling.,P4,P0,<TBD>,In Progress,P2
-P4.07,Implement UCS using a priority queue and accumulated non-negative path cost.,P4,P0,<TBD>,In Progress,P2
-P4.08,Implement Greedy Best-First using heuristic priority.,P4,P0,<TBD>,In Progress,P2
-P4.09,"Implement A* using f(n)=g(n)+h(n), parent reconstruction and correct priority updates.",P4,P0,<TBD>,In Progress,P2
-P4.10,"Implement Manhattan heuristic for four-directional movement, scaled consistently with path costs.",P4,P0,<TBD>,In Progress,P2
-P4.11,Implement IDFS/IDDFS using repeated depth-limited DFS with increasing limits.,P4,P0,<TBD>,In Progress,P2
-P4.12,Define depth-limit behavior and termination for unreachable goals.,P4,P0,<TBD>,In Progress,P2
-P4.13,Handle stale priority-queue entries and improved paths correctly in UCS/A*.,P4,P0,<TBD>,In Progress,P2
-P4.14,"Handle start equals goal, invalid start/goal, no path and disconnected maps.",P4,P0,<TBD>,In Progress,P2
-P4.15,Add optional step-by-step trace events for visualization without coupling algorithms to the UI.,P4,P3,<TBD>,In Progress,P2
-P4.16,Write unit tests for each algorithm on reference graphs and grids.,P4,P0,<TBD>,In Progress,P2
-P4.17,Verify BFS shortest step count on uniform-cost maps.,P4,P0,<TBD>,In Progress,P2
-P4.18,Verify UCS least-cost route on weighted maps.,P4,P0,<TBD>,In Progress,P2
-P4.19,Verify A* against UCS on suitable maps with admissible heuristic.,P4,P0,<TBD>,In Progress,P2
-P4.20,Demonstrate Greedy can return a non-optimal path on a heuristic trap case.,P4,P0,<TBD>,In Progress,P2
-P4.21,Verify DFS behavior under documented neighbor order.,P4,P0,<TBD>,In Progress,P2
-P4.22,"Verify IDDFS depth progression, completeness on finite test cases and repeated expansion accounting.",P4,P0,<TBD>,In Progress,P2
-P4.23,Benchmark algorithm execution independently from visualization.,P4,P2,<TBD>,In Progress,P2
-P4.24,Document complexity and behavioral limitations for the final academic explanation.,P4,P2,<TBD>,In Progress,P2
-P5.01,Define point-to-point search mode separately from area-coverage mode.,P5,P0,<TBD>,Not Started,P3;P4
-P5.02,Define reachable cleanable-cell set and coverage denominator.,P5,P0,<TBD>,Not Started,P3;P4
-P5.03,"Define a deterministic next-target selection policy, e.g. nearest uncleaned reachable cell.",P5,P0,<TBD>,Not Started,P3;P4
-P5.04,Ensure target-selection policy is identical across algorithm comparisons.,P5,P0,<TBD>,Not Started,P3;P4
-P5.05,"Implement coverage controller loop: select target, call planner, execute route, update cleaned cells, repeat.",P5,P0,<TBD>,Not Started,P3;P4
-P5.06,Implement handling when a selected target has no route.,P5,P0,<TBD>,Not Started,P3;P4
-P5.07,Implement handling for disconnected regions and report inaccessible cleanable cells.,P5,P0,<TBD>,Not Started,P3;P4
-P5.08,Execute route one action at a time through the robot movement API.,P5,P0,<TBD>,Not Started,P3;P4
-P5.09,Ensure search expansion itself does not consume robot energy or move the robot.,P5,P0,<TBD>,Not Started,P3;P4
-P5.10,"Update robot position, battery, lifetime and cleaning state after each executed action.",P5,P0,<TBD>,Not Started,P3;P4
-P5.11,Check stop conditions after every simulated action.,P5,P0,<TBD>,Not Started,P3;P4
-P5.12,Prevent starting a movement action if insufficient energy/time is available under the defined policy.,P5,P0,<TBD>,Not Started,P3;P4
-P5.13,"Record event log: search started/finished, target selected, movement, cleaning, resource update and stop reason.",P5,P0,<TBD>,Not Started,P3;P4
-P5.14,"Support pause, resume, reset and cancellation at safe action boundaries.",P5,P2,<TBD>,Not Started,P3;P4
-P5.15,Implement simulation state snapshots for visualization playback.,P5,P0,<TBD>,Not Started,P3;P4
-P5.16,Calculate partial coverage and remaining uncleaned cells after early termination.,P5,P0,<TBD>,Not Started,P3;P4
-P5.17,Run end-to-end scenarios on small synthetic maps.,P5,P0,<TBD>,Not Started,P3;P4
-P5.18,Test full coverage with sufficient resources and partial coverage with constrained resources.,P5,P0,<TBD>,Not Started,P3;P4
-P5.19,"Test mission completion, battery depletion and lifetime expiry in integrated runs.",P5,P0,<TBD>,Not Started,P3;P4
-P5.20,Verify no robot path ever crosses an obstacle.,P5,P0,<TBD>,Not Started,P3;P4
-P6.01,Design UI navigation and screen layout.,P6,P1,<TBD>,Done,P5
-P6.02,Create PySide6 application shell and main window.,P6,P1,<TBD>,Done,P5
-P6.03,Create project home screen and map open/create actions.,P6,P1,<TBD>,Done,P5
-P6.04,Build map import and calibration screen.,P6,P1,<TBD>,In Progress,P5
-P6.05,"Build map editor with zoom, pan, grid overlay and cell/region editing.",P6,P2,<TBD>,Done,P5
-P6.06,"Add map legend and clear visual states for wall, free, unknown, door, explored, route and cleaned.",P6,P1,<TBD>,Done,P5
-P6.07,Add start-position selection and map validation feedback.,P6,P1,<TBD>,Done,P5
-P6.08,"Build robot configuration panel for battery, lifetime, speed, footprint and energy settings.",P6,P1,<TBD>,Done,P5
-P6.09,Build algorithm selection and scenario configuration panel.,P6,P1,<TBD>,Done,P5
-P6.10,Build point-to-point goal selection and coverage-mode controls.,P6,P1,<TBD>,Done,P5
-P6.11,Embed Matplotlib map view or use a compatible Qt plotting canvas.,P6,P1,<TBD>,Done,P5
-P6.12,Render explored states progressively from simulation trace events.,P6,P1,<TBD>,Done,P5
-P6.13,Render final path and live robot location.,P6,P1,<TBD>,Done,P5
-P6.14,Render cleaned cells and coverage progress.,P6,P1,<TBD>,Done,P5
-P6.15,"Add run, pause, resume, step, reset and speed controls where supported.",P6,P1,<TBD>,In Progress,P5
-P6.16,"Display live battery, elapsed time, lifetime remaining, status and coverage.",P6,P1,<TBD>,Done,P5
-P6.17,"Display validation warnings, no-path outcomes and stop reasons.",P6,P1,<TBD>,Done,P5
-P6.18,Ensure long-running search/simulation does not freeze the UI (worker thread or task runner).,P6,P1,<TBD>,Done,P5
-P6.19,Handle worker cancellation and safe UI updates.,P6,P1,<TBD>,Done,P5
-P6.20,Add configuration save/load and recent map/run access.,P6,P1,<TBD>,Done,P5
-P6.21,Perform UI usability testing with a user unfamiliar with the code.,P6,P2,<TBD>,Human Action,P5
-P6.22,Verify UI results match underlying engine data.,P6,P1,<TBD>,Done,P5
-P7.01,Create a minimal Ursina prototype and validate performance on target hardware.,P7,P0,<TBD>,Not Started,P5
-P7.02,Define conversion from grid/image/world coordinates to 3D scene coordinates.,P7,P1,<TBD>,Not Started,P5
-P7.03,Generate floor plane and room/floor boundaries from the map.,P7,P1,<TBD>,Not Started,P5
-P7.04,Generate wall geometry with consistent thickness and height.,P7,P1,<TBD>,Not Started,P5
-P7.05,Represent door openings and passages accurately.,P7,P1,<TBD>,Not Started,P5
-P7.06,Add optional room labels and simple environmental details where useful.,P7,P3,<TBD>,Not Started,P5
-P7.07,Create or select a simple vacuum robot 3D model (primitive model acceptable for initial release).,P7,P1,<TBD>,Not Started,P5
-P7.08,Set robot scale based on map calibration and modeled diameter.,P7,P1,<TBD>,Not Started,P5
-P7.09,"Implement camera controls: orbit, pan, zoom and reset view.",P7,P2,<TBD>,Not Started,P5
-P7.10,Animate robot along the executed route using simulation state/events.,P7,P1,<TBD>,Not Started,P5
-P7.11,Synchronize 3D robot position with the 2D simulation state.,P7,P1,<TBD>,Not Started,P5
-P7.12,Represent cleaned regions visually in 3D if feasible; otherwise show coverage in 2D and a 3D route.,P7,P2,<TBD>,Not Started,P5
-P7.13,"Support playback speed, pause and reset consistently with simulation controls.",P7,P1,<TBD>,Not Started,P5
-P7.14,"Handle room boundaries, floor height and camera clipping.",P7,P1,<TBD>,Not Started,P5
-P7.15,Optimize mesh count and scene updates for the actual floor-plan size.,P7,P1,<TBD>,Not Started,P5
-P7.16,Verify the robot does not visually pass through walls or closed passages.,P7,P0,<TBD>,Not Started,P5
-P7.17,Compare 3D route coordinates against 2D route coordinates.,P7,P0,<TBD>,Not Started,P5
-P7.18,Decide final integration mode: embedded view or separate synchronized window.,P7,P0,<TBD>,Not Started,P5
-P7.19,Test on the actual presentation laptop and document graphics requirements.,P7,P1,<TBD>,Not Started,P5
-P8.01,"Finalize precise definitions for expanded nodes, generated nodes and duplicate/repeated expansions.",P8,P0,<TBD>,Not Started,P5;P6
-P8.02,"Finalize definitions for path length, path cost, search time and travel time.",P8,P0,<TBD>,Not Started,P5;P6
-P8.03,Finalize battery and lifetime reporting units.,P8,P0,<TBD>,Not Started,P5;P6
-P8.04,Finalize coverage numerator/denominator and treatment of unreachable cells.,P8,P0,<TBD>,Not Started,P5;P6
-P8.05,Implement metrics extraction from search result and simulation event log.,P8,P1,<TBD>,Not Started,P5;P6
-P8.06,Store experiment metadata and raw results in JSON/CSV or another documented format.,P8,P1,<TBD>,Not Started,P5;P6
-P8.07,Implement per-run result summary.,P8,P1,<TBD>,Not Started,P5;P6
-P8.08,Implement cross-run comparison and check that map/scenario settings are comparable.,P8,P0,<TBD>,Not Started,P5;P6
-P8.09,Generate comparison tables for all six algorithms.,P8,P1,<TBD>,Not Started,P5;P6
-P8.10,"Generate charts for explored nodes, execution time, path length/cost, energy and coverage.",P8,P1,<TBD>,Not Started,P5;P6
-P8.11,Use repeated timing runs and calculate median or another declared statistic.,P8,P1,<TBD>,Not Started,P5;P6
-P8.12,Separate search execution time from animation and UI overhead.,P8,P0,<TBD>,Not Started,P5;P6
-P8.13,"Generate detailed per-algorithm report with configuration, results, events and termination reason.",P8,P1,<TBD>,Not Started,P5;P6
-P8.14,Generate comparative report with interpretation and limitations.,P8,P1,<TBD>,Not Started,P5;P6
-P8.15,Export CSV for raw metrics.,P8,P1,<TBD>,Not Started,P5;P6
-P8.16,"Export PDF report with tables, charts, map snapshots and assumptions.",P8,P1,<TBD>,Not Started,P5;P6
-P8.17,Optionally export DOCX summary if required by the course.,P8,P3,<TBD>,Not Started,P5;P6
-P8.18,Validate exported reports against source run records.,P8,P0,<TBD>,Not Started,P5;P6
-P8.19,"Add report metadata: project version, map version, date and experiment ID.",P8,P1,<TBD>,Not Started,P5;P6
-P8.20,Ensure no unsupported claim of universal algorithm superiority appears in generated interpretation.,P8,P0,<TBD>,Not Started,P5;P6
-P9.01,Review requirements traceability matrix and identify unimplemented requirements.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.02,"Run all unit tests for map, robot, algorithms, coverage and reporting.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.03,Run full integration tests from map import through report export.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.04,Run regression tests after each defect fix.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.05,"Test map edge cases: tiny map, large map, narrow corridor, loops, disconnected rooms and irregular geometry.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.06,"Test algorithm edge cases: start=goal, invalid states, no path, multiple equal-cost paths and weighted transitions.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.07,"Test robot edge cases: zero battery, zero lifetime, resource exhaustion mid-route and invalid configuration.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.08,"Test coverage edge cases: no cleanable cells, unreachable regions, complete coverage and partial coverage.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.09,Test repeated runs and verify deterministic results except timing variation.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.10,"Test saving, loading and compatibility of map/configuration/result files.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.11,Measure runtime and memory on the real department map.,P9,P1,<TBD>,Not Started,P6;P7;P8
-P9.12,Profile bottlenecks and optimize only where necessary.,P9,P2,<TBD>,Not Started,P6;P7;P8
-P9.13,"Test UI responsiveness during search, simulation and report generation.",P9,P2,<TBD>,Not Started,P6;P7;P8
-P9.14,"Test 3D scene stability, frame rate and route synchronization.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.15,Test on the intended presentation computer with a clean environment.,P9,P1,<TBD>,Not Started,P6;P7;P8
-P9.16,Perform usability review and fix confusing labels or controls.,P9,P2,<TBD>,Not Started,P6;P7;P8
-P9.17,"Check error messages, logs and recovery from invalid input.",P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.18,Verify offline operation of all core features.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.19,Run final acceptance test suite against AC-01 through AC-09.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P9.20,"Record known defects, limitations and deferred features.",P9,P1,<TBD>,Not Started,P6;P7;P8
-P9.21,Freeze release candidate and tag version in Git.,P9,P0,<TBD>,Not Started,P6;P7;P8
-P10.01,"Update README with installation, dependencies, launch and troubleshooting instructions.",P10,P1,<TBD>,Not Started,P9
-P10.02,Document project architecture and module responsibilities.,P10,P1,<TBD>,Not Started,P9
-P10.03,"Document map preparation, calibration, grid resolution and limitations.",P10,P1,<TBD>,Not Started,P9
-P10.04,"Document robot model, battery/lifetime equations and parameter assumptions.",P10,P1,<TBD>,Not Started,P9
-P10.05,Document each search algorithm and its implementation-specific behavior.,P10,P1,<TBD>,Not Started,P9
-P10.06,Document coverage policy and explain why it is separate from pathfinding.,P10,P1,<TBD>,Not Started,P9
-P10.07,"Document metrics, definitions, experiment protocol and fairness controls.",P10,P1,<TBD>,Not Started,P9
-P10.08,Document test strategy and final test outcomes.,P10,P1,<TBD>,Not Started,P9
-P10.09,Prepare final SRS updates to reflect implemented behavior and approved deviations.,P10,P0,<TBD>,Not Started,P9
-P10.10,Prepare user guide with screenshots and step-by-step workflow.,P10,P1,<TBD>,Not Started,P9
-P10.11,Prepare technical report and architecture diagrams.,P10,P1,<TBD>,Not Started,P9
-P10.12,Prepare experiment dataset and final comparison tables/charts.,P10,P1,<TBD>,Not Started,P9
-P10.13,"Prepare demo scenario with fixed map, start point, target/coverage mode and resource settings.",P10,P1,<TBD>,Not Started,P9
-P10.14,"Prepare presentation slides: problem, objectives, architecture, algorithms, simulation, results and limitations.",P10,P1,<TBD>,Not Started,P9
-P10.15,Prepare a short live demonstration script and expected outcomes.,P10,P1,<TBD>,Not Started,P9
-P10.16,Capture backup screenshots/video in case the live 3D demo fails.,P10,P1,<TBD>,Not Started,P9
-P10.17,Verify all required files are included and paths are relative/portable.,P10,P0,<TBD>,Not Started,P9
-P10.18,Create final release tag and archive source code.,P10,P1,<TBD>,Not Started,P9
-P10.19,Conduct a complete rehearsal on the presentation machine.,P10,P1,<TBD>,Not Started,P9
-P10.20,"Deliver source code, documentation, map assets, reports, test evidence and presentation.",P10,P0,<TBD>,Not Started,P9
-P5-GATE,P5 acceptance checks and evidence report: reports/qa/p5_gate_result.md,P5,P0,<TBD>,Done,P3;P4
-
+﻿"task_id","task","phase","priority","owner","status","depends_on"
+"P0.01","Read and review the Project Description and SRS in full.","P0","P0","<TBD>","Done",""
+"P0.02","Create a requirements traceability matrix mapping every FR/NFR to phase, module and test case.","P0","P0","<TBD>","Done",""
+"P0.03","Confirm the six required algorithms and confirm whether the course term IDFS means IDDFS/Iterative Deepening DFS.","P0","P0","<TBD>","Blocked",""
+"P0.04","Confirm project deliverables, grading rubric, submission format and demonstration expectations with the instructor.","P0","P0","<TBD>","Blocked",""
+"P0.05","Identify team members, responsibilities, communication channel and decision owner.","P0","P0","<TBD>","Blocked",""
+"P0.06","Create Git repository and define main/develop/feature branch workflow.","P0","P0","<TBD>","Done",""
+"P0.07","Create initial folder structure matching the SRS architecture.","P0","P0","<TBD>","In Progress",""
+"P0.08","Select supported Python version and create virtual environment.","P0","P0","<TBD>","In Progress",""
+"P0.09","Create requirements.txt or pyproject.toml with pinned, tested dependencies.","P0","P0","<TBD>","In Progress",""
+"P0.10","Install and smoke-test Python, PySide6, OpenCV, NumPy, Matplotlib, Pandas, Ursina and pytest.","P0","P0","<TBD>","Blocked",""
+"P0.11","Create README with setup, run, test and contribution instructions.","P0","P0","<TBD>","Done",""
+"P0.12","Define code style, naming conventions, type hints and docstring expectations.","P0","P0","<TBD>","Done",""
+"P0.13","Configure logging, error-handling conventions and application configuration location.","P0","P0","<TBD>","Done",""
+"P0.14","Create issue/task board with phase labels, priorities, owners and statuses.","P0","P0","<TBD>","Done",""
+"P0.15","Create a small technical prototype to confirm PySide6 and Ursina can coexist reliably (separate window/process is acceptable).","P0","P0","<TBD>","In Progress",""
+"P0.16","Record architectural decisions and known risks in an Architecture Decision Record (ADR) log.","P0","P0","<TBD>","Done",""
+"P1.01","Collect the original highest-quality floor-plan file or scan and preserve an untouched source copy.","P1","P0","<TBD>","Blocked","P0"
+"P1.02","Inspect drawing format, resolution, orientation, page size and image quality.","P1","P1","<TBD>","Blocked","P0"
+"P1.03","Identify the building/dept boundary and the exact area included in the simulation.","P1","P1","<TBD>","Done","P0"
+"P1.04","Extract all available dimensions, scale notation and measurement units.","P1","P0","<TBD>","In Review","P0"
+"P1.05","Identify rooms, corridors, entrances, doors, wall segments and fixed obstacles.","P1","P0","<TBD>","Done","P0"
+"P1.06","Clarify which doors/passages are open, closed or conditionally traversable.","P1","P0","<TBD>","Done","P0"
+"P1.07","Identify areas excluded from cleaning (stairs, shafts, furniture zones, restricted rooms or unknown regions).","P1","P1","<TBD>","Done","P0"
+"P1.08","Check drawing consistency: dimensions, wall thickness, gaps, overlaps and unclear symbols.","P1","P0","<TBD>","In Review","P0"
+"P1.09","Choose calibration method using known dimension(s); define fallback to abstract grid units if scale is unknown.","P1","P0","<TBD>","In Review","P0"
+"P1.10","Estimate candidate grid resolutions and compare narrowest corridor/door widths against robot footprint.","P1","P0","<TBD>","In Progress","P0"
+"P1.11","Choose initial movement model: four-neighbor grid; document any later diagonal extension.","P1","P0","<TBD>","Done","P0"
+"P1.12","Define representation for wall, free, unknown, door/passage and cleaned state.","P1","P0","<TBD>","Done","P0"
+"P1.13","Decide how to represent doors and openings so no accidental wall gaps appear.","P1","P0","<TBD>","Done","P0"
+"P1.14","Define robot starting position and any target/goal points required for course demonstrations.","P1","P0","<TBD>","Done","P0"
+"P1.15","Define candidate robot diameter, cleaning width, movement speed, battery capacity and lifetime values for prototype testing.","P1","P1","<TBD>","Done","P0"
+"P1.16","Prepare a marked-up copy of the floor plan showing all interpreted geometry.","P1","P1","<TBD>","In Review","P0"
+"P1.17","Review the interpretation with the team/instructor or map owner.","P1","P0","<TBD>","In Review","P0"
+"P1.18","Record unresolved assumptions and obtain confirmation before freezing the map specification.","P1","P0","<TBD>","In Review","P0"
+"P2.01","Implement image loading for PNG/JPG; add PDF page rasterization if PDF input is required.","P2","P0","<TBD>","In Progress","P1"
+"P2.02","Implement image orientation correction, cropping and optional resizing without losing source coordinates.","P2","P1","<TBD>","In Progress","P1"
+"P2.03","Implement scale calibration from user-entered known distance and selected image points.","P2","P0","<TBD>","In Progress","P1"
+"P2.04","Implement grid overlay generation using configurable cell size.","P2","P0","<TBD>","In Progress","P1"
+"P2.05","Implement manual map editing/tracing for walls, free regions, doors and unknown cells.","P2","P0","<TBD>","In Progress","P1"
+"P2.06","Add optional image thresholding/edge-detection helpers as suggestions only; require human confirmation.","P2","P3","<TBD>","In Progress","P1"
+"P2.07","Convert confirmed geometry into occupancy-grid data.","P2","P0","<TBD>","In Progress","P1"
+"P2.08","Keep occupancy data separate from cleaning-state data.","P2","P0","<TBD>","In Progress","P1"
+"P2.09","Implement coordinate transforms between image pixels, grid row/column and real-world units.","P2","P0","<TBD>","In Progress","P1"
+"P2.10","Implement map-to-graph conversion for traversable cells.","P2","P0","<TBD>","In Progress","P1"
+"P2.11","Implement neighbor generation with fixed order (Up, Right, Down, Left).","P2","P0","<TBD>","In Progress","P1"
+"P2.12","Implement transition validation to prevent crossing occupied or unknown cells.","P2","P0","<TBD>","In Progress","P1"
+"P2.13","Implement optional robot-footprint obstacle inflation or clearance validation.","P2","P0","<TBD>","In Progress","P1"
+"P2.14","Implement connected-component analysis to identify disconnected walkable regions.","P2","P0","<TBD>","In Progress","P1"
+"P2.15","Validate start and target cells against traversability.","P2","P0","<TBD>","In Progress","P1"
+"P2.16","Detect invalid map states: no free cells, invalid dimensions, unclassified areas, accidental openings and invalid start.","P2","P0","<TBD>","In Progress","P1"
+"P2.17","Create map preview with grid overlay, legend and editable cell states.","P2","P1","<TBD>","In Progress","P1"
+"P2.18","Implement save/load format for map geometry, calibration, cell size and metadata.","P2","P0","<TBD>","In Progress","P1"
+"P2.19","Create small synthetic maps for unit tests: open room, corridor, wall detour, disconnected regions and narrow passage.","P2","P1","<TBD>","In Progress","P1"
+"P2.20","Test map connectivity and coordinate conversion against known dimensions.","P2","P0","<TBD>","In Progress","P1"
+"P2.21","Freeze and version the first validated department map.","P2","P0","<TBD>","Blocked","P1"
+"P3.01","Define robot state data structure: position, heading, battery, elapsed time, lifetime remaining, status and cleaned cells.","P3","P1","<TBD>","In Progress","P2"
+"P3.02","Define robot configuration schema and defaults.","P3","P1","<TBD>","In Progress","P2"
+"P3.03","Implement independent battery capacity and operational lifetime fields.","P3","P1","<TBD>","In Progress","P2"
+"P3.04","Implement movement speed and movement duration calculation.","P3","P1","<TBD>","In Progress","P2"
+"P3.05","Implement movement energy consumption per step or per meter.","P3","P1","<TBD>","In Progress","P2"
+"P3.06","Implement cleaning energy consumption per cell or unit time.","P3","P1","<TBD>","In Progress","P2"
+"P3.07","Implement optional idle energy consumption.","P3","P3","<TBD>","In Progress","P2"
+"P3.08","Implement battery remaining calculation and lower bound at zero.","P3","P1","<TBD>","In Progress","P2"
+"P3.09","Implement elapsed time and operational lifetime countdown.","P3","P1","<TBD>","In Progress","P2"
+"P3.10","Implement robot footprint and collision/clearance checks.","P3","P1","<TBD>","In Progress","P2"
+"P3.11","Implement movement action validation for adjacent traversable cells.","P3","P1","<TBD>","In Progress","P2"
+"P3.12","Implement step execution that updates position, time and energy atomically.","P3","P1","<TBD>","In Progress","P2"
+"P3.13","Implement cleaning action based on cleaning width/footprint.","P3","P1","<TBD>","In Progress","P2"
+"P3.14","Implement stop conditions: mission complete, battery depleted, lifetime expired, no reachable target, user stop and error.","P3","P1","<TBD>","In Progress","P2"
+"P3.15","Define behavior when a resource limit is reached mid-route (stop at last valid state; do not teleport).","P3","P1","<TBD>","In Progress","P2"
+"P3.16","Add optional safety reserve/return-to-safe-state policy only if required; otherwise explicitly omit it.","P3","P3","<TBD>","In Progress","P2"
+"P3.17","Implement reset and state snapshot functionality.","P3","P1","<TBD>","In Progress","P2"
+"P3.18","Unit-test battery and lifetime independently and simultaneously.","P3","P1","<TBD>","In Progress","P2"
+"P3.19","Test collision, wall boundaries, narrow passages and invalid movement.","P3","P1","<TBD>","In Progress","P2"
+"P3.20","Document all model units and coefficients as simulation assumptions.","P3","P1","<TBD>","In Progress","P2"
+"P4.01","Define common SearchProblem interface for map, start, goal, neighbors and transition costs.","P4","P0","<TBD>","In Progress","P2"
+"P4.02","Define SearchResult schema: found, path, expanded/generated counts, path cost, execution time, termination and optional trace.","P4","P0","<TBD>","In Progress","P2"
+"P4.03","Define deterministic neighbor order and tie-breaking rules.","P4","P0","<TBD>","In Progress","P2"
+"P4.04","Define counter semantics for expanded, generated and repeated states.","P4","P0","<TBD>","In Progress","P2"
+"P4.05","Implement BFS using FIFO queue and parent reconstruction.","P4","P0","<TBD>","In Progress","P2"
+"P4.06","Implement DFS using stack/recursion and visited-state handling.","P4","P0","<TBD>","In Progress","P2"
+"P4.07","Implement UCS using a priority queue and accumulated non-negative path cost.","P4","P0","<TBD>","In Progress","P2"
+"P4.08","Implement Greedy Best-First using heuristic priority.","P4","P0","<TBD>","In Progress","P2"
+"P4.09","Implement A* using f(n)=g(n)+h(n), parent reconstruction and correct priority updates.","P4","P0","<TBD>","In Progress","P2"
+"P4.10","Implement Manhattan heuristic for four-directional movement, scaled consistently with path costs.","P4","P0","<TBD>","In Progress","P2"
+"P4.11","Implement IDFS/IDDFS using repeated depth-limited DFS with increasing limits.","P4","P0","<TBD>","In Progress","P2"
+"P4.12","Define depth-limit behavior and termination for unreachable goals.","P4","P0","<TBD>","In Progress","P2"
+"P4.13","Handle stale priority-queue entries and improved paths correctly in UCS/A*.","P4","P0","<TBD>","In Progress","P2"
+"P4.14","Handle start equals goal, invalid start/goal, no path and disconnected maps.","P4","P0","<TBD>","In Progress","P2"
+"P4.15","Add optional step-by-step trace events for visualization without coupling algorithms to the UI.","P4","P3","<TBD>","In Progress","P2"
+"P4.16","Write unit tests for each algorithm on reference graphs and grids.","P4","P0","<TBD>","In Progress","P2"
+"P4.17","Verify BFS shortest step count on uniform-cost maps.","P4","P0","<TBD>","In Progress","P2"
+"P4.18","Verify UCS least-cost route on weighted maps.","P4","P0","<TBD>","In Progress","P2"
+"P4.19","Verify A* against UCS on suitable maps with admissible heuristic.","P4","P0","<TBD>","In Progress","P2"
+"P4.20","Demonstrate Greedy can return a non-optimal path on a heuristic trap case.","P4","P0","<TBD>","In Progress","P2"
+"P4.21","Verify DFS behavior under documented neighbor order.","P4","P0","<TBD>","In Progress","P2"
+"P4.22","Verify IDDFS depth progression, completeness on finite test cases and repeated expansion accounting.","P4","P0","<TBD>","In Progress","P2"
+"P4.23","Benchmark algorithm execution independently from visualization.","P4","P2","<TBD>","In Progress","P2"
+"P4.24","Document complexity and behavioral limitations for the final academic explanation.","P4","P2","<TBD>","In Progress","P2"
+"P5.01","Define point-to-point search mode separately from area-coverage mode.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.02","Define reachable cleanable-cell set and coverage denominator.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.03","Define a deterministic next-target selection policy, e.g. nearest uncleaned reachable cell.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.04","Ensure target-selection policy is identical across algorithm comparisons.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.05","Implement coverage controller loop: select target, call planner, execute route, update cleaned cells, repeat.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.06","Implement handling when a selected target has no route.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.07","Implement handling for disconnected regions and report inaccessible cleanable cells.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.08","Execute route one action at a time through the robot movement API.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.09","Ensure search expansion itself does not consume robot energy or move the robot.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.10","Update robot position, battery, lifetime and cleaning state after each executed action.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.11","Check stop conditions after every simulated action.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.12","Prevent starting a movement action if insufficient energy/time is available under the defined policy.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.13","Record event log: search started/finished, target selected, movement, cleaning, resource update and stop reason.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.14","Support pause, resume, reset and cancellation at safe action boundaries.","P5","P2","<TBD>","Not Started","P3;P4"
+"P5.15","Implement simulation state snapshots for visualization playback.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.16","Calculate partial coverage and remaining uncleaned cells after early termination.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.17","Run end-to-end scenarios on small synthetic maps.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.18","Test full coverage with sufficient resources and partial coverage with constrained resources.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.19","Test mission completion, battery depletion and lifetime expiry in integrated runs.","P5","P0","<TBD>","Not Started","P3;P4"
+"P5.20","Verify no robot path ever crosses an obstacle.","P5","P0","<TBD>","Not Started","P3;P4"
+"P6.01","Design UI navigation and screen layout.","P6","P1","<TBD>","Done","P5"
+"P6.02","Create PySide6 application shell and main window.","P6","P1","<TBD>","Done","P5"
+"P6.03","Create project home screen and map open/create actions.","P6","P1","<TBD>","Done","P5"
+"P6.04","Build map import and calibration screen.","P6","P1","<TBD>","In Progress","P5"
+"P6.05","Build map editor with zoom, pan, grid overlay and cell/region editing.","P6","P2","<TBD>","Done","P5"
+"P6.06","Add map legend and clear visual states for wall, free, unknown, door, explored, route and cleaned.","P6","P1","<TBD>","Done","P5"
+"P6.07","Add start-position selection and map validation feedback.","P6","P1","<TBD>","Done","P5"
+"P6.08","Build robot configuration panel for battery, lifetime, speed, footprint and energy settings.","P6","P1","<TBD>","Done","P5"
+"P6.09","Build algorithm selection and scenario configuration panel.","P6","P1","<TBD>","Done","P5"
+"P6.10","Build point-to-point goal selection and coverage-mode controls.","P6","P1","<TBD>","Done","P5"
+"P6.11","Embed Matplotlib map view or use a compatible Qt plotting canvas.","P6","P1","<TBD>","Done","P5"
+"P6.12","Render explored states progressively from simulation trace events.","P6","P1","<TBD>","Done","P5"
+"P6.13","Render final path and live robot location.","P6","P1","<TBD>","Done","P5"
+"P6.14","Render cleaned cells and coverage progress.","P6","P1","<TBD>","Done","P5"
+"P6.15","Add run, pause, resume, step, reset and speed controls where supported.","P6","P1","<TBD>","In Progress","P5"
+"P6.16","Display live battery, elapsed time, lifetime remaining, status and coverage.","P6","P1","<TBD>","Done","P5"
+"P6.17","Display validation warnings, no-path outcomes and stop reasons.","P6","P1","<TBD>","Done","P5"
+"P6.18","Ensure long-running search/simulation does not freeze the UI (worker thread or task runner).","P6","P1","<TBD>","Done","P5"
+"P6.19","Handle worker cancellation and safe UI updates.","P6","P1","<TBD>","Done","P5"
+"P6.20","Add configuration save/load and recent map/run access.","P6","P1","<TBD>","Done","P5"
+"P6.21","Perform UI usability testing with a user unfamiliar with the code.","P6","P2","<TBD>","Human Action","P5"
+"P6.22","Verify UI results match underlying engine data.","P6","P1","<TBD>","Done","P5"
+"P7.01","Create a minimal Ursina prototype and validate performance on target hardware.","P7","P0","<TBD>","In Progress","P5"
+"P7.02","Define conversion from grid/image/world coordinates to 3D scene coordinates.","P7","P1","<TBD>","Done","P5"
+"P7.03","Generate floor plane and room/floor boundaries from the map.","P7","P1","<TBD>","Done","P5"
+"P7.04","Generate wall geometry with consistent thickness and height.","P7","P1","<TBD>","Done","P5"
+"P7.05","Represent door openings and passages accurately.","P7","P1","<TBD>","Done","P5"
+"P7.06","Add optional room labels and simple environmental details where useful.","P7","P3","<TBD>","Done","P5"
+"P7.07","Create or select a simple vacuum robot 3D model (primitive model acceptable for initial release).","P7","P1","<TBD>","Done","P5"
+"P7.08","Set robot scale based on map calibration and modeled diameter.","P7","P1","<TBD>","Done","P5"
+"P7.09","Implement camera controls: orbit, pan, zoom and reset view.","P7","P2","<TBD>","Done","P5"
+"P7.10","Animate robot along the executed route using simulation state/events.","P7","P1","<TBD>","Done","P5"
+"P7.11","Synchronize 3D robot position with the 2D simulation state.","P7","P1","<TBD>","Done","P5"
+"P7.12","Represent cleaned regions visually in 3D if feasible; otherwise show coverage in 2D and a 3D route.","P7","P2","<TBD>","In Progress","P5"
+"P7.13","Support playback speed, pause and reset consistently with simulation controls.","P7","P1","<TBD>","Done","P5"
+"P7.14","Handle room boundaries, floor height and camera clipping.","P7","P1","<TBD>","Done","P5"
+"P7.15","Optimize mesh count and scene updates for the actual floor-plan size.","P7","P1","<TBD>","Done","P5"
+"P7.16","Verify the robot does not visually pass through walls or closed passages.","P7","P0","<TBD>","Done","P5"
+"P7.17","Compare 3D route coordinates against 2D route coordinates.","P7","P0","<TBD>","Done","P5"
+"P7.18","Decide final integration mode: embedded view or separate synchronized window.","P7","P0","<TBD>","Done","P5"
+"P7.19","Test on the actual presentation laptop and document graphics requirements.","P7","P1","<TBD>","Human Action","P5"
+"P8.01","Finalize precise definitions for expanded nodes, generated nodes and duplicate/repeated expansions.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.02","Finalize definitions for path length, path cost, search time and travel time.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.03","Finalize battery and lifetime reporting units.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.04","Finalize coverage numerator/denominator and treatment of unreachable cells.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.05","Implement metrics extraction from search result and simulation event log.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.06","Store experiment metadata and raw results in JSON/CSV or another documented format.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.07","Implement per-run result summary.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.08","Implement cross-run comparison and check that map/scenario settings are comparable.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.09","Generate comparison tables for all six algorithms.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.10","Generate charts for explored nodes, execution time, path length/cost, energy and coverage.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.11","Use repeated timing runs and calculate median or another declared statistic.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.12","Separate search execution time from animation and UI overhead.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.13","Generate detailed per-algorithm report with configuration, results, events and termination reason.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.14","Generate comparative report with interpretation and limitations.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.15","Export CSV for raw metrics.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.16","Export PDF report with tables, charts, map snapshots and assumptions.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.17","Optionally export DOCX summary if required by the course.","P8","P3","<TBD>","Not Started","P5;P6"
+"P8.18","Validate exported reports against source run records.","P8","P0","<TBD>","Not Started","P5;P6"
+"P8.19","Add report metadata: project version, map version, date and experiment ID.","P8","P1","<TBD>","Not Started","P5;P6"
+"P8.20","Ensure no unsupported claim of universal algorithm superiority appears in generated interpretation.","P8","P0","<TBD>","Not Started","P5;P6"
+"P9.01","Review requirements traceability matrix and identify unimplemented requirements.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.02","Run all unit tests for map, robot, algorithms, coverage and reporting.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.03","Run full integration tests from map import through report export.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.04","Run regression tests after each defect fix.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.05","Test map edge cases: tiny map, large map, narrow corridor, loops, disconnected rooms and irregular geometry.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.06","Test algorithm edge cases: start=goal, invalid states, no path, multiple equal-cost paths and weighted transitions.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.07","Test robot edge cases: zero battery, zero lifetime, resource exhaustion mid-route and invalid configuration.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.08","Test coverage edge cases: no cleanable cells, unreachable regions, complete coverage and partial coverage.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.09","Test repeated runs and verify deterministic results except timing variation.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.10","Test saving, loading and compatibility of map/configuration/result files.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.11","Measure runtime and memory on the real department map.","P9","P1","<TBD>","Not Started","P6;P7;P8"
+"P9.12","Profile bottlenecks and optimize only where necessary.","P9","P2","<TBD>","Not Started","P6;P7;P8"
+"P9.13","Test UI responsiveness during search, simulation and report generation.","P9","P2","<TBD>","Not Started","P6;P7;P8"
+"P9.14","Test 3D scene stability, frame rate and route synchronization.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.15","Test on the intended presentation computer with a clean environment.","P9","P1","<TBD>","Not Started","P6;P7;P8"
+"P9.16","Perform usability review and fix confusing labels or controls.","P9","P2","<TBD>","Not Started","P6;P7;P8"
+"P9.17","Check error messages, logs and recovery from invalid input.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.18","Verify offline operation of all core features.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.19","Run final acceptance test suite against AC-01 through AC-09.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P9.20","Record known defects, limitations and deferred features.","P9","P1","<TBD>","Not Started","P6;P7;P8"
+"P9.21","Freeze release candidate and tag version in Git.","P9","P0","<TBD>","Not Started","P6;P7;P8"
+"P10.01","Update README with installation, dependencies, launch and troubleshooting instructions.","P10","P1","<TBD>","Not Started","P9"
+"P10.02","Document project architecture and module responsibilities.","P10","P1","<TBD>","Not Started","P9"
+"P10.03","Document map preparation, calibration, grid resolution and limitations.","P10","P1","<TBD>","Not Started","P9"
+"P10.04","Document robot model, battery/lifetime equations and parameter assumptions.","P10","P1","<TBD>","Not Started","P9"
+"P10.05","Document each search algorithm and its implementation-specific behavior.","P10","P1","<TBD>","Not Started","P9"
+"P10.06","Document coverage policy and explain why it is separate from pathfinding.","P10","P1","<TBD>","Not Started","P9"
+"P10.07","Document metrics, definitions, experiment protocol and fairness controls.","P10","P1","<TBD>","Not Started","P9"
+"P10.08","Document test strategy and final test outcomes.","P10","P1","<TBD>","Not Started","P9"
+"P10.09","Prepare final SRS updates to reflect implemented behavior and approved deviations.","P10","P0","<TBD>","Not Started","P9"
+"P10.10","Prepare user guide with screenshots and step-by-step workflow.","P10","P1","<TBD>","Not Started","P9"
+"P10.11","Prepare technical report and architecture diagrams.","P10","P1","<TBD>","Not Started","P9"
+"P10.12","Prepare experiment dataset and final comparison tables/charts.","P10","P1","<TBD>","Not Started","P9"
+"P10.13","Prepare demo scenario with fixed map, start point, target/coverage mode and resource settings.","P10","P1","<TBD>","Not Started","P9"
+"P10.14","Prepare presentation slides: problem, objectives, architecture, algorithms, simulation, results and limitations.","P10","P1","<TBD>","Not Started","P9"
+"P10.15","Prepare a short live demonstration script and expected outcomes.","P10","P1","<TBD>","Not Started","P9"
+"P10.16","Capture backup screenshots/video in case the live 3D demo fails.","P10","P1","<TBD>","Not Started","P9"
+"P10.17","Verify all required files are included and paths are relative/portable.","P10","P0","<TBD>","Not Started","P9"
+"P10.18","Create final release tag and archive source code.","P10","P1","<TBD>","Not Started","P9"
+"P10.19","Conduct a complete rehearsal on the presentation machine.","P10","P1","<TBD>","Not Started","P9"
+"P10.20","Deliver source code, documentation, map assets, reports, test evidence and presentation.","P10","P0","<TBD>","Not Started","P9"
+"P5-GATE","P5 acceptance checks and evidence report: reports/qa/p5_gate_result.md","P5","P0","<TBD>","Done","P3;P4"

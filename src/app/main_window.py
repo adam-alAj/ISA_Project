@@ -18,10 +18,12 @@ from PySide6.QtWidgets import (
 from src.algorithms.registry import REGISTRY
 from src.app.app_controller import AppController
 from src.app.simulation_worker import SimulationWorker
+from src.map_processing.spec_loader import load_spec
 from src.app import strings as T
 from src.map_processing.constants import CellState
 from src.robot.config import RobotConfig
 from src.visualization.two_d.map_canvas import MapCanvas
+from src.visualization.three_d.client import ThreeDClient
 
 
 class CalibrationImage(QWidget):
@@ -62,8 +64,11 @@ class MainWindow(QMainWindow):
         self.controller = app_controller or AppController()
         self.setWindowTitle(T.APP_TITLE); self.resize(1440, 900)
         self._worker: SimulationWorker | None = None
+        self._three_d_client=ThreeDClient(self)
+        self._three_d_client.process.finished.connect(lambda *_:self.launch_3d.setText("Launch 3D"))
         self._target = None; self._last_seq = -1; self._close_pending = False
         self._build_shell(); self._build_pages(); self._connect()
+        self._three_d_client.status.connect(self.three_d_status.setText)
         # Snapshot/event presentation is intentionally capped at 10 Hz. The
         # worker still executes every action; this bounds GUI paint work.
         self.timer = QTimer(self); self.timer.setInterval(100); self.timer.timeout.connect(self._poll_run)
@@ -227,6 +232,7 @@ class MainWindow(QMainWindow):
         self.stop_button.clicked.connect(self._stop); self.reset_button.clicked.connect(self._reset)
         self.speed_slider.valueChanged.connect(self._apply_playback_speed)
         self.skip_to_end.clicked.connect(self._skip_to_end)
+        self.launch_3d.clicked.connect(self._launch_3d)
         self.export_config.clicked.connect(self._save_config); self.export_csv.clicked.connect(self._save_csv)
         self.cal_open.clicked.connect(self._load_calibration_image); self.cal_image.point_clicked.connect(lambda _:self._update_calibration())
         self.cal_distance.valueChanged.connect(self._update_calibration)
@@ -315,6 +321,7 @@ class MainWindow(QMainWindow):
             self.controller.algorithm=self.algorithm_combo.currentData(); self.controller.mode=self.mode_combo.currentData()
             self.controller.run_state="running"; self.controller.search_result=None; self.controller.run_result=None
             self.stop_reason.setText(""); self._last_seq=-1
+            if self._three_d_client.is_running:self._three_d_client.begin_run(self.controller.start)
             self._worker=SimulationWorker(self.controller); self._worker.finished_result.connect(self._run_finished); self._worker.failed.connect(self._run_failed)
             self._worker.start(); self.timer.start(); self.hud['status'].setText("Running"); self._set_controls(True)
         except Exception as exc: QMessageBox.warning(self,"Cannot start run",str(exc))
@@ -331,11 +338,23 @@ class MainWindow(QMainWindow):
                 break
             new_events.append(event)
         new_events.reverse()
+        if self._three_d_client.is_running and new_events:
+            expected=self._three_d_client.last_event_seq+1
+            if new_events[0].seq!=expected:
+                # EventLog is bounded. Resync the renderer to a current engine
+                # snapshot rather than animate a discontinuous jump through a wall.
+                self._three_d_client.send("seek",cell=c.robot.state.position,
+                    cleaned_cells=np.argwhere(c.robot.cleaning.cleaned).tolist())
+                self._last_seq=new_events[-1].seq
+                self._three_d_client.last_event_seq=new_events[-1].seq
+                self.three_d_status.setText("3D resynced to current robot state; earlier route events exceeded the log ring.")
+                new_events=[]
         if new_events:self._last_seq=new_events[-1].seq
         target=self._target
         for event in new_events:
             if event.type=="TargetSelected":target=tuple(event.payload["target"])
             elif event.type=="RunStopped":self.stop_reason.setText(f"Stopped: {event.payload['reason']}")
+            self._three_d_client.send_event(event)
         self._target=target
         snap=sim.snapshots[-1] if sim.snapshots else None
         cleaned=snap.cleaned if snap else c.robot.cleaning.cleaned
@@ -356,6 +375,9 @@ class MainWindow(QMainWindow):
         except OSError as exc:self.statusBar().showMessage(f"Run finished; could not save recent-run summary: {exc}")
         self._refresh_recent_list()
         self.hud['status'].setText("Complete"); self._set_controls(False); self._poll_run()
+        if self.controller.mode=="point_to_point" and self.controller.search_events is not None:
+            event_log=self.controller.search_events
+            self._three_d_client.send_events(getattr(event_log,"events",event_log))
         if self.controller.mode=="point_to_point" and self.controller.search_result is not None:
             self.sim_canvas.set_overlay(path=self.controller.search_result.path,explored=self.controller.trace_cells(),
                 frontier=self.controller.frontier_cells(),
@@ -369,14 +391,17 @@ class MainWindow(QMainWindow):
 
     def _pause(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.pause()
+        self._three_d_client.send("pause")
         self.controller.run_state="paused"; self.hud['status'].setText("Paused")
 
     def _resume(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.resume()
+        self._three_d_client.send("play")
         self.controller.run_state="running"; self.hud['status'].setText("Running")
 
     def _step(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.step_once(); self.controller.run_state="paused"
+        self._three_d_client.send("step")
 
     def _toggle_pause(self):
         if self.controller.run_state=="paused":self._resume()
@@ -384,12 +409,14 @@ class MainWindow(QMainWindow):
 
     def _stop(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.cancel()
+        self._three_d_client.send("pause")
         self.controller.run_state="stopping"; self.hud['status'].setText("Stopping…")
 
     def _reset(self):
         if self._worker is not None and self._worker.isRunning():
             self._stop(); return
         if self.controller.robot:self.controller.robot.reset()
+        if self.controller.start:self._three_d_client.send("reset",cell=self.controller.start)
         if self.controller.coverage_controller:self.controller.coverage_controller.reset()
         self.controller.coverage_controller=None; self.controller.run_state="idle"; self._target=None
         self.sim_canvas.set_map(self.controller.map.grid if self.controller.map else None,self.controller.start,self.controller.goal)
@@ -459,6 +486,57 @@ class MainWindow(QMainWindow):
         self.speed_label.setText(f"{speed:g}×")
         # Presentation cadence only; simulation time and planner time do not change.
         self.timer.setInterval(max(34,int(100/speed)))  # capped at 30 UI updates/second
+        self._three_d_client.set_speed(speed)
+
+    def _three_d_payload(self):
+        c=self.controller
+        if c.map is None or c.robot is None or c.start is None:
+            raise ValueError("Load a map and choose a valid start before opening 3D.")
+        metadata=dict(c.map.metadata)
+        if c.map_path is not None:
+            spec_path=c.map_path/"map_spec.yaml"
+            if spec_path.exists():metadata["spec"]=load_spec(spec_path)
+        initial_path=()
+        robot_cell=c.robot.state.position
+        cleaned_cells=np.argwhere(c.robot.cleaning.cleaned).tolist()
+        # Replaying a completed point-to-point run starts at the original cell;
+        # a completed coverage preview starts from its current saved snapshot.
+        if c.mode=="point_to_point":
+            robot_cell=c.start; cleaned_cells=[]
+        elif c.run_state=="complete" and c.coverage_controller and c.coverage_controller.snapshots:
+            initial_path=c.coverage_controller.snapshots[-1].current_path
+        return {"grid":c.map.grid.tolist(),"cell_m":c.map.cell_m,
+                "metadata":metadata,"start_cell":c.start,
+                "robot_cell":robot_cell,
+                "robot_diameter_m":c.robot.config.diameter_m,
+                "speed_m_per_s":c.robot.config.speed_m_per_s,
+                "playback_speed":(0.25,0.5,1,2,4,8,16)[self.speed_slider.value()],
+                "cleaned_cells":cleaned_cells,
+                "initial_path":initial_path}
+
+    def _launch_3d(self):
+        if self._three_d_client.is_running:
+            self._three_d_client.close(); self.launch_3d.setText("Launch 3D")
+            self.three_d_status.setText("3D renderer closed")
+            return
+        try:
+            payload=self._three_d_payload()
+            self._three_d_client.last_event_seq=self._last_seq
+            self._three_d_client.launch(payload)
+            self.launch_3d.setText("Close 3D")
+            # Point-to-point runs finish quickly, so replay their buffered
+            # frozen events after the scene reports that it is initialized.
+            if (self.controller.run_state=="complete" and self.controller.mode=="point_to_point"
+                    and self.controller.search_events is not None):
+                self._three_d_client.last_event_seq=-1
+                self._three_d_client.send_events(getattr(self.controller.search_events,"events",()))
+            elif self.controller.run_state=="complete":
+                event_log=(self.controller.coverage_controller.events
+                           if self.controller.coverage_controller else None)
+                if event_log and event_log.events:
+                    self._three_d_client.last_event_seq=event_log.events[-1].seq
+        except Exception as exc:
+            QMessageBox.warning(self,"3D renderer unavailable",str(exc))
 
     def _skip_to_end(self):
         self._poll_run()
@@ -500,5 +578,6 @@ class MainWindow(QMainWindow):
             if not self._worker.wait(5000):
                 self.statusBar().showMessage("Waiting for the current bounded search call to finish; close again when it stops.")
                 event.ignore(); return
+        self._three_d_client.close()
         event.accept()
 

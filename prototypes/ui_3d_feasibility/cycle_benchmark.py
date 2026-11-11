@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import json
 import queue
 import subprocess
 import sys
@@ -10,7 +11,7 @@ import threading
 import time
 from pathlib import Path
 
-WORKER = Path(__file__).with_name("ursina_worker.py")
+WORKER = Path(__file__).resolve().parents[2] / "src" / "visualization" / "three_d" / "worker.py"
 RESULTS = Path(__file__).with_name("cycle_results.csv")
 
 
@@ -43,14 +44,17 @@ def main() -> int:
                 line = lines.get(timeout=0.1)
             except queue.Empty:
                 continue
-            if line.startswith("READY_JSON "):
-                ready = True
-                break
+            try:
+                message=json.loads(line)
+            except json.JSONDecodeError:
+                message={}
+            if message.get("type")=="process_ready":
+                ready=True; break
             if line.strip():
                 errors.append(line.strip())
         startup_seconds = time.perf_counter() - started if ready else -1.0
         if process.poll() is None and process.stdin is not None:
-            process.stdin.write('{"cmd":"close"}\n')
+            process.stdin.write('{"schema_version":1,"cmd":"close"}\n')
             process.stdin.flush()
         try:
             exit_code = process.wait(timeout=10)
