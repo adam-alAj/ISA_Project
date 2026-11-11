@@ -1,38 +1,19 @@
-﻿schema_version: 1
-status: provisional
-units_note: "Simulation assumptions only; not appliance measurements."
-editable_in_ui: true
-parameters:
-  diameter_m:
-    value: 0.35
-    provisional: true
-    rationale: "Existing map builder footprint assumption; inflates obstacles conservatively."
-  cleaning_width_m:
-    value: 0.30
-    provisional: true
-    rationale: "Required prototype parameter; no real robot specification supplied."
-  speed_m_per_s:
-    value: 0.25
-    provisional: true
-    rationale: "Demonstration assumption for converting travel distance to simulated time."
-  battery_capacity_units:
-    value: 100
-    provisional: true
-    rationale: "Normalized simulation budget; not a measured battery capacity."
-  lifetime_min:
-    value: 30
-    provisional: true
-    rationale: "Demonstration limit independent from the battery budget."
-  move_energy_units_per_step:
-    value: 0.05
-    step_length_m: 0.10
-    provisional: true
-    rationale: "Transparent per-grid-step model at the current 0.10 m cell size."
-  clean_energy_units_per_cell:
-    value: 0.02
-    provisional: true
-    rationale: "Model output assumption; cleaning credit is tracked independently of occupancy."
-  idle_energy_units_per_s:
-    value: 0.001
-    provisional: true
-    rationale: "Optional idle drain assumption; expose it in run configuration and reports."
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "units_note": "Simulation assumptions only; not appliance measurements.",
+  "editable_in_ui": true,
+  "parameters": {
+    "diameter_m": {"value": 0.35, "provisional": true},
+    "cleaning_width_m": {"value": 0.30, "provisional": true},
+    "speed_m_per_s": {"value": 0.25, "provisional": true},
+    "battery_capacity_units": {"value": 100, "provisional": true},
+    "lifetime_min": {"value": 30, "provisional": true},
+    "move_energy_units_per_step": {"value": 0.05, "step_length_m": 0.10, "provisional": true},
+    "clean_energy_units_per_cell": {"value": 0.02, "provisional": true},
+    "idle_energy_units_per_s": {"value": 0.001, "provisional": true},
+    "safety_reserve_units": {"value": 0.0, "provisional": true},
+    "turn_energy_units": {"value": 0.0, "provisional": true},
+    "turn_time_s": {"value": 0.0, "provisional": true}
+  }
+}
