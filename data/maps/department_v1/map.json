@@ -1,0 +1,117 @@
+{
+    "schema_version":  1,
+    "version":  "1.0-draft",
+    "cell_m":  0.1,
+    "origin_px":  [
+                      80,
+                      160
+                  ],
+    "ppm":  108,
+    "grid_shape":  [
+                       127,
+                       120
+                   ],
+    "start_cell":  [
+                       118,
+                       54
+                   ],
+    "robot_diameter_m":  0.35,
+    "states":  {
+                   "FREE":  0,
+                   "OCCUPIED":  1,
+                   "UNKNOWN":  2,
+                   "DOOR":  3
+               },
+    "spec_sha256":  "BF298AA924391DE37B25AE0D4C302AB55D3736F045D4D3691D09513E395FA720",
+    "array_npy_sha256":  "8D1394701FEA02122D8145117FFAC62C407D4237D9436901224F052B77EC4158",
+    "grid_npz_sha256":  "CB4618D4706A85B09EB4F63739D404C8DCB77150D2E33B46D1C7DFB2DDF03C54",
+    "generation_note":  "Carried forward from the P1 v0.3 PowerShell raster reproduction; Python spec-to-grid regression still pending.",
+    "room_bounds_px":  {
+                           "R1":  [
+                                      85,
+                                      165,
+                                      335,
+                                      490
+                                  ],
+                           "R2":  [
+                                      395,
+                                      165,
+                                      595,
+                                      310
+                                  ],
+                           "R3":  [
+                                      780,
+                                      165,
+                                      985,
+                                      310
+                                  ],
+                           "R4":  [
+                                      1130,
+                                      215,
+                                      1330,
+                                      490
+                                  ],
+                           "R5":  [
+                                      1130,
+                                      590,
+                                      1320,
+                                      750
+                                  ],
+                           "R6":  [
+                                      905,
+                                      855,
+                                      1160,
+                                      1030
+                                  ],
+                           "R7":  [
+                                      905,
+                                      1105,
+                                      1365,
+                                      1375
+                                  ],
+                           "R7b":  [
+                                       1175,
+                                       1375,
+                                       1365,
+                                       1520
+                                   ],
+                           "R8":  [
+                                      195,
+                                      950,
+                                      340,
+                                      1160
+                                  ]
+                       },
+    "room_areas_m2":  {
+                          "R1":  6.965878,
+                          "R2":  2.486283,
+                          "R3":  2.54844,
+                          "R4":  4.715364,
+                          "R5":  2.60631,
+                          "R6":  3.825874,
+                          "R7":  10.648148,
+                          "R7b":  2.361968,
+                          "R8":  2.610597
+                      },
+    "timestamp_utc":  "2026-11-11T00:28:22.2702052Z",
+    "calibration":  {
+                        "ppm":  108,
+                        "confirmed_dimensions_m":  {
+                                                       "lower_span":  6,
+                                                       "column":  0.5,
+                                                       "right_wall":  5,
+                                                       "doors":  [
+                                                                     0.9,
+                                                                     1.2
+                                                                 ],
+                                                       "cabinets_cm":  [
+                                                                           75,
+                                                                           60
+                                                                       ]
+                                                   },
+                        "informational_labels_m":  [
+                                                       4.8,
+                                                       2
+                                                   ]
+                    }
+}

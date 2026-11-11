@@ -14,5 +14,6 @@
 | ADR-0010 | Preserve 0.10 m resolution from v0.2 into v0.3 | Accepted provisionally |
 | ADR-0011 | Estimate room sizes from proportions plus confirmed ordering | Approved; validation pending |
 | ADR-0012 | Permanently open doors in v1.0 | Approved |
+| ADR-0013 | Environment API freeze point 1 | Draft; human freeze gate pending |
 
 Each ADR records context, decision, consequences, and status. Human decisions remain provisional until the named owner or instructor confirms them.

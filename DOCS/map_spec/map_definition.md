@@ -1,4 +1,4 @@
-﻿# Department map v0.3 definition (draft)
+# Department map v0.3 definition (draft)
 
 ## Boundary and occupancy
 
@@ -13,3 +13,5 @@ All nine doors are permanently open passages in v1.0. Grid movement is four-neig
 ## Start and demo goals
 
 The default start is S at `(118,54)`. The around-column case uses `(36,68)` only as the explicitly named `around_column_alternate_start` scenario variant in `demo_config.yaml`; its goal is `(36,78)`. The other seven department-map goals use S. The synthetic no-path case uses a separate 1×3 test map. The listed demo set remains provisional pending instructor clarification.
+
+P2 compatibility: the v1 draft spec carries the user-approved P1 R4/R5/R6 correction. The preserved v0.2 array remains a regression baseline; only corrected room geometry may differ, while hall and door cells must match exactly.

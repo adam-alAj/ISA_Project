@@ -1,0 +1,7 @@
+{
+  "description": "Open 5x5 grid for weighted-path tests; cost is separate from occupancy.",
+  "grid": [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]],
+  "entry_cost": [[1,1,1,1,1],[1,8,8,8,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]],
+  "start": [2,0],
+  "goal": [2,4]
+}
