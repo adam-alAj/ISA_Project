@@ -23,7 +23,8 @@ $checks = @(
     @{Name='100 seeded movement invariants'; Args=@('-m','pytest','-q','tests/coverage/test_p5_gate.py::test_invariant_100_seeded_scenarios')},
     @{Name='Planning state immutability for six algorithms'; Args=@('-m','pytest','-q','tests/coverage/test_p5_gate.py::test_planning_preserves_robot_snapshot_for_each_algorithm')},
     @{Name='Event replay equivalence and schema version'; Args=@('-m','pytest','-q','tests/coverage/test_p5_gate.py::test_event_replay_equivalence_and_schema_version')},
-    @{Name='Department-map coverage metrics and memory bound'; Args=@('-s','-m','pytest','-q','tests/coverage/test_p5_gate.py::test_department_headless_runs_report_metrics_and_bounded_memory')}
+    @{Name='Long action stream memory bound'; Args=@('-m','pytest','-s','-q','tests/coverage/test_p5_gate.py::test_long_action_stream_has_bounded_event_and_snapshot_memory')},
+    @{Name='Department-map coverage metrics and memory bound'; Args=@('-m','pytest','-s','-q','tests/coverage/test_p5_gate.py::test_department_headless_runs_report_metrics_and_bounded_memory')}
 )
 $departmentOutput = ''
 if ($python) {
@@ -58,14 +59,14 @@ foreach ($check in $checks) {
 }
 $lines.Add('## Department-map coverage table')
 $lines.Add('')
-$lines.Add('| Algorithm | Coverage % | Steps | Energy | Sim time (s) | Stop reason | Planner wall time (s) |')
+$lines.Add('| Algorithm | Coverage % | Steps | Energy | Sim time (s) | Stop reason | Planner wall time (s) | Run wall time (s) |')
 $lines.Add('|---|---:|---:|---:|---:|---|---:|')
 foreach ($name in @('bfs','dfs','ucs','greedy','astar','iddfs')) {
-    $match = [regex]::Match($departmentOutput, "(?m)^$name,([^\r\n]+)$")
+    $match = [regex]::Match($departmentOutput, "(?im)^\s*$name,([^\r\n]+)\s*$")
     if ($match.Success) {
         $values = $match.Groups[1].Value.Split(',')
-        $lines.Add("| $name | $($values[0]) | $($values[1]) | $($values[2]) | $($values[3]) | $($values[4]) | $($values[5]) |")
-    } else { $lines.Add("| $name | NOT RUN | NOT RUN | NOT RUN | NOT RUN | pending evidence | NOT RUN |") }
+        $lines.Add("| $name | $($values[0]) | $($values[1]) | $($values[2]) | $($values[3]) | $($values[4]) | $($values[5]) | $($values[6]) |")
+    } else { $lines.Add("| $name | NOT RUN | NOT RUN | NOT RUN | NOT RUN | pending evidence | NOT RUN | NOT RUN |") }
 }
 $lines.Add('')
 $allPass = $python -and ($lines -join "`n") -notmatch '\*\*FAIL\*\*'

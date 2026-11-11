@@ -47,6 +47,8 @@ class CoverageController:
         self.robot.reset(); self.events = EventLog(sink_path=self.event_sink_path); self.snapshots.clear(); self._cancel.clear()
 
     def run(self):
+        if hasattr(self.policy, "reset"):
+            self.policy.reset()
         self.events.emit("RunStarted", self.robot.state.elapsed_time_s, run_id=self.run_id, algorithm=self.algorithm_id)
         executor = RouteExecutor(self.robot, self.events)
         initial_clean = self.robot.clean()

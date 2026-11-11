@@ -65,3 +65,12 @@ The PowerShell gate wrapper itself ran with `powershell.exe -NoProfile -Executio
 | Ten-cycle PySide6/Ursina stability measurement | NOT RUN | No Python runtime or graphics session is available in this shell. |
 
 Do not represent an unexecuted smoke test or integration measurement as a pass.
+
+## P5 verification update (2026-11-11)
+
+The interpreter path found in the user's configured environment is `C:\Users\HP\Desktop\ISA\.venv\Scripts\python.exe`, Python 3.12.10. Its base interpreter lives at `C:\Users\HP\AppData\Local\Programs\Python\Python312\python.exe`; both are present, but sandboxed launches reported the base as missing. Running the project venv through the authorized host command succeeded.
+
+- Dependency smoke test: 12/12 checks passed.
+- Full repository suite: 63 passed.
+- P5 gate report: `reports/qa/p5_gate_result.md` (PASS).
+- The department-map comparison uses explicit bounds (2,000 expansions or 0.5 seconds per planner call and 50 coverage target selections per run). The resulting department rows are partial diagnostics and report the max-iteration stop; they do not claim full-floor completion.

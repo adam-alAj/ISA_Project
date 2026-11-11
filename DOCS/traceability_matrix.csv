@@ -48,3 +48,4 @@
 "AC-07","AC","MUST","P8","reporting","test_ac_07_run_report","Not Started"
 "AC-08","AC","MUST","P8","analytics/reporting","test_ac_08_comparison_report","Not Started"
 "AC-09","AC","MUST","P9","app","test_ac_09_offline_workflow","Not Started"
+"P5-GATE","GATE","MUST","P5","coverage/simulation","reports/qa/p5_gate_result.md","Pass"

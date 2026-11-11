@@ -50,16 +50,17 @@ run_check 'TS-08/TS-09 for six algorithms' -m pytest -q tests/coverage/test_p5_g
 run_check '100 seeded movement invariants' -m pytest -q tests/coverage/test_p5_gate.py::test_invariant_100_seeded_scenarios
 run_check 'Planning state immutability for six algorithms' -m pytest -q tests/coverage/test_p5_gate.py::test_planning_preserves_robot_snapshot_for_each_algorithm
 run_check 'Event replay equivalence and schema version' -m pytest -q tests/coverage/test_p5_gate.py::test_event_replay_equivalence_and_schema_version
-run_check 'Department-map coverage metrics and memory bound' -s -m pytest -q tests/coverage/test_p5_gate.py::test_department_headless_runs_report_metrics_and_bounded_memory
+run_check 'Long action stream memory bound' -m pytest -s -q tests/coverage/test_p5_gate.py::test_long_action_stream_has_bounded_event_and_snapshot_memory
+run_check 'Department-map coverage metrics and memory bound' -m pytest -s -q tests/coverage/test_p5_gate.py::test_department_headless_runs_report_metrics_and_bounded_memory
 {
   echo '## Department-map coverage table'
   echo
-  echo '| Algorithm | Coverage % | Steps | Energy | Sim time (s) | Stop reason | Planner wall time (s) |'
+  echo '| Algorithm | Coverage % | Steps | Energy | Sim time (s) | Stop reason | Planner wall time (s) | Run wall time (s) |'
   echo '|---|---:|---:|---:|---:|---|---:|'
   for name in bfs dfs ucs greedy astar iddfs; do
     row=$(printf '%s\n' "$DEPARTMENT_OUTPUT" | awk -F, -v alg="$name" '$1==alg {print $0; exit}')
-    if [[ -n "$row" ]]; then IFS=, read -r alg cov steps energy sim stop wall <<< "$row"; echo "| $alg | $cov | $steps | $energy | $sim | $stop | $wall |"
-    else echo "| $name | NOT RUN | NOT RUN | NOT RUN | NOT RUN | pending evidence | NOT RUN |"; fi
+    if [[ -n "$row" ]]; then IFS=, read -r alg cov steps energy sim stop planner runwall <<< "$row"; echo "| $alg | $cov | $steps | $energy | $sim | $stop | $planner | $runwall |"
+    else echo "| $name | NOT RUN | NOT RUN | NOT RUN | NOT RUN | pending evidence | NOT RUN | NOT RUN |"; fi
   done
   echo
 } >> "$REPORT"

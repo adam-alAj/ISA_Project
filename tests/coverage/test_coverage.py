@@ -15,7 +15,10 @@ def test_policy_tie_break_and_controller_completes_small_map():
                   battery_capacity_units=100, operational_lifetime_s=1000))
     cleanable = build_cleanable_cells(grid, (3, 3), robot)
     policy = NearestUncleanedPolicy(cleanable.achievable_cells)
-    assert policy.next_target(robot.state, set()) == (0, 0)
+    # The current cell is nearest when still uncleaned; after excluding it,
+    # the four equally distant neighbors resolve by (row, column).
+    assert policy.next_target(robot.state, set()) == (3, 3)
+    assert policy.next_target(robot.state, {(3, 3)}) == (2, 3)
     controller = CoverageController(robot, cleanable, policy, bfs, "bfs", max_iterations=1000)
     result = controller.run()
     assert result.raw_coverage_percent == 100

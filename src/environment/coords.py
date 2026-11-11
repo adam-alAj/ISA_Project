@@ -6,6 +6,7 @@ y up, z toward the top of the image (negative row direction).
 """
 
 from typing import Sequence
+import math
 
 
 def pixel_to_cell(point_xy: Sequence[float], origin_xy: Sequence[float], ppm: float, cell_m: float) -> tuple[int, int]:
@@ -37,7 +38,14 @@ def meters_to_cell(point_xy_m: Sequence[float], cell_m: float) -> tuple[int, int
     if cell_m <= 0:
         raise ValueError("cell_m must be positive")
     x, y = point_xy_m
-    return int(y // cell_m), int(x // cell_m)
+    def containing_index(value: float) -> int:
+        """Floor ratios while snapping floating-point noise at exact grid lines."""
+        ratio = value / cell_m
+        nearest = round(ratio)
+        if math.isclose(ratio, nearest, rel_tol=0.0, abs_tol=1e-12):
+            ratio = float(nearest)
+        return math.floor(ratio)
+    return containing_index(y), containing_index(x)
 
 
 def cell_to_world(cell: Sequence[int], cell_m: float, floor_y_m: float = 0.0) -> tuple[float, float, float]:

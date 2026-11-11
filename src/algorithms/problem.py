@@ -38,7 +38,16 @@ class SearchProblem(Generic[NodeT]):
 
     def step_cost(self, source: NodeT, target: NodeT) -> float:
         """Return a finite non-negative transition cost."""
-        cost = float(self.step_cost_fn(source, target))
+        try:
+            raw_cost = self.step_cost_fn(source, target)
+        except TypeError as two_argument_error:
+            # Accept mapping-style callables keyed by (source, target), while
+            # keeping the documented two-argument callback as the primary API.
+            try:
+                raw_cost = self.step_cost_fn((source, target))  # type: ignore[call-arg]
+            except TypeError:
+                raise two_argument_error
+        cost = float(raw_cost)
         if not math.isfinite(cost) or cost < 0:
             raise ValueError("step costs must be finite and non-negative")
         return cost

@@ -94,7 +94,7 @@ def test_greedy_trap_against_astar():
 
 
 def test_seeded_bfs_and_weighted_oracles():
-    rng = random.Random(219)
+    rng = np.random.default_rng(219)
     for _ in range(200):
         cells = (rng.random((6, 7)) > 0.27).astype(np.uint8)
         cells[0, 0] = cells[-1, -1] = 0

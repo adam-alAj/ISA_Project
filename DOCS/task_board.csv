@@ -220,4 +220,5 @@
 "P10.18","Create final release tag and archive source code.","P10","P1","<TBD>","Not Started","P9"
 "P10.19","Conduct a complete rehearsal on the presentation machine.","P10","P1","<TBD>","Not Started","P9"
 "P10.20","Deliver source code, documentation, map assets, reports, test evidence and presentation.","P10","P0","<TBD>","Not Started","P9"
+"P5-GATE","P5 acceptance checks and evidence report: reports/qa/p5_gate_result.md","P5","P0","<TBD>","Done","P3;P4"
 

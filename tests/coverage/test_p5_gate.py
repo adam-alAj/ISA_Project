@@ -1,6 +1,8 @@
 """Acceptance evidence checks invoked by scripts/run_p5_gate.*."""
 import tracemalloc
+from time import perf_counter
 from pathlib import Path
+from collections import deque
 
 import numpy as np
 import pytest
@@ -14,7 +16,8 @@ from src.coverage.target_policy import NearestUncleanedPolicy
 from src.environment.grid_map import GridMap
 from src.robot.config import RobotConfig
 from src.robot.vacuum_robot import Robot
-from src.simulation.events import replay_actions
+from src.simulation.events import replay_actions, EventLog, SimulationSnapshot
+from src.simulation.executor import RouteExecutor
 from src.map_processing.constants import CellState as S
 
 ALGORITHMS = tuple(REGISTRY)
@@ -95,6 +98,27 @@ def test_event_replay_equivalence_and_schema_version():
                for event in controller.events.events)
 
 
+def test_long_action_stream_has_bounded_event_and_snapshot_memory():
+    grid = GridMap(np.zeros((9, 9), dtype=np.uint8), .1)
+    robot = Robot(grid, (4, 4), RobotConfig(diameter_m=.1, cleaning_width_m=.1,
+                 battery_capacity_units=1e9, operational_lifetime_s=1e9))
+    event_log = EventLog(capacity=256)
+    executor = RouteExecutor(robot, event_log)
+    snapshots = deque(maxlen=8)
+    tracemalloc.start()
+    for _ in range(5000):
+        target = (4, 5) if robot.state.position == (4, 4) else (4, 4)
+        executor.execute((robot.state.position, target))
+        snapshots.append(SimulationSnapshot(robot.state, robot.cleaning.cleaned))
+    _, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    assert len(event_log.events) == 256 and event_log.events.maxlen == 256
+    assert event_log.events[-1].seq > 5000
+    assert len(snapshots) == snapshots.maxlen == 8
+    print(f"long_action_peak_bytes={peak}; retained_events={len(event_log.events)}; retained_snapshots={len(snapshots)}")
+    assert peak < 16 * 1024 * 1024
+
+
 def test_department_headless_runs_report_metrics_and_bounded_memory():
     root = Path(__file__).resolve().parents[2]
     map_path = root / "data/maps/department_v1/grid.npz"
@@ -109,18 +133,22 @@ def test_department_headless_runs_report_metrics_and_bounded_memory():
         cleanable = build_cleanable_cells(grid, start, robot)
         controller = CoverageController(robot, cleanable, NearestUncleanedPolicy(cleanable.cells),
             planner, name, options=SearchOptions(max_expansions=2000, time_budget_s=.5), max_iterations=50,
-            snapshot_capacity=8)
+            snapshot_cadence=100, snapshot_capacity=8)
+        run_started = perf_counter()
         result = controller.run()
+        run_wall = perf_counter() - run_started
         rows.append((name, result.coverage_percent, robot.state.step_count,
                      robot.config.battery_capacity_units - robot.state.battery_remaining,
-                     robot.state.elapsed_time_s, result.stop_reason.value, result.planner_wall_time_s))
+                     robot.state.elapsed_time_s, result.stop_reason.value, result.planner_wall_time_s, run_wall))
+        assert result.iterations == 50 and result.stop_reason.value == "error"
         assert len(controller.snapshots) <= 8
         assert controller.events.events.maxlen == 10000
     _, peak = tracemalloc.get_traced_memory()
     tracemalloc.stop()
-    print("algorithm,coverage_pct,steps,energy,sim_time_s,stop_reason,planner_wall_s")
+    print("algorithm,coverage_pct,steps,energy,sim_time_s,stop_reason,planner_wall_s,run_wall_s")
     for row in rows:
         print(",".join(str(value) for value in row))
+    print("department_run_note=50 target-iteration guard; per-search budget 2000 expansions or 0.5 seconds; partial result")
     print(f"tracemalloc_peak_bytes={peak}")
     assert len(rows) == 6
     assert peak < 512 * 1024 * 1024

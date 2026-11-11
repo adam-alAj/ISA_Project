@@ -148,7 +148,9 @@ def test_footprint_inflation_clips_edges_and_preserves_department_rooms() -> Non
         room = (x >= xmin) & (x <= xmax) & (y >= ymin) & (y <= ymax)
         assert np.any(room & reached)
     # The entrance cabinet does not sever the open hall/entrance connection.
-    assert reached[118, 54] and reached[118, 25]
+    # Column 25 lies within the conservative inflated clearance envelope;
+    # column 27 is the first reachable centre cell beyond the cabinet.
+    assert reached[118, 54] and reached[118, 27]
 
 
 def test_validation_structures_invalid_start_and_targets() -> None:
