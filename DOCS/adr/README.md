@@ -18,3 +18,4 @@
 | ADR-0014 | Robot API freeze point 2 | Draft; tests and upstream freeze pending |
 
 Each ADR records context, decision, consequences, and status. Human decisions remain provisional until the named owner or instructor confirms them.
+| ADR-0015 | SearchResult and trace contract | Draft; validation pending |
