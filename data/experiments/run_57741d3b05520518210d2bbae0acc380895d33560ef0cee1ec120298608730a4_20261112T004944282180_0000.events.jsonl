@@ -1,0 +1,3 @@
+{"payload": {"mode": "point_to_point"}, "schema_version": 1, "seq": 0, "t_sim": 0.0, "type": "RunStarted"}
+{"payload": {}, "schema_version": 1, "seq": 1, "t_sim": 0.0, "type": "SearchStarted"}
+{"payload": {"expanded": 20000, "found": false, "generated": 92089, "path_cost": null, "path_length_steps": null, "peak_frontier": 50, "planner_execution_time_s": 0.39030389999970794, "repeated_expansions": 19283, "termination_reason": "node_budget_exceeded", "wall_time_s": 0.39034519996494055}, "schema_version": 1, "seq": 2, "t_sim": 0.0, "type": "SearchFinished"}
