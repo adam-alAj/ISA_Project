@@ -1,4 +1,4 @@
-"""Capture Smart Vacuum UI screenshots and basic contrast diagnostics.
+﻿"""Capture Smart Vacuum UI screenshots and basic contrast diagnostics.
 
 This script supports two modes:
 1) orchestrator mode (default): spawns worker processes for each
@@ -52,9 +52,8 @@ PAGES = (
     (2, "robot_configuration"),
     (3, "algorithm_setup"),
     (4, "simulation_2d"),
-    (5, "simulation_3d_launcher"),
-    (6, "results_dashboard"),
-    (7, "report_export"),
+    (5, "results_dashboard"),
+    (6, "report_export"),
 )
 
 RESOLUTIONS = (
@@ -344,3 +343,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

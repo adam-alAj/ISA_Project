@@ -22,11 +22,11 @@ from src.visualization.two_d.map_canvas import MapCanvas
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_eight_screens_and_department_map_load(qtbot,tmp_path):
+def test_seven_screens_and_department_map_load(qtbot,tmp_path):
     window = MainWindow(AppController(data_root=tmp_path/"data"))
     qtbot.addWidget(window); window.show()
-    assert window.stack.count() == 8
-    assert window.nav.count() == 8
+    assert window.stack.count() == 7
+    assert window.nav.count() == 7
     window.controller.load_map(ROOT/"data"/"maps"/"department_v1")
     assert window.controller.map.shape == (127, 120)
     assert window.controller.start == (118, 54)

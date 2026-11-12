@@ -1,11 +1,10 @@
-"""Main Qt desktop shell, pages and worker-driven simulation controls."""
+﻿"""Main Qt desktop shell, pages and worker-driven simulation controls."""
 from __future__ import annotations
 
 import csv
 import json
 from pathlib import Path
 
-import numpy as np
 from PySide6.QtCore import Qt, QTimer, Signal
 from PySide6.QtGui import QIcon, QKeySequence, QShortcut
 from PySide6.QtWidgets import (
@@ -21,13 +20,11 @@ from src.app.app_controller import AppController
 from src.app.config import UiSettings, load_ui_settings, save_ui_settings
 from src.app.simulation_worker import SimulationWorker
 from src.app.theme import apply_theme
-from src.map_processing.spec_loader import load_spec
 from src.app import strings as T
 from src.map_processing.constants import CellState
 from src.app.widgets import Banner, Card, MetricTile, PageHeader, StatusChip
 from src.robot.config import RobotConfig
 from src.visualization.two_d.map_canvas import MapCanvas
-from src.visualization.three_d.client import ThreeDClient
 
 
 class CalibrationImage(QWidget):
@@ -63,7 +60,7 @@ class CalibrationImage(QWidget):
 
 
 class MainWindow(QMainWindow):
-    """Eight-screen application with controller-mediated domain operations."""
+    """Seven-screen application with controller-mediated domain operations."""
     def __init__(self, app_controller: AppController | None = None, theme_mode: str | None = None):
         super().__init__()
         self.controller = app_controller or AppController()
@@ -72,12 +69,9 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(T.APP_TITLE); self.resize(1440, 900)
         self.setWindowIcon(QIcon(str(Path(__file__).resolve().parents[2] / "assets" / "brand" / "app_icon.ico")))
         self._worker: SimulationWorker | None = None
-        self._three_d_client=ThreeDClient(self)
-        self._three_d_client.process.finished.connect(lambda *_:self.launch_3d.setText("Launch 3D"))
         self._target = None; self._last_seq = -1; self._close_pending = False
         self._build_shell(); self._build_pages(); self._connect()
         apply_theme(QApplication.instance(), self.theme_mode, window=self)
-        self._three_d_client.status.connect(self.three_d_status.setText)
         # Snapshot/event presentation is intentionally capped at 10 Hz. The
         # worker still executes every action; this bounds GUI paint work.
         self.timer = QTimer(self); self.timer.setInterval(100); self.timer.timeout.connect(self._poll_run)
@@ -111,7 +105,6 @@ class MainWindow(QMainWindow):
             "robot.svg",
             "route.svg",
             "play.svg",
-            "cube.svg",
             "chart.svg",
             "report.svg",
         )
@@ -129,8 +122,8 @@ class MainWindow(QMainWindow):
     def _build_pages(self):
         self.home = self._home_page(); self.editor = self._editor_page(); self.robot_page = self._robot_page()
         self.algorithm_page = self._algorithm_page(); self.sim_page = self._simulation_page()
-        self.three_d_page = self._three_d_page(); self.results_page = self._results_page(); self.export_page = self._export_page()
-        for page in (self.home,self.editor,self.robot_page,self.algorithm_page,self.sim_page,self.three_d_page,self.results_page,self.export_page):
+        self.results_page = self._results_page(); self.export_page = self._export_page()
+        for page in (self.home,self.editor,self.robot_page,self.algorithm_page,self.sim_page,self.results_page,self.export_page):
             self.stack.addWidget(page)
 
     def _heading(self, title, subtitle=""):
@@ -156,16 +149,16 @@ class MainWindow(QMainWindow):
         action_row = QHBoxLayout()
         self.home_map_button = QPushButton(T.LOAD_DEPARTMENT)
         self.home_map_button.setProperty("variant", "primary")
-        self.home_open_button = QPushButton("Open map folder…")
+        self.home_open_button = QPushButton("Open map folderâ€¦")
         self.home_new_button = QPushButton("Create experiment")
-        self.home_load_config = QPushButton("Load experiment JSON…")
+        self.home_load_config = QPushButton("Load experiment JSONâ€¦")
         for button in (self.home_map_button, self.home_open_button, self.home_new_button, self.home_load_config):
             action_row.addWidget(button)
         lay.addLayout(action_row)
 
         card = Card()
         card.layout.addWidget(QLabel("Project overview"))
-        card.layout.addWidget(QLabel("Smart Vacuum — route planning, resource simulation, and coverage control."))
+        card.layout.addWidget(QLabel("Smart Vacuum â€” route planning, resource simulation, and coverage control."))
         self.home_summary = QLabel("No map loaded.")
         card.layout.addWidget(self.home_summary)
 
@@ -196,7 +189,7 @@ class MainWindow(QMainWindow):
         tabs.addTab(edit,"Grid editor")
         cal=QWidget(); cl=QHBoxLayout(cal); self.cal_image=CalibrationImage(); cl.addWidget(self.cal_image,1)
         cform=QFormLayout(); self.cal_distance=QDoubleSpinBox(); self.cal_distance.setRange(.001,10000); self.cal_distance.setValue(1.0); self.cal_distance.setSuffix(" m")
-        self.cal_open=QPushButton("Load floor-plan image…"); self.cal_result=QLabel("Scale: —\nResidual: —")
+        self.cal_open=QPushButton("Load floor-plan imageâ€¦"); self.cal_result=QLabel("Scale: â€”\nResidual: â€”")
         cform.addRow(self.cal_open); cform.addRow("Known distance",self.cal_distance); cform.addRow(self.cal_result)
         cl.addLayout(cform); tabs.addTab(cal,"Import & calibration")
         self.editor_canvas.cell_clicked.connect(self._editor_cell_clicked)
@@ -249,10 +242,10 @@ class MainWindow(QMainWindow):
         form=QFormLayout(); self.algorithm_combo=QComboBox()
         for key in REGISTRY: self.algorithm_combo.addItem(key.upper() if key!="iddfs" else "IDDFS",key)
         self.mode_combo=QComboBox(); self.mode_combo.addItem("Coverage", "coverage"); self.mode_combo.addItem("Point to point", "point_to_point")
-        self.heuristic=QLabel("Manhattan distance × minimum step cost (A* / Greedy)")
-        self.neighbor_order=QLabel("Up → Right → Down → Left")
+        self.heuristic=QLabel("Manhattan distance Ã— minimum step cost (A* / Greedy)")
+        self.neighbor_order=QLabel("Up â†’ Right â†’ Down â†’ Left")
         self.policy_label=QLabel("Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)")
-        self.quick_goal=QComboBox(); self.quick_goal.addItem("Choose a demo goal…",None)
+        self.quick_goal=QComboBox(); self.quick_goal.addItem("Choose a demo goalâ€¦",None)
         goals_path=Path(__file__).resolve().parents[2]/"docs"/"map_spec"/"demo_goals.csv"
         try:
             with goals_path.open(encoding="utf-8",newline="") as stream:
@@ -291,7 +284,7 @@ class MainWindow(QMainWindow):
         self.run_button.setProperty("variant", "primary")
         self.stop_button.setProperty("variant", "danger")
         controls.addWidget(QLabel("Playback")); self.speed_slider=QSlider(Qt.Orientation.Horizontal); self.speed_slider.setRange(0,6); self.speed_slider.setValue(2); controls.addWidget(self.speed_slider,1)
-        self.speed_label=QLabel("1×"); controls.addWidget(self.speed_label)
+        self.speed_label=QLabel("1Ã—"); controls.addWidget(self.speed_label)
         self.skip_to_end=QPushButton("Show latest state"); controls.addWidget(self.skip_to_end)
         lay.addLayout(controls)
         self.stop_banner = Banner("warning", "")
@@ -300,12 +293,6 @@ class MainWindow(QMainWindow):
         self.stop_reason=QLabel("")
         self.stop_reason.setProperty("variant", "muted")
         lay.addWidget(self.stop_reason)
-        return page
-
-    def _three_d_page(self):
-        page,lay=self._page("3D Simulation","3D renderer launcher; map and movement state are shared with the simulation engine.")
-        lay.addWidget(QLabel("The 3D renderer is maintained as a separate visualization module."))
-        self.launch_3d=QPushButton("Open 3D renderer"); lay.addWidget(self.launch_3d); self.three_d_status=QLabel("3D renderer integration is not configured in this build."); lay.addWidget(self.three_d_status); lay.addStretch()
         return page
 
     def _results_page(self):
@@ -321,7 +308,7 @@ class MainWindow(QMainWindow):
 
     def _export_page(self):
         page,lay=self._page("Report Export","Save the current experiment configuration and run metrics locally.")
-        self.export_config=QPushButton("Save experiment configuration as JSON…"); self.export_csv=QPushButton("Export current run as CSV…")
+        self.export_config=QPushButton("Save experiment configuration as JSONâ€¦"); self.export_csv=QPushButton("Export current run as CSVâ€¦")
         lay.addWidget(self.export_config); lay.addWidget(self.export_csv); lay.addStretch()
         return page
 
@@ -350,7 +337,6 @@ class MainWindow(QMainWindow):
         self.stop_button.clicked.connect(self._stop); self.reset_button.clicked.connect(self._reset)
         self.speed_slider.valueChanged.connect(self._apply_playback_speed)
         self.skip_to_end.clicked.connect(self._skip_to_end)
-        self.launch_3d.clicked.connect(self._launch_3d)
         self.export_config.clicked.connect(self._save_config); self.export_csv.clicked.connect(self._save_csv)
         self.cal_open.clicked.connect(self._load_calibration_image); self.cal_image.point_clicked.connect(lambda _:self._update_calibration())
         self.cal_distance.valueChanged.connect(self._update_calibration)
@@ -362,7 +348,7 @@ class MainWindow(QMainWindow):
     def _refresh(self):
         c=self.controller; self.statusBar().showMessage(f"Map: {c.map_version}  |  {c.run_state.title()}")
         self.status_chip.set_state(c.run_state)
-        self.home_summary.setText(f"Map: {c.map_version}\nDimensions: {c.map.shape if c.map else '—'}\nStart: {c.start or 'not set'}")
+        self.home_summary.setText(f"Map: {c.map_version}\nDimensions: {c.map.shape if c.map else 'â€”'}\nStart: {c.start or 'not set'}")
         if c.robot is not None:
             cfg = c.robot.config
             steps_est = int(cfg.battery_capacity_units / max(cfg.move_energy_units_per_step, 1e-9))
@@ -388,15 +374,15 @@ class MainWindow(QMainWindow):
         for record in self.controller.recent_experiments()[:12]:
             kind = "Run" if record.get("kind") == "run_record" else "Config"
             experiment = record.get("experiment", {})
-            label = (f"{kind}: {record.get('algorithm', experiment.get('algorithm', '—'))} · "
-                     f"{record.get('mode', experiment.get('mode', '—'))} · "
-                     f"{record.get('map_version', record.get('map', {}).get('version', '—'))}")
+            label = (f"{kind}: {record.get('algorithm', experiment.get('algorithm', 'â€”'))} Â· "
+                     f"{record.get('mode', experiment.get('mode', 'â€”'))} Â· "
+                     f"{record.get('map_version', record.get('map', {}).get('version', 'â€”'))}")
             item = QListWidgetItem(label)
             item.setData(Qt.ItemDataRole.UserRole, record["_path"])
             self.recent_list.addItem(item)
         self.recent_maps_list.clear()
         for record in self.controller.recent_map_records()[:8]:
-            item=QListWidgetItem(f"{record.get('version','Map')} · {Path(record['path']).name}")
+            item=QListWidgetItem(f"{record.get('version','Map')} Â· {Path(record['path']).name}")
             item.setData(Qt.ItemDataRole.UserRole,record["path"])
             self.recent_maps_list.addItem(item)
 
@@ -452,7 +438,6 @@ class MainWindow(QMainWindow):
             self.controller.algorithm=self.algorithm_combo.currentData(); self.controller.mode=self.mode_combo.currentData()
             self.controller.run_state="running"; self.controller.search_result=None; self.controller.run_result=None
             self.stop_reason.setText(""); self._last_seq=-1
-            if self._three_d_client.is_running:self._three_d_client.begin_run(self.controller.start)
             self._worker=SimulationWorker(self.controller); self._worker.finished_result.connect(self._run_finished); self._worker.failed.connect(self._run_failed)
             self._worker.record_failed.connect(lambda message: self.statusBar().showMessage(f"Run finished; record save failed: {message}"))
             self._worker.start(); self.timer.start(); self.hud['status'].setText("Running"); self._set_controls(True)
@@ -470,23 +455,11 @@ class MainWindow(QMainWindow):
                 break
             new_events.append(event)
         new_events.reverse()
-        if self._three_d_client.is_running and new_events:
-            expected=self._three_d_client.last_event_seq+1
-            if new_events[0].seq!=expected:
-                # EventLog is bounded. Resync the renderer to a current engine
-                # snapshot rather than animate a discontinuous jump through a wall.
-                self._three_d_client.send("seek",cell=c.robot.state.position,
-                    cleaned_cells=np.argwhere(c.robot.cleaning.cleaned).tolist())
-                self._last_seq=new_events[-1].seq
-                self._three_d_client.last_event_seq=new_events[-1].seq
-                self.three_d_status.setText("3D resynced to current robot state; earlier route events exceeded the log ring.")
-                new_events=[]
         if new_events:self._last_seq=new_events[-1].seq
         target=self._target
         for event in new_events:
             if event.type=="TargetSelected":target=tuple(event.payload["target"])
             elif event.type=="RunStopped":self.stop_reason.setText(f"Stopped: {event.payload['reason']}")
-            self._three_d_client.send_event(event)
         self._target=target
         snap=sim.snapshots[-1] if sim.snapshots else None
         cleaned=snap.cleaned if snap else c.robot.cleaning.cleaned
@@ -496,8 +469,8 @@ class MainWindow(QMainWindow):
         self.hud['battery'].setText(f"{c.robot.state.battery_remaining:.2f} / {c.robot.config.battery_capacity_units:.2f}")
         self.hud['elapsed'].setText(f"{c.robot.state.elapsed_time_s:.2f} s")
         self.hud['lifetime'].setText(f"{c.robot.state.lifetime_remaining_s:.2f} s")
-        self.hud['coverage'].setText(f"{snap.coverage_percent:.1f}%" if snap else "—")
-        self.hud['target'].setText(str(target) if target else "—")
+        self.hud['coverage'].setText(f"{snap.coverage_percent:.1f}%" if snap else "â€”")
+        self.hud['target'].setText(str(target) if target else "â€”")
         self.hud['steps'].setText(str(c.robot.state.step_count))
         self.battery_bar.setRange(0,100); self.battery_bar.setValue(int(100*c.robot.state.battery_remaining/max(c.robot.config.battery_capacity_units,1e-9)))
 
@@ -505,9 +478,6 @@ class MainWindow(QMainWindow):
         self.controller.run_result=result; self.controller.run_state="complete"; self.timer.stop()
         self._refresh_recent_list()
         self.hud['status'].setText("Complete"); self._set_controls(False); self._poll_run(); self.status_chip.set_state("complete")
-        if self.controller.mode=="point_to_point" and self.controller.search_events is not None:
-            event_log=self.controller.search_events
-            self._three_d_client.send_events(getattr(event_log,"events",event_log))
         if self.controller.mode=="point_to_point" and self.controller.search_result is not None:
             self.sim_canvas.set_overlay(path=self.controller.search_result.path,explored=self.controller.trace_cells(),
                 frontier=self.controller.frontier_cells(),
@@ -525,17 +495,14 @@ class MainWindow(QMainWindow):
 
     def _pause(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.pause()
-        self._three_d_client.send("pause")
         self.controller.run_state="paused"; self.hud['status'].setText("Paused"); self.status_chip.set_state("paused")
 
     def _resume(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.resume()
-        self._three_d_client.send("play")
         self.controller.run_state="running"; self.hud['status'].setText("Running"); self.status_chip.set_state("running")
 
     def _step(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.step_once(); self.controller.run_state="paused"
-        self._three_d_client.send("step")
 
     def _toggle_pause(self):
         if self.controller.run_state=="paused":self._resume()
@@ -543,14 +510,12 @@ class MainWindow(QMainWindow):
 
     def _stop(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.cancel()
-        self._three_d_client.send("pause")
-        self.controller.run_state="stopping"; self.hud['status'].setText("Stopping…"); self.status_chip.set_state("stopped")
+        self.controller.run_state="stopping"; self.hud['status'].setText("Stoppingâ€¦"); self.status_chip.set_state("stopped")
 
     def _reset(self):
         if self._worker is not None and self._worker.isRunning():
             self._stop(); return
         if self.controller.robot:self.controller.robot.reset()
-        if self.controller.start:self._three_d_client.send("reset",cell=self.controller.start)
         if self.controller.coverage_controller:self.controller.coverage_controller.reset()
         self.controller.coverage_controller=None; self.controller.run_state="idle"; self._target=None
         self.sim_canvas.set_map(self.controller.map.grid if self.controller.map else None,self.controller.start,self.controller.goal)
@@ -575,7 +540,7 @@ class MainWindow(QMainWindow):
                   f"Planner wall time: {r.planner_wall_time_s:.4f} s\nRemaining: {len(r.remaining_cells)} cells")
         else:
             result=c.search_result
-            text=f"Algorithm: {c.algorithm}\nMode: Point to point\nFound: {result.found if result else False}\nPath steps: {result.path_length_steps if result else '—'}\nPlanner wall time: {result.execution_time_s:.4f} s" if result else "No completed result."
+            text=f"Algorithm: {c.algorithm}\nMode: Point to point\nFound: {result.found if result else False}\nPath steps: {result.path_length_steps if result else 'â€”'}\nPlanner wall time: {result.execution_time_s:.4f} s" if result else "No completed result."
         if c.mode != "coverage" and c.search_result is not None:
             result=c.search_result
             reason=(robot.termination_reason.value if robot.termination_reason else
@@ -622,7 +587,7 @@ class MainWindow(QMainWindow):
             else:
                 fields=("map_version","algorithm","mode","coverage_percent","raw_coverage_percent","steps",
                         "energy_used","simulated_time_s","stop_reason","planner_wall_time_s")
-                self.results_text.setText("\n".join(f"{key.replace('_',' ').title()}: {document.get(key, '—')}" for key in fields))
+                self.results_text.setText("\n".join(f"{key.replace('_',' ').title()}: {document.get(key, 'â€”')}" for key in fields))
                 self.nav.setCurrentRow(6)
         except Exception as exc:QMessageBox.warning(self,"Open recent item failed",str(exc))
 
@@ -638,60 +603,9 @@ class MainWindow(QMainWindow):
 
     def _apply_playback_speed(self, value):
         speeds=(.25,.5,1,2,4,8,16); speed=speeds[value]
-        self.speed_label.setText(f"{speed:g}×")
+        self.speed_label.setText(f"{speed:g}Ã—")
         # Presentation cadence only; simulation time and planner time do not change.
         self.timer.setInterval(max(34,int(100/speed)))  # capped at 30 UI updates/second
-        self._three_d_client.set_speed(speed)
-
-    def _three_d_payload(self):
-        c=self.controller
-        if c.map is None or c.robot is None or c.start is None:
-            raise ValueError("Load a map and choose a valid start before opening 3D.")
-        metadata=dict(c.map.metadata)
-        if c.map_path is not None:
-            spec_path=c.map_path/"map_spec.yaml"
-            if spec_path.exists():metadata["spec"]=load_spec(spec_path)
-        initial_path=()
-        robot_cell=c.robot.state.position
-        cleaned_cells=np.argwhere(c.robot.cleaning.cleaned).tolist()
-        # Replaying a completed point-to-point run starts at the original cell;
-        # a completed coverage preview starts from its current saved snapshot.
-        if c.mode=="point_to_point":
-            robot_cell=c.start; cleaned_cells=[]
-        elif c.run_state=="complete" and c.coverage_controller and c.coverage_controller.snapshots:
-            initial_path=c.coverage_controller.snapshots[-1].current_path
-        return {"grid":c.map.grid.tolist(),"cell_m":c.map.cell_m,
-                "metadata":metadata,"start_cell":c.start,
-                "robot_cell":robot_cell,
-                "robot_diameter_m":c.robot.config.diameter_m,
-                "speed_m_per_s":c.robot.config.speed_m_per_s,
-                "playback_speed":(0.25,0.5,1,2,4,8,16)[self.speed_slider.value()],
-                "cleaned_cells":cleaned_cells,
-                "initial_path":initial_path}
-
-    def _launch_3d(self):
-        if self._three_d_client.is_running:
-            self._three_d_client.close(); self.launch_3d.setText("Launch 3D")
-            self.three_d_status.setText("3D renderer closed")
-            return
-        try:
-            payload=self._three_d_payload()
-            self._three_d_client.last_event_seq=self._last_seq
-            self._three_d_client.launch(payload)
-            self.launch_3d.setText("Close 3D")
-            # Point-to-point runs finish quickly, so replay their buffered
-            # frozen events after the scene reports that it is initialized.
-            if (self.controller.run_state=="complete" and self.controller.mode=="point_to_point"
-                    and self.controller.search_events is not None):
-                self._three_d_client.last_event_seq=-1
-                self._three_d_client.send_events(getattr(self.controller.search_events,"events",()))
-            elif self.controller.run_state=="complete":
-                event_log=(self.controller.coverage_controller.events
-                           if self.controller.coverage_controller else None)
-                if event_log and event_log.events:
-                    self._three_d_client.last_event_seq=event_log.events[-1].seq
-        except Exception as exc:
-            QMessageBox.warning(self,"3D renderer unavailable",str(exc))
 
     def _skip_to_end(self):
         self._poll_run()
@@ -722,7 +636,7 @@ class MainWindow(QMainWindow):
         if path:self.cal_image.load(path); self._update_calibration()
 
     def _update_calibration(self):
-        if len(self.cal_image.points)<2:self.cal_result.setText("Scale: click two points\nResidual: —"); return
+        if len(self.cal_image.points)<2:self.cal_result.setText("Scale: click two points\nResidual: â€”"); return
         a,b=self.cal_image.points; pixels=((a[0]-b[0])**2+(a[1]-b[1])**2)**.5
         scale=pixels/max(self.cal_distance.value(),1e-9)
         self.cal_result.setText(f"Scale: {scale:.2f} px/m\nResidual: n/a (one reference segment; no independent check)")
@@ -733,6 +647,6 @@ class MainWindow(QMainWindow):
             if not self._worker.wait(5000):
                 self.statusBar().showMessage("Waiting for the current bounded search call to finish; close again when it stops.")
                 event.ignore(); return
-        self._three_d_client.close()
         event.accept()
+
 

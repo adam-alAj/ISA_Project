@@ -1,4 +1,4 @@
-"""Automated P6 gate evidence on the real MainWindow and department map."""
+﻿"""Automated P6 gate evidence on the real MainWindow and department map."""
 
 from pathlib import Path
 import time
@@ -152,7 +152,8 @@ def test_p6_cancel_and_close_leaves_no_worker_thread(qtbot):
     window.close()
     qtbot.waitUntil(lambda: window._worker is not None and not window._worker.isRunning(), timeout=10000)
     assert not window._worker.isRunning()
-    assert not window._three_d_client.is_running
+    assert window.stack.count() == window.nav.count()
+    assert all("3D" not in window.nav.item(i).text() for i in range(window.nav.count()))
 
 
 def test_p6_department_coverage_responsiveness_through_terminal_stop(qtbot):
@@ -190,3 +191,4 @@ def test_p6_department_coverage_responsiveness_through_terminal_stop(qtbot):
     assert controller.run_result is not None
     assert max_stall_ms < 100.0
     assert update_rate_hz <= 30.0
+

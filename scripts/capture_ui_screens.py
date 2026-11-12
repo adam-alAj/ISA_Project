@@ -1,4 +1,4 @@
-"""Capture the eight desktop screens offscreen for P6 review artifacts."""
+﻿"""Capture the seven retained desktop screens offscreen for P6 review artifacts."""
 from pathlib import Path
 import os
 import sys
@@ -24,7 +24,7 @@ def main():
     window.show(); app.processEvents()
     out=root/"docs"/"img"; out.mkdir(parents=True,exist_ok=True)
     names=("project_home","map_editor","robot_configuration","algorithm_setup","2d_simulation",
-           "3d_simulation_launcher","results_dashboard","report_export")
+           "results_dashboard","report_export")
     for index,name in enumerate(names):
         window.nav.setCurrentRow(index); app.processEvents(); window.stack.currentWidget().grab().save(str(out/f"{name}.png"))
     window.nav.setCurrentRow(4); app.processEvents()
@@ -41,3 +41,4 @@ def main():
 
 
 if __name__=="__main__": main()
+
