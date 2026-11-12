@@ -25,3 +25,4 @@ Each ADR records context, decision, consequences, and status. Human decisions re
 | ADR-0019 | Metrics and run-record contract (Freeze point 5) | Accepted |
 | ADR-0020 | Start-reachable robot centres for achievable coverage | Accepted |
 | ADR-0021 | Raw planner summaries in SearchFinished events | Accepted; additive schema-1 payload |
+| ADR-0022 | Remove 3D visualization feature | Accepted — pending instructor acknowledgement |
