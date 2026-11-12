@@ -137,7 +137,11 @@ def generate_run_pdf(record: dict, path: str | Path) -> Path:
              Paragraph(f"Run ID: {record['run_id']}", styles["Normal"]),
              Paragraph(f"Created: {record['created_utc']} · {exp['mode']} · {exp['algorithm']}", styles["Normal"]),
              Spacer(1, 12)]
-    metadata = [["Map hash", record["map"]["sha256"]], ["Map version", record["map"]["version"]],
+    metadata = [["Project version", record.get("project", {}).get("version", "unknown")],
+                ["Experiment ID", record["run_id"]], ["Report date", record["created_utc"]],
+                ["Software versions", json.dumps(record.get("project", {}).get("software", {}), sort_keys=True)],
+                ["Map ID / version", f"{record['map'].get('id', 'unknown')} / {record['map']['version']}"],
+                ["Map hash", record["map"]["sha256"]],
                 ["Robot configuration", json.dumps(exp["robot"], sort_keys=True)],
                 ["Algorithm settings", json.dumps(exp["algorithm_settings"], sort_keys=True)],
                 ["Policy", json.dumps(exp["policy"], sort_keys=True)], ["Assumptions", _assumptions(record)]]
@@ -164,7 +168,12 @@ def generate_comparison_pdf(records: list[dict], path: str | Path, *, minimum_re
         raise ValueError(f"comparison requires at least {minimum_repetitions} runs per algorithm; insufficient: {too_few}")
     path = Path(path); path.parent.mkdir(parents=True, exist_ok=True)
     styles = getSampleStyleSheet()
+    first = records[0]
+    project = first.get("project", {})
     story = [Paragraph(f"{comparison['mode'].replace('_', ' ').title()} comparison", styles["Title"]),
+             Paragraph(f"Project {project.get('version', 'unknown')} | map {first['map'].get('version', 'unknown')} | "
+                       f"experiment {first['run_id']} | generated {first.get('created_utc', 'unknown')}",
+                       styles["Normal"]),
              Paragraph("Runs share map, robot, policy, neighbor order, cost model, heuristic, and mission mode.", styles["BodyText"]),
              Spacer(1, 10)]
     headers = ["Algorithm", "n", "Expanded", "Search median (s)", "IQR (s)", "Steps", "Cost", "Energy", "Coverage %", "Stop"]

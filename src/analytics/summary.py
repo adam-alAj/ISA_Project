@@ -38,4 +38,8 @@ class RunSummary:
         return (f"{self.mode.replace('_', ' ').title()} · {self.algorithm.upper()}: {details}; "
                 f"expanded {self.expanded}; planner time {self.search_time_s:.6f} s; "
                 f"travel time {self.simulated_travel_time_s} s; energy {self.energy_units}; "
-                f"lifetime remaining {self.lifetime_remaining_s} s; stop reason {self.stop_reason}.")
+                f"lifetime remaining {self.lifetime_remaining_s} s; stop reason {self.stop_reason}. "
+                "DFS depends on neighbor order. "
+                "Greedy search is not guaranteed to return an optimal path. "
+                "IDDFS may repeat expansions across depth limits. "
+                "Simulated battery values are abstract model outputs, not real appliance measurements.")
