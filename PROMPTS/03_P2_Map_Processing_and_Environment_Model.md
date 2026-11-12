@@ -36,7 +36,7 @@ Produce the machine-readable map and reusable state-space model. **Exit gate:** 
 - **P2.21** Freeze: write `data/maps/department_v1/` (version `1.0`), record SHA-256, tag the environment API in an ADR ("Freeze point 1").
 
 ## 6. Constraints
-- Core modules (`environment`, `map_processing` except the optional OpenCV helpers) must not import PySide6/Ursina.
+- Core modules (`environment`, `map_processing` except the optional OpenCV helpers) must not import PySide6.
 - Keep the occupancy array and the cleaning array strictly separate.
 - All public functions typed and documented; no magic numbers (constants in one module).
 

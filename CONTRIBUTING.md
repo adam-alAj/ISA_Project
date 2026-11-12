@@ -14,4 +14,4 @@ Use Conventional Commits: `type(scope): imperative summary`. Common types are `f
 
 ## Review expectations
 
-Keep search, environment, robot, and simulation modules independent of UI/3D libraries. Record requirement changes and architectural decisions. Add tests with behavior changes and run `pytest` before requesting review.
+Keep search, environment, robot, and simulation modules independent of UI libraries. Record requirement changes and architectural decisions. Add tests with behavior changes and run `pytest` before requesting review.

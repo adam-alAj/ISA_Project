@@ -1,12 +1,12 @@
 # Environment API draft
 
-This document describes the UI-independent environment contract for P2. The API is implemented in `src/environment` and does not import PySide6 or Ursina.
+This document describes the UI-independent environment contract for P2. The API is implemented in `src/environment` and does not import PySide6.
 
 ## Occupancy and coordinates
 
 Occupancy is a two-dimensional `numpy.uint8` array with `FREE=0`, `OCCUPIED=1`, `UNKNOWN=2`, and `DOOR=3`. Only `FREE` and `DOOR` are traversable. Cleaning uses a separate boolean array and never modifies occupancy.
 
-Cells are `(row, column)`, rows increase down, and columns increase right. Neighbors are yielded in fixed `Up, Right, Down, Left` order. `GridMap.is_valid_transition(a,b)` requires Manhattan adjacency, in-bounds endpoints, and traversability at both ends. Pixel transforms use source `(x,y)` coordinates, origin `(80,160)` for the department trace, and `108 px/m`; metric coordinates use positive x right and y down. The 3D mapping is `(x, floor_y, z)` with z negative as image rows increase.
+Cells are `(row, column)`, rows increase down, and columns increase right. Neighbors are yielded in fixed `Up, Right, Down, Left` order. `GridMap.is_valid_transition(a,b)` requires Manhattan adjacency, in-bounds endpoints, and traversability at both ends. Pixel transforms use source `(x,y)` coordinates, origin `(80,160)` for the department trace, and `108 px/m`; metric coordinates use positive x right and y down. The shared Cartesian coordinate helper returns `(x, floor_y, z)` with z negative as image rows increase; it is retained as a coordinate API utility and does not activate a visualization feature.
 
 `GridMap.with_footprint(radius_m)` returns a read-only robot-center navigation mask. It conservatively rounds the radius outward to whole cells and applies a discrete circular kernel using NumPy. The current robot diameter assumption remains 0.35 m and provisional.
 

@@ -4,7 +4,7 @@
 You are a **Simulation Architect and Coverage-Planning Engineer**. You integrate independent components (environment, robot, planners) through clean interfaces and event streams, and you are meticulous about separating *planning*, *execution* and *policy*.
 
 ## 2. Context
-Use `00_Shared_Context_and_Rules.md`. Gates of **P3 and P4** must be met. This phase defines the **simulation event/snapshot API** that both 2D and 3D visualizers will consume (Freeze point 4).
+Use `00_Shared_Context_and_Rules.md`. Gates of **P3 and P4** must be met. This phase defines the **simulation event/snapshot API** that the 2D visualizer will consume (Freeze point 4).
 
 ## 3. Inputs
 `GridMap`, `Robot`, `REGISTRY` of algorithms, `SearchResult`, SRS §9–§11, Roadmap P5.

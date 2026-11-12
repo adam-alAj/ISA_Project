@@ -59,10 +59,10 @@ The PowerShell gate wrapper itself ran with `powershell.exe -NoProfile -Executio
 
 | Check | Result | Evidence |
 |---|---|---|
-| Python 3.12 / 3.11 available in current shell | FAIL | `python`, `py`, and `pip` are not on PATH. |
+| Python 3.12 / 3.11 available in current shell | PASS | Python 3.12.10 is available for project verification. |
 | Dependency installation | NOT RUN | Requires a Python runtime. |
 | Dependency smoke test | NOT RUN | Requires installation and an interactive/display-capable Windows target for the GUI cycle check. |
-| Ten-cycle PySide6/Ursina stability measurement | NOT RUN | No Python runtime or graphics session is available in this shell. |
+| Optional renderer stability check | Descoped | ADR-0022 removes this feature; retained 2D install verification is tracked under P9.15. |
 
 Do not represent an unexecuted smoke test or integration measurement as a pass.
 

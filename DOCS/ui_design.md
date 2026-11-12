@@ -9,12 +9,12 @@ Project Home
   ├─ Map Editor / Import & Calibration
   ├─ Robot Configuration
   ├─ Algorithm Setup
-  ├─ 2D Simulation ── 3D Simulation launcher
+  ├─ 2D Simulation ── 
   ├─ Results Dashboard
   └─ Report Export
 ```
 
-The eight screens are Project Home, Map Editor (including import/calibration), Robot Configuration, Algorithm Setup, 2D Simulation, 3D Simulation launcher, Results Dashboard, and Report Export. A persistent left rail selects screens; the status bar shows the loaded map version and experiment run state. Views bind to an `AppController`; they never invoke search algorithms or mutate robot state.
+The seven screens are Project Home, Map Editor (including import/calibration), Robot Configuration, Algorithm Setup, 2D Simulation, Results Dashboard, and Report Export. A persistent left rail selects screens; the status bar shows the loaded map version and experiment run state. Views bind to an `AppController`; they never invoke search algorithms or mutate robot state.
 
 ## Layout sketches
 

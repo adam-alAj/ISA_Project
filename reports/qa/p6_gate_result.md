@@ -22,7 +22,7 @@ PySide6 6.12.0 Qt 6.12.0
 | 1 | Scripted end-to-end workflow on real `MainWindow`: load map, start, robot, BFS, point-to-point, coverage, overlays and stop banner | PASS | `tests/ui/test_p6_gate.py::test_scripted_p6_end_to_end_workflow_and_screenshots`; ten screenshots in `docs/img/p6_e2e/` |
 | 2 | UI numbers equal engine numbers: battery, elapsed, lifetime, coverage, steps, stop reason | PASS | `test_p6_dashboard_numbers_match_engine_state` and end-to-end coverage assertions; integers/enums exact, rendered floats within half of their last displayed decimal (battery/time/lifetime <0.0005; coverage <0.005 percentage points) |
 | 3 | Department coverage responsiveness through terminal state | PASS | Default configuration, ended `battery_depleted`: 6.149 s, 130 UI refreshes, 21.14 Hz, maximum heartbeat gap 23.97 ms; targets <100 ms and ≤30 Hz |
-| 4 | Cancel and close leave no live worker | PASS | `test_p6_cancel_and_close_leaves_no_worker_thread`; active run cancelled, window closed, QThread stopped, no 3D QProcess running |
+| 4 | Cancel and close leave no live worker | PASS | `test_p6_cancel_and_close_leaves_no_worker_thread`; active run cancelled, window closed, and QThread stopped |
 | 5 | Legend and non-color state cues | PASS | `test_p6_legend_covers_every_state_and_map_states_have_texture`; ten legend entries and patterned FREE/OCCUPIED/UNKNOWN/DOOR cells |
 | 6 | Experiment save/load and recent runs | PASS | `tests/ui/test_desktop_ui.py::test_experiment_config_round_trip_and_recent_run_list` |
 

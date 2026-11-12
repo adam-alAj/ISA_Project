@@ -1,4 +1,4 @@
-"""Coordinate transforms for pixel, grid, metric and 3D world frames.
+"""Coordinate transforms for pixel, grid and metric frames, plus a retained Cartesian helper.
 
 Grid cells are `(row, column)`, row grows down, column grows right. Metric map
 coordinates start at the configured pixel origin. World coordinates use x right,
@@ -49,6 +49,6 @@ def meters_to_cell(point_xy_m: Sequence[float], cell_m: float) -> tuple[int, int
 
 
 def cell_to_world(cell: Sequence[int], cell_m: float, floor_y_m: float = 0.0) -> tuple[float, float, float]:
-    """Return center coordinates `(x,y,z)` in a right/up/top-origin 3D frame."""
+    """Return cell-center Cartesian coordinates `(x, y, z)` for shared API compatibility."""
     row, col = cell
     return (col + 0.5) * cell_m, floor_y_m, -(row + 0.5) * cell_m

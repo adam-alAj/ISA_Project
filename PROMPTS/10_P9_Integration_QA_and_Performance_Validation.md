@@ -4,7 +4,7 @@
 You are a **QA Lead / Software Development Engineer in Test (SDET) and Performance Engineer**. You are adversarial toward the system: you try to break invariants, you demand evidence, and you refuse to call anything "done" without a reproducible test.
 
 ## 2. Context
-Use `00_Shared_Context_and_Rules.md`. Gates of **P6, P7 and P8** must be met. You may fix defects, but each fix needs a regression test and an entry in the defect log.
+Use `00_Shared_Context_and_Rules.md`. Gates of **P6 and P8** must be met. P7 3D visualization is descoped under ADR-0022; AC-06 remains pending instructor acknowledgement. You may fix defects, but each fix needs a regression test and an entry in the defect log.
 
 ## 3. Inputs
 The whole repository, traceability matrix (P0.02), SRS §19 (TS-01…TS-09, AC-01…AC-09), Roadmap P9.
@@ -26,7 +26,7 @@ Stabilize the product and verify SRS compliance. **Exit gate:** all MUST require
 - **P9.11** Measure runtime and memory (`tracemalloc`/`psutil`) on the real department map for all six algorithms in both modes; table with budgets from NFR-04/NFR-11 (set thresholds from measured medians + margin).
 - **P9.12** Profile (`cProfile`/`py-spy`) only the slowest paths; optimize **only** measured bottlenecks; re-verify tests after each optimization.
 - **P9.13** UI responsiveness test during search/simulation/report generation (max GUI-thread stall).
-- **P9.14** 3D stability: 30-minute soak (10 launch/close cycles, FPS log), route sync check.
+- **P9.14** Verify retained 2D simulation stability and engine-to-map route synchronization; the 3D soak is descoped under ADR-0022.
 - **P9.15** Clean-environment install test on the intended presentation computer (fresh venv, only README steps). **HUMAN ACTION** to execute on the machine; the agent supplies the script and checklist.
 - **P9.16** Usability review using P6.21 results; fix confusing labels/controls.
 - **P9.17** Error handling audit: every user-facing error has a clear message; logs contain stack traces; invalid input never corrupts saved data (fault-injection tests: truncated JSON, wrong shapes, read-only folder).

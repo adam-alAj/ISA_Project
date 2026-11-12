@@ -10,7 +10,7 @@ Use `00_Shared_Context_and_Rules.md`. P2 gate must be met. Can run in parallel w
 `GridMap`, `neighbors` (order U,R,D,L), synthetic test maps from P2.19, SRS §10, §16.3–16.4, §19.1.
 
 ## 4. Objective
-Six algorithms with a common interface and testable behaviour. **Exit gate:** all six pass reference tests; results are comparable; search time excludes UI/3D; `SearchResult` + trace format frozen.
+Six algorithms with a common interface and testable behaviour. **Exit gate:** all six pass reference tests; results are comparable; search time excludes UI; `SearchResult` + trace format frozen.
 
 ## 5. Tasks (ID → concrete instruction)
 - **P4.01** `algorithms/problem.py`: `SearchProblem` (start, goal, `neighbors`, `step_cost(a,b)`, `is_goal`, `heuristic(n)` optional). Build it from `GridMap` + cost model (default uniform cost = 1.0 per step; allow weighted cost layers for TS-04).

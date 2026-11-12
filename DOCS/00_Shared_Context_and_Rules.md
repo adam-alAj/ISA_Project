@@ -9,7 +9,7 @@
 ---
 
 ## 1. Project in one paragraph
-**Smart Vacuum Cleaner — Intelligent Search, Navigation & 3D Simulation** (course: *Intelligence Systems*). A Python desktop **simulation** (not a physical robot) that converts a hand-drawn floor plan of a university department into an occupancy grid, simulates a vacuum robot with **independent battery capacity and operational lifetime**, runs **six search algorithms** (BFS, DFS, UCS, Greedy Best-First, A*, IDFS/IDDFS) on identical scenarios, visualizes exploration/movement/cleaning in **2D and 3D**, and produces metrics, comparison charts and PDF/CSV reports. Baseline documents: `Smart_Vacuum_Intelligent_Search_SRS.docx` (SRS v1.0) and `Smart_Vacuum_Project_Roadmap.docx` (Roadmap v1.0) — both are in the project files and are the **requirements authority**.
+**Smart Vacuum Cleaner — Intelligent Search, Navigation & Coverage Simulation** (course: *Intelligence Systems*). A Python desktop **simulation** (not a physical robot) that converts a hand-drawn floor plan of a university department into an occupancy grid, simulates a vacuum robot with **independent battery capacity and operational lifetime**, runs **six search algorithms** (BFS, DFS, UCS, Greedy Best-First, A*, IDFS/IDDFS) on identical scenarios, visualizes exploration/movement/cleaning in **2D**, and produces metrics, comparison charts and PDF/CSV reports. Baseline documents: `Smart_Vacuum_Intelligent_Search_SRS.docx` (SRS v1.0) and `Smart_Vacuum_Project_Roadmap.docx` (Roadmap v1.0) — both are in the project files and are the **requirements authority**.
 
 ## 2. Non-negotiable rules (violating any of these = defect)
 1. **Search ≠ movement.** Search expansion never moves the robot and never consumes battery/time. Only executing the *returned route* changes robot state.
@@ -21,11 +21,11 @@
 7. **Battery and operational lifetime are independent limits**; a run ends when either is reached first, and the termination reason is recorded.
 8. **Movement model:** 4-directional only (no diagonals) in v1.0.
 9. **Heuristic:** Manhattan distance × minimum step cost (admissible & consistent for the 4-neighbor model; must stay a lower bound if costs vary).
-10. **Metrics must be defined once and used everywhere** (see P8). Search execution time excludes UI, 3D rendering and animation delays.
+10. **Metrics must be defined once and used everywhere** (see P8). Search execution time excludes UI and animation delays.
 11. **Simulated values are model outputs**, not measurements of a real appliance. State units and coefficients in every report.
 12. **Human-assisted digitization** of the map must be described honestly as such (no claim of automatic floor-plan recognition).
 13. Core workflow must run **offline** on **Windows 10/11**, Python **3.11 or 3.12**.
-14. 2D and 3D visualizers consume the **same simulation events/snapshots**; neither re-implements movement logic.
+14. The 2D visualizer consumes the **same frozen simulation events/snapshots** as the controller; it does not re-implement movement logic.
 
 ## 3. Current state of the map (already produced — do NOT redo from scratch)
 Files delivered by the previous work session (place them in the repo as shown in §5):
@@ -73,7 +73,7 @@ smart_vacuum_ai/
 
 ## 6. Engineering conventions
 - Python 3.11/3.12, full type hints, `dataclass(frozen=True)` for value objects, docstrings (Google style), `pathlib`, no hidden globals, no randomness without a seed.
-- Layered: algorithms/environment/robot/simulation are **UI-free** and import nothing from PySide6/Ursina/Matplotlib.
+- Layered: algorithms/environment/robot/simulation are **UI-free** and import nothing from PySide6/Matplotlib.
 - `pytest` for everything; each task that adds behaviour adds/updates a test. Optional `ruff`.
 - Logging via `logging` (no bare `print` in library code). Errors are explicit exceptions with clear messages.
 - Pin dependency versions only after smoke-testing them (P0).

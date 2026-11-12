@@ -2,7 +2,7 @@
 
 ## Purpose and scope
 
-The project is an offline educational desktop simulation for converting a human-reviewed floor plan into an occupancy grid, planning routes with six classical search algorithms, executing those routes with an independently constrained simulated vacuum robot, visualizing the run in 2D and 3D, and reporting comparable results. It is not a physical robot controller. Coverage is a separate controller that repeatedly selects reachable uncleaned targets and calls one of the point-to-point planners.
+The project is an offline educational desktop simulation for converting a human-reviewed floor plan into an occupancy grid, planning routes with six classical search algorithms, executing those routes with an independently constrained simulated vacuum robot, visualizing the run in 2D, and reporting comparable results. It is not a physical robot controller. Coverage is a separate controller that repeatedly selects reachable uncleaned targets and calls one of the point-to-point planners.
 
 The first complete release includes image import and calibration, editable/validated occupancy maps, BFS/DFS/UCS/Greedy/A*/IDFS (pending instructor interpretation), robot battery and lifetime constraints, collision-safe movement, repeatable search and coverage runs, 2D visualization, analytics, and reports. The department map must be treated as human-assisted digitization and its assumptions labeled.
 
@@ -31,12 +31,11 @@ The first complete release includes image import and calibration, editable/valid
 | Ambiguous or incomplete source drawing | A wrong map invalidates paths and measurements. | Preserve the source; manually trace, annotate, and request review. |
 | Map scale or grid resolution mismatch | Narrow passages may become impassable or unsafe. | Verify calibration and robot footprint against the narrowest opening. |
 | Missing instructor decisions | IDFS meaning and grading expectations can change scope. | Send the questions in `open_questions.md` and record answers. |
-| 3D engine integration instability | A late UI/3D conflict can threaten the demo. | Keep Ursina in a separate process and measure on the demo machine. |
+| Removed optional 3D visualization | The original requirement is not included in the retained 2D product scope. | ADR-0022 and `SRS_v1.1_deviations.md` record the pending instructor acknowledgement; AC-06 is not passed. |
 | Search coupled to movement or UI | Metrics become unfair and tests become difficult. | Keep search headless; execute only the returned route. |
 | Coverage misrepresented as pathfinding | Claims about algorithm guarantees become incorrect. | Use an independent coverage controller and state the denominator. |
 | Non-deterministic tie handling | Repeated comparisons can disagree. | Fix U,R,D,L neighbor order and all tie-breaks. |
 | Arbitrary battery and lifetime coefficients | Resource outcomes may look authoritative without evidence. | Expose and label model assumptions in every run report. |
-| Runtime/dependency conflicts across UI and 3D | Setup failure blocks teammate onboarding. | Use the dependency smoke test before pinning package versions. |
 | Unbounded traces or animation snapshots | Large maps can exhaust memory or freeze the UI. | Bound retained event/frame data and benchmark on the agreed map. |
 
 ## Baseline invariants

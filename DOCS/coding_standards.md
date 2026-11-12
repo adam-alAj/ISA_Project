@@ -7,7 +7,7 @@
 - Prefer small functions, explicit data flow, `pathlib`, and frozen dataclasses for value objects. Avoid hidden mutable globals and unseeded randomness.
 - Add concise Google-style docstrings to public APIs and explain non-obvious algorithm choices.
 - Raise specific exceptions with actionable messages. Use `logging`; library modules must not print.
-- Keep algorithms, environment, robot, coverage, and simulation free of PySide6, Ursina, and Matplotlib imports. UI and visualization consume core interfaces/events.
+- Keep algorithms, environment, robot, coverage, and simulation free of PySide6 and Matplotlib imports. UI and visualization consume core interfaces/events.
 - Keep occupancy and cleaning state separate. Search expansion must not mutate robot state. Fix and document neighbor order and tie-breaking.
 
 ## Tests and quality

@@ -10,7 +10,7 @@
 
 | ID | Severity | Issue | P8 impact | Workaround / follow-up |
 |---|---|---|---|---|
-| KI-3D-01 | High for P7 demo | Development 3D framebuffer capture displays the Ursina HUD but not the world geometry; worker scene layout and camera transforms are populated. | None. Analytics uses engine state/events and the 2D view. | Use 2D for demo until the Ursina camera/render issue is resolved; investigate under P7/P9. |
+| KI-SCOPE-01 | Pending decision | FR-21 and AC-06 are descoped under ADR-0022; instructor acknowledgement has not been recorded. | AC-06 remains unpassed; no 3D capability is delivered. | Obtain instructor acknowledgement or restore the requirement and reopen implementation work. |
 | KI-P6-01 | Medium | Playback slider controls presentation refresh cadence and does not pace simulation execution. | None. Planner and simulation timing remain separately recorded. | Use pause/step controls to inspect discrete actions. |
 | KI-P6-02 | Low | A single calibration reference segment cannot provide an independent residual estimate. | None. Map calibration and run records still retain the configured scale. | UI displays “n/a”; add a second independent reference measurement in a later UI improvement. |
 | KI-P6-03 | Low | Some user-facing strings remain inline rather than centralized for translation. | None. | English workflow is usable; move remaining strings to `src/app/strings.py` as polish. |

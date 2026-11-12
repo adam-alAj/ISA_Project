@@ -12,4 +12,4 @@ After creating the documented Python 3.12 (or 3.11) environment and installing `
 python scripts/smoke_test.py
 ```
 
-The script prints an individual `PASS` or `FAIL` for PySide6, OpenCV, NumPy, Shapely, Matplotlib, Pandas, ReportLab, Ursina, python-docx, and NetworkX, followed by installed versions and a summary. Copy the actual output and record the interpreter/platform here; pin only versions that pass. The graphical ten-cycle measurement is tracked separately in `docs/three_d_feasibility.md`.
+The script prints an individual `PASS` or `FAIL` for PySide6, OpenCV, NumPy, Shapely, Matplotlib, Pandas, ReportLab, python-docx, and NetworkX, followed by installed versions and a summary. Copy the actual output and record the interpreter/platform here; pin only versions that pass. Historical renderer feasibility measurements are recorded in ADR-0022 and are not part of the retained feature set.

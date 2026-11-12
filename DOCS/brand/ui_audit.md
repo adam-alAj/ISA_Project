@@ -6,7 +6,7 @@ Scope: P6 desktop shell pages under Windows using forced Qt color-scheme permuta
 ## Reproduction Matrix
 
 - Script: `scripts/ui_screenshots.py`
-- Pages: Project Home, Map Editor, Robot Configuration, Algorithm Setup, 2D Simulation, 3D Simulation launcher, Results Dashboard, Report Export
+- Pages: Project Home, Map Editor, Robot Configuration, Algorithm Setup, 2D Simulation, Results Dashboard, Report Export
 - Resolutions: 1280x720, 1600x900, 1920x1080
 - Scale factors: 1.0, 1.25, 1.5 (`QT_SCALE_FACTOR`)
 - Forced scheme: `QT_QPA_PLATFORM=windows:darkmode=0|2` plus `QStyleHints.setColorScheme(...)` where available

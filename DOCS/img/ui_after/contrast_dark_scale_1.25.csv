@@ -2,14 +2,14 @@ scheme,scale,resolution,page,widget_class,widget_name,text,fg_hex,bg_hex,ratio,m
 dark,1.25,1280x720,project_home,QLabel,PageTitle,Project Home,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1280x720,project_home,QLabel,PageSubtitle,"Load a map, configure a run, and inspect results.",#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1280x720,project_home,QLabel,,Project overview,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,project_home,QLabel,,"Smart Vacuum — route planning, resource simulation, and coverage control.",#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1280x720,project_home,QLabel,,"Smart Vacuum â€” route planning, resource simulation, and coverage control.",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,project_home,QLabel,,"Map: 1.0-draft Dimensions: (127, 120) Start: (118, 54)",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,project_home,QLabel,,Recent experiments and runs,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,project_home,QLabel,,Recent maps,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,project_home,QPushButton,,Load department map v1,#06202e,#38bdf8,7.818,4.5,True
-dark,1.25,1280x720,project_home,QPushButton,,Open map folder…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1280x720,project_home,QPushButton,,Open map folderâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1280x720,project_home,QPushButton,,Create experiment,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1280x720,project_home,QPushButton,,Load experiment JSON…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1280x720,project_home,QPushButton,,Load experiment JSONâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1280x720,project_home,QListWidget,,list,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1280x720,project_home,QListWidget,,list,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1280x720,map_editor,QLabel,PageTitle,Map Editor,#e6ebf5,#0b1220,15.662,3.0,True
@@ -58,16 +58,16 @@ dark,1.25,1280x720,algorithm_setup,QLabel,PageSubtitle,Choose the point-to-point
 dark,1.25,1280x720,algorithm_setup,QLabel,,Algorithm,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,Mission mode,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,Heuristic,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,algorithm_setup,QLabel,,Manhattan distance × minimum step cost (A* / Greedy),#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1280x720,algorithm_setup,QLabel,,Manhattan distance Ã— minimum step cost (A* / Greedy),#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,Neighbor order,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,algorithm_setup,QLabel,,Up → Right → Down → Left,#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1280x720,algorithm_setup,QLabel,,Up â†’ Right â†’ Down â†’ Left,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,Coverage policy,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,"Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,Demo goal,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QLabel,,Choose start and goal in Map Editor. Coverage mode does not require a goal.,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,algorithm_setup,QComboBox,,BFS,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1280x720,algorithm_setup,QComboBox,,Coverage,#e6ebf5,#111a2e,14.505,4.5,True
-dark,1.25,1280x720,algorithm_setup,QComboBox,,Choose a demo goal…,#e6ebf5,#111a2e,14.505,4.5,True
+dark,1.25,1280x720,algorithm_setup,QComboBox,,Choose a demo goalâ€¦,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1280x720,simulation_2d,QLabel,PageTitle,2D Simulation,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1280x720,simulation_2d,QLabel,PageSubtitle,"Exploration, route, cleaning and robot state come from the simulation engine.",#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1280x720,simulation_2d,QLabel,,Battery,#9fb0cb,#0b1220,8.512,4.5,True
@@ -84,9 +84,9 @@ dark,1.25,1280x720,simulation_2d,QLabel,,Steps,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1280x720,simulation_2d,QLabel,,—,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,simulation_2d,QLabel,,Status,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1280x720,simulation_2d,QLabel,,—,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,simulation_2d,QLabel,,Legend: # wall   · free (dotted)   ? unknown (hatch)   D door (stripe)   • explored   ◇ frontier   → route   * cleaned  ,#9fb0cb,#0b1220,8.512,4.5,True
+dark,1.25,1280x720,simulation_2d,QLabel,,Legend: # wall   Â· free (dotted)   ? unknown (hatch)   D door (stripe)   â€¢ explored   â—‡ frontier   â†’ route   * cl,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1280x720,simulation_2d,QLabel,,Playback,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,simulation_2d,QLabel,,1×,#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1280x720,simulation_2d,QLabel,,1Ã—,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,simulation_2d,QPushButton,,Run,#06202e,#38bdf8,7.818,4.5,True
 dark,1.25,1280x720,simulation_2d,QPushButton,,Pause,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1280x720,simulation_2d,QPushButton,,Resume,#e6ebf5,#16213a,13.381,4.5,True
@@ -94,29 +94,24 @@ dark,1.25,1280x720,simulation_2d,QPushButton,,Step,#e6ebf5,#16213a,13.381,4.5,Tr
 dark,1.25,1280x720,simulation_2d,QPushButton,,Reset,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1280x720,simulation_2d,QPushButton,,Stop,#06202e,#f87171,6.055,4.5,True
 dark,1.25,1280x720,simulation_2d,QPushButton,,Show latest state,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1280x720,simulation_3d_launcher,QLabel,PageTitle,3D Simulation,#e6ebf5,#0b1220,15.662,3.0,True
-dark,1.25,1280x720,simulation_3d_launcher,QLabel,PageSubtitle,3D renderer launcher; map and movement state are shared with the simulation engine.,#9fb0cb,#0b1220,8.512,4.5,True
-dark,1.25,1280x720,simulation_3d_launcher,QLabel,,The 3D renderer is maintained as a separate visualization module.,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,simulation_3d_launcher,QLabel,,3D renderer integration is not configured in this build.,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1280x720,simulation_3d_launcher,QPushButton,,Open 3D renderer,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1280x720,results_dashboard,QLabel,PageTitle,Results Dashboard,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1280x720,results_dashboard,QLabel,PageSubtitle,Metrics are read from the completed engine run.,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1280x720,results_dashboard,QLabel,,No completed run yet.,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1280x720,report_export,QLabel,PageTitle,Report Export,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1280x720,report_export,QLabel,PageSubtitle,Save the current experiment configuration and run metrics locally.,#9fb0cb,#0b1220,8.512,4.5,True
-dark,1.25,1280x720,report_export,QPushButton,,Save experiment configuration as JSON…,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1280x720,report_export,QPushButton,,Export current run as CSV…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1280x720,report_export,QPushButton,,Save experiment configuration as JSONâ€¦,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1280x720,report_export,QPushButton,,Export current run as CSVâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1600x900,project_home,QLabel,PageTitle,Project Home,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1600x900,project_home,QLabel,PageSubtitle,"Load a map, configure a run, and inspect results.",#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1600x900,project_home,QLabel,,Project overview,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,project_home,QLabel,,"Smart Vacuum — route planning, resource simulation, and coverage control.",#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1600x900,project_home,QLabel,,"Smart Vacuum â€” route planning, resource simulation, and coverage control.",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,project_home,QLabel,,"Map: 1.0-draft Dimensions: (127, 120) Start: (118, 54)",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,project_home,QLabel,,Recent experiments and runs,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,project_home,QLabel,,Recent maps,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,project_home,QPushButton,,Load department map v1,#06202e,#38bdf8,7.818,4.5,True
-dark,1.25,1600x900,project_home,QPushButton,,Open map folder…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1600x900,project_home,QPushButton,,Open map folderâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1600x900,project_home,QPushButton,,Create experiment,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1600x900,project_home,QPushButton,,Load experiment JSON…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1600x900,project_home,QPushButton,,Load experiment JSONâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1600x900,project_home,QListWidget,,list,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1600x900,project_home,QListWidget,,list,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1600x900,map_editor,QLabel,PageTitle,Map Editor,#e6ebf5,#0b1220,15.662,3.0,True
@@ -165,16 +160,16 @@ dark,1.25,1600x900,algorithm_setup,QLabel,PageSubtitle,Choose the point-to-point
 dark,1.25,1600x900,algorithm_setup,QLabel,,Algorithm,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,Mission mode,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,Heuristic,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,algorithm_setup,QLabel,,Manhattan distance × minimum step cost (A* / Greedy),#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1600x900,algorithm_setup,QLabel,,Manhattan distance Ã— minimum step cost (A* / Greedy),#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,Neighbor order,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,algorithm_setup,QLabel,,Up → Right → Down → Left,#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1600x900,algorithm_setup,QLabel,,Up â†’ Right â†’ Down â†’ Left,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,Coverage policy,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,"Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,Demo goal,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QLabel,,Choose start and goal in Map Editor. Coverage mode does not require a goal.,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,algorithm_setup,QComboBox,,BFS,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1600x900,algorithm_setup,QComboBox,,Coverage,#e6ebf5,#111a2e,14.505,4.5,True
-dark,1.25,1600x900,algorithm_setup,QComboBox,,Choose a demo goal…,#e6ebf5,#111a2e,14.505,4.5,True
+dark,1.25,1600x900,algorithm_setup,QComboBox,,Choose a demo goalâ€¦,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1600x900,simulation_2d,QLabel,PageTitle,2D Simulation,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1600x900,simulation_2d,QLabel,PageSubtitle,"Exploration, route, cleaning and robot state come from the simulation engine.",#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1600x900,simulation_2d,QLabel,,Battery,#9fb0cb,#0b1220,8.512,4.5,True
@@ -191,9 +186,9 @@ dark,1.25,1600x900,simulation_2d,QLabel,,Steps,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1600x900,simulation_2d,QLabel,,—,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,simulation_2d,QLabel,,Status,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1600x900,simulation_2d,QLabel,,—,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,simulation_2d,QLabel,,Legend: # wall   · free (dotted)   ? unknown (hatch)   D door (stripe)   • explored   ◇ frontier   → route   * cleaned  ,#9fb0cb,#0b1220,8.512,4.5,True
+dark,1.25,1600x900,simulation_2d,QLabel,,Legend: # wall   Â· free (dotted)   ? unknown (hatch)   D door (stripe)   â€¢ explored   â—‡ frontier   â†’ route   * cl,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1600x900,simulation_2d,QLabel,,Playback,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,simulation_2d,QLabel,,1×,#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1600x900,simulation_2d,QLabel,,1Ã—,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,simulation_2d,QPushButton,,Run,#06202e,#38bdf8,7.818,4.5,True
 dark,1.25,1600x900,simulation_2d,QPushButton,,Pause,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1600x900,simulation_2d,QPushButton,,Resume,#e6ebf5,#16213a,13.381,4.5,True
@@ -201,29 +196,24 @@ dark,1.25,1600x900,simulation_2d,QPushButton,,Step,#e6ebf5,#16213a,13.381,4.5,Tr
 dark,1.25,1600x900,simulation_2d,QPushButton,,Reset,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1600x900,simulation_2d,QPushButton,,Stop,#06202e,#f87171,6.055,4.5,True
 dark,1.25,1600x900,simulation_2d,QPushButton,,Show latest state,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1600x900,simulation_3d_launcher,QLabel,PageTitle,3D Simulation,#e6ebf5,#0b1220,15.662,3.0,True
-dark,1.25,1600x900,simulation_3d_launcher,QLabel,PageSubtitle,3D renderer launcher; map and movement state are shared with the simulation engine.,#9fb0cb,#0b1220,8.512,4.5,True
-dark,1.25,1600x900,simulation_3d_launcher,QLabel,,The 3D renderer is maintained as a separate visualization module.,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,simulation_3d_launcher,QLabel,,3D renderer integration is not configured in this build.,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1600x900,simulation_3d_launcher,QPushButton,,Open 3D renderer,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1600x900,results_dashboard,QLabel,PageTitle,Results Dashboard,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1600x900,results_dashboard,QLabel,PageSubtitle,Metrics are read from the completed engine run.,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1600x900,results_dashboard,QLabel,,No completed run yet.,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1600x900,report_export,QLabel,PageTitle,Report Export,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1600x900,report_export,QLabel,PageSubtitle,Save the current experiment configuration and run metrics locally.,#9fb0cb,#0b1220,8.512,4.5,True
-dark,1.25,1600x900,report_export,QPushButton,,Save experiment configuration as JSON…,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1600x900,report_export,QPushButton,,Export current run as CSV…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1600x900,report_export,QPushButton,,Save experiment configuration as JSONâ€¦,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1600x900,report_export,QPushButton,,Export current run as CSVâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1920x1080,project_home,QLabel,PageTitle,Project Home,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1920x1080,project_home,QLabel,PageSubtitle,"Load a map, configure a run, and inspect results.",#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1920x1080,project_home,QLabel,,Project overview,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,project_home,QLabel,,"Smart Vacuum — route planning, resource simulation, and coverage control.",#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1920x1080,project_home,QLabel,,"Smart Vacuum â€” route planning, resource simulation, and coverage control.",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,project_home,QLabel,,"Map: 1.0-draft Dimensions: (127, 120) Start: (118, 54)",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,project_home,QLabel,,Recent experiments and runs,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,project_home,QLabel,,Recent maps,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,project_home,QPushButton,,Load department map v1,#06202e,#38bdf8,7.818,4.5,True
-dark,1.25,1920x1080,project_home,QPushButton,,Open map folder…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1920x1080,project_home,QPushButton,,Open map folderâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1920x1080,project_home,QPushButton,,Create experiment,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1920x1080,project_home,QPushButton,,Load experiment JSON…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1920x1080,project_home,QPushButton,,Load experiment JSONâ€¦,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1920x1080,project_home,QListWidget,,list,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1920x1080,project_home,QListWidget,,list,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1920x1080,map_editor,QLabel,PageTitle,Map Editor,#e6ebf5,#0b1220,15.662,3.0,True
@@ -272,16 +262,16 @@ dark,1.25,1920x1080,algorithm_setup,QLabel,PageSubtitle,Choose the point-to-poin
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Algorithm,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Mission mode,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Heuristic,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,algorithm_setup,QLabel,,Manhattan distance × minimum step cost (A* / Greedy),#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1920x1080,algorithm_setup,QLabel,,Manhattan distance Ã— minimum step cost (A* / Greedy),#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Neighbor order,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,algorithm_setup,QLabel,,Up → Right → Down → Left,#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1920x1080,algorithm_setup,QLabel,,Up â†’ Right â†’ Down â†’ Left,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Coverage policy,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,"Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)",#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Demo goal,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QLabel,,Choose start and goal in Map Editor. Coverage mode does not require a goal.,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QComboBox,,BFS,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1920x1080,algorithm_setup,QComboBox,,Coverage,#e6ebf5,#111a2e,14.505,4.5,True
-dark,1.25,1920x1080,algorithm_setup,QComboBox,,Choose a demo goal…,#e6ebf5,#111a2e,14.505,4.5,True
+dark,1.25,1920x1080,algorithm_setup,QComboBox,,Choose a demo goalâ€¦,#e6ebf5,#111a2e,14.505,4.5,True
 dark,1.25,1920x1080,simulation_2d,QLabel,PageTitle,2D Simulation,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1920x1080,simulation_2d,QLabel,PageSubtitle,"Exploration, route, cleaning and robot state come from the simulation engine.",#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1920x1080,simulation_2d,QLabel,,Battery,#9fb0cb,#0b1220,8.512,4.5,True
@@ -298,9 +288,9 @@ dark,1.25,1920x1080,simulation_2d,QLabel,,Steps,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1920x1080,simulation_2d,QLabel,,—,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,simulation_2d,QLabel,,Status,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1920x1080,simulation_2d,QLabel,,—,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,simulation_2d,QLabel,,Legend: # wall   · free (dotted)   ? unknown (hatch)   D door (stripe)   • explored   ◇ frontier   → route   * cleaned  ,#9fb0cb,#0b1220,8.512,4.5,True
+dark,1.25,1920x1080,simulation_2d,QLabel,,Legend: # wall   Â· free (dotted)   ? unknown (hatch)   D door (stripe)   â€¢ explored   â—‡ frontier   â†’ route   * cl,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1920x1080,simulation_2d,QLabel,,Playback,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,simulation_2d,QLabel,,1×,#e6ebf5,#0b1220,15.662,4.5,True
+dark,1.25,1920x1080,simulation_2d,QLabel,,1Ã—,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,simulation_2d,QPushButton,,Run,#06202e,#38bdf8,7.818,4.5,True
 dark,1.25,1920x1080,simulation_2d,QPushButton,,Pause,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1920x1080,simulation_2d,QPushButton,,Resume,#e6ebf5,#16213a,13.381,4.5,True
@@ -308,15 +298,10 @@ dark,1.25,1920x1080,simulation_2d,QPushButton,,Step,#e6ebf5,#16213a,13.381,4.5,T
 dark,1.25,1920x1080,simulation_2d,QPushButton,,Reset,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1920x1080,simulation_2d,QPushButton,,Stop,#06202e,#f87171,6.055,4.5,True
 dark,1.25,1920x1080,simulation_2d,QPushButton,,Show latest state,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1920x1080,simulation_3d_launcher,QLabel,PageTitle,3D Simulation,#e6ebf5,#0b1220,15.662,3.0,True
-dark,1.25,1920x1080,simulation_3d_launcher,QLabel,PageSubtitle,3D renderer launcher; map and movement state are shared with the simulation engine.,#9fb0cb,#0b1220,8.512,4.5,True
-dark,1.25,1920x1080,simulation_3d_launcher,QLabel,,The 3D renderer is maintained as a separate visualization module.,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,simulation_3d_launcher,QLabel,,3D renderer integration is not configured in this build.,#e6ebf5,#0b1220,15.662,4.5,True
-dark,1.25,1920x1080,simulation_3d_launcher,QPushButton,,Open 3D renderer,#e6ebf5,#16213a,13.381,4.5,True
 dark,1.25,1920x1080,results_dashboard,QLabel,PageTitle,Results Dashboard,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1920x1080,results_dashboard,QLabel,PageSubtitle,Metrics are read from the completed engine run.,#9fb0cb,#0b1220,8.512,4.5,True
 dark,1.25,1920x1080,results_dashboard,QLabel,,No completed run yet.,#e6ebf5,#0b1220,15.662,4.5,True
 dark,1.25,1920x1080,report_export,QLabel,PageTitle,Report Export,#e6ebf5,#0b1220,15.662,3.0,True
 dark,1.25,1920x1080,report_export,QLabel,PageSubtitle,Save the current experiment configuration and run metrics locally.,#9fb0cb,#0b1220,8.512,4.5,True
-dark,1.25,1920x1080,report_export,QPushButton,,Save experiment configuration as JSON…,#e6ebf5,#16213a,13.381,4.5,True
-dark,1.25,1920x1080,report_export,QPushButton,,Export current run as CSV…,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1920x1080,report_export,QPushButton,,Save experiment configuration as JSONâ€¦,#e6ebf5,#16213a,13.381,4.5,True
+dark,1.25,1920x1080,report_export,QPushButton,,Export current run as CSVâ€¦,#e6ebf5,#16213a,13.381,4.5,True

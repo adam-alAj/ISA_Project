@@ -23,7 +23,7 @@ python scripts/smoke_test.py
 pytest
 ```
 
-The current `main.py` launches the PySide6 desktop application. The P2?P5 environment, robot, search and simulation layers are implemented; P6 provides the 2D workflow and UI. The 3D screen is currently a launcher placeholder while P7 integration proceeds. Run `pytest` for the automated checks.
+`main.py` launches the PySide6 desktop application. The 2D workflow supports map editing, robot configuration, six search algorithms, simulation, coverage, analytics, and report export. Run `pytest` for automated checks. See `DOCS/SRS_v1.1_deviations.md` and ADR-0022 for the pending instructor acknowledgement of the removed visualization scope.
 
 ## Structure
 

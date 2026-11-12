@@ -13,7 +13,7 @@ Frozen APIs (environment, robot, search, simulation events), SRS §15, FR-20…F
 Make the system operable and understandable through a desktop application. **Exit gate:** a user can complete the main workflow without editing code; the 2D display faithfully reflects simulation state; the UI stays responsive.
 
 ## 5. Tasks (ID → concrete instruction)
-- **P6.01** Write `docs/ui_design.md`: navigation map of the 8 screens (Project Home, Map Editor, Robot Configuration, Algorithm Setup, 2D Simulation, 3D Simulation launcher, Results Dashboard, Report Export), layout sketches (ASCII), and state diagram of the main workflow.
+- **P6.01** Write `docs/ui_design.md`: navigation map of the 7 retained screens (Project Home, Map Editor, Robot Configuration, Algorithm Setup, 2D Simulation, Results Dashboard, Report Export), layout sketches (ASCII), and state diagram of the main workflow.
 - **P6.02** `app/main_window.py` with `QMainWindow`, left navigation, stacked pages, status bar (map version, run state); MVC/MVVM split: views never call algorithms directly — they call an `AppController` (signals/slots).
 - **P6.03** Project Home: open/recent maps, "Load department map v1", create experiment, project info.
 - **P6.04** Map import & calibration page: load image, pick two points + distance, show resulting px/m and residual. (The department map comes from the spec; this page serves the generic workflow and shows the original photo with overlay.)

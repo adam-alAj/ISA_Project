@@ -24,7 +24,7 @@ Turn run logs into transparent, academically defensible results. **Exit gate:** 
 - **P8.09** Comparison tables for all six algorithms in two separate sections: **(A) point-to-point planning** and **(B) coverage missions** (never mixed).
 - **P8.10** Charts (Matplotlib, labelled axes with units, consistent colors per algorithm, colorblind-safe): explored/expanded nodes, search time, path length & cost, energy, coverage; optional per-goal grouped bars.
 - **P8.11** Timing protocol: ≥ 5 repetitions per algorithm per scenario, warm-up run discarded, report **median and IQR**; fixed seeds; machine info recorded (CPU, Python, OS).
-- **P8.12** Prove separation: assert that timing excludes UI/3D/animation (code-level test + documentation).
+- **P8.12** Prove separation: assert that timing excludes UI/animation (code-level test + documentation).
 - **P8.13** Per-run **PDF report** (ReportLab): metadata, map + grid resolution, robot config, algorithm settings, policy, route result, node counts, times, energy, lifetime, coverage, termination reason, map snapshot with explored/route/cleaned, short **factual** interpretation.
 - **P8.14** **Comparison PDF**: tables, charts, assumptions, limitations; interpretation generated from rules, never "X is best" (see P8.20).
 - **P8.15** CSV export of raw metrics (UTF-8 with BOM for Excel, documented columns).

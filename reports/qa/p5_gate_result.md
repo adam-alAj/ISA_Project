@@ -1,3 +1,5 @@
+> Historical evidence captured before the 3D feature was removed by ADR-0022. Dependency checks in this snapshot do not describe the current runtime.
+
 ﻿# P5 gate results
 
 Generated: 2026-11-11 13:49:22 +02:00
