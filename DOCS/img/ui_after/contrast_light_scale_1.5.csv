@@ -1,0 +1,322 @@
+scheme,scale,resolution,page,widget_class,widget_name,text,fg_hex,bg_hex,ratio,min_required,pass_wcag_aa
+light,1.5,1280x720,project_home,QLabel,PageTitle,Project Home,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,project_home,QLabel,PageSubtitle,"Load a map, configure a run, and inspect results.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,project_home,QLabel,,Project overview,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,project_home,QLabel,,"Smart Vacuum — route planning, resource simulation, and coverage control.",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,project_home,QLabel,,"Map: 1.0-draft Dimensions: (127, 120) Start: (118, 54)",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,project_home,QLabel,,Recent experiments and runs,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,project_home,QLabel,,Recent maps,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,project_home,QPushButton,,Load department map v1,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1280x720,project_home,QPushButton,,Open map folder…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,project_home,QPushButton,,Create experiment,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,project_home,QPushButton,,Load experiment JSON…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,project_home,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,project_home,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,map_editor,QLabel,PageTitle,Map Editor,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,map_editor,QLabel,PageSubtitle,"Import/calibrate plans, paint occupancy states, and validate start/goal cells.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,map_editor,QLabel,,Paint state,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,map_editor,QLabel,,Validation,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,map_editor,QPushButton,,Pick start,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,map_editor,QPushButton,,Pick goal,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,map_editor,QPushButton,,Paint cells,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,map_editor,QPushButton,,Undo,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,map_editor,QPushButton,,Redo,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,map_editor,QComboBox,,FREE,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,map_editor,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,PageTitle,Robot Configuration,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,robot_configuration,QLabel,PageSubtitle,Battery and operational lifetime are independent simulation limits.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Limits,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Battery capacity,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Operational lifetime,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Speed,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Diameter,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Cleaning width,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Move energy / step,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Clean energy / cell,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Summary,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QLabel,,Estimated max move steps: 2000 Operational lifetime: 30.0 min Cleaning width: 0.300 m,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,robot_configuration,QPushButton,,Default,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,robot_configuration,QPushButton,,Low battery,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,robot_configuration,QPushButton,,Short lifetime,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,robot_configuration,QPushButton,,Apply configuration,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,100.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,1800.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.2500,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.350,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.300,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.05000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.02000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,100.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,1800.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,0.2500,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,0.350,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,0.300,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,0.05000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,robot_configuration,QDoubleSpinBox,,0.02000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,PageTitle,Algorithm Setup,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,algorithm_setup,QLabel,PageSubtitle,Choose the point-to-point planner and mission mode.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Algorithm,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Mission mode,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Heuristic,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Manhattan distance × minimum step cost (A* / Greedy),#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Neighbor order,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Up → Right → Down → Left,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Coverage policy,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,"Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Demo goal,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QLabel,,Choose start and goal in Map Editor. Coverage mode does not require a goal.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,algorithm_setup,QComboBox,,BFS,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,algorithm_setup,QComboBox,,Coverage,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,algorithm_setup,QComboBox,,Choose a demo goal…,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,PageTitle,2D Simulation,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,simulation_2d,QLabel,PageSubtitle,"Exploration, route, cleaning and robot state come from the simulation engine.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Battery,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Elapsed time,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Lifetime remaining,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Coverage,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Current target,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Steps,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Status,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Legend: # wall   · free (dotted)   ? unknown (hatch)   D door (stripe)   • explored   ◇ frontier   → route   * cleaned  ,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,Playback,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QLabel,,1×,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Run,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Pause,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Resume,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Step,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Reset,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Stop,#ffffff,#b91c1c,6.47,4.5,True
+light,1.5,1280x720,simulation_2d,QPushButton,,Show latest state,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,simulation_3d_launcher,QLabel,PageTitle,3D Simulation,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,simulation_3d_launcher,QLabel,PageSubtitle,3D renderer launcher; map and movement state are shared with the simulation engine.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,simulation_3d_launcher,QLabel,,The 3D renderer is maintained as a separate visualization module.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_3d_launcher,QLabel,,3D renderer integration is not configured in this build.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,simulation_3d_launcher,QPushButton,,Open 3D renderer,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,results_dashboard,QLabel,PageTitle,Results Dashboard,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,results_dashboard,QLabel,PageSubtitle,Metrics are read from the completed engine run.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,results_dashboard,QLabel,,No completed run yet.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1280x720,report_export,QLabel,PageTitle,Report Export,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1280x720,report_export,QLabel,PageSubtitle,Save the current experiment configuration and run metrics locally.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1280x720,report_export,QPushButton,,Save experiment configuration as JSON…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1280x720,report_export,QPushButton,,Export current run as CSV…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,project_home,QLabel,PageTitle,Project Home,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,project_home,QLabel,PageSubtitle,"Load a map, configure a run, and inspect results.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,project_home,QLabel,,Project overview,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,project_home,QLabel,,"Smart Vacuum — route planning, resource simulation, and coverage control.",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,project_home,QLabel,,"Map: 1.0-draft Dimensions: (127, 120) Start: (118, 54)",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,project_home,QLabel,,Recent experiments and runs,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,project_home,QLabel,,Recent maps,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,project_home,QPushButton,,Load department map v1,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1600x900,project_home,QPushButton,,Open map folder…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,project_home,QPushButton,,Create experiment,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,project_home,QPushButton,,Load experiment JSON…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,project_home,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,project_home,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,map_editor,QLabel,PageTitle,Map Editor,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,map_editor,QLabel,PageSubtitle,"Import/calibrate plans, paint occupancy states, and validate start/goal cells.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,map_editor,QLabel,,Paint state,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,map_editor,QLabel,,Validation,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,map_editor,QPushButton,,Pick start,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,map_editor,QPushButton,,Pick goal,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,map_editor,QPushButton,,Paint cells,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,map_editor,QPushButton,,Undo,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,map_editor,QPushButton,,Redo,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,map_editor,QComboBox,,FREE,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,map_editor,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,PageTitle,Robot Configuration,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,robot_configuration,QLabel,PageSubtitle,Battery and operational lifetime are independent simulation limits.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Limits,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Battery capacity,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Operational lifetime,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Speed,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Diameter,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Cleaning width,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Move energy / step,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Clean energy / cell,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Summary,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QLabel,,Estimated max move steps: 2000 Operational lifetime: 30.0 min Cleaning width: 0.300 m,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,robot_configuration,QPushButton,,Default,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,robot_configuration,QPushButton,,Low battery,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,robot_configuration,QPushButton,,Short lifetime,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,robot_configuration,QPushButton,,Apply configuration,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,100.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,1800.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.2500,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.350,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.300,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.05000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.02000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,100.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,1800.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,0.2500,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,0.350,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,0.300,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,0.05000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,robot_configuration,QDoubleSpinBox,,0.02000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,PageTitle,Algorithm Setup,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,algorithm_setup,QLabel,PageSubtitle,Choose the point-to-point planner and mission mode.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Algorithm,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Mission mode,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Heuristic,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Manhattan distance × minimum step cost (A* / Greedy),#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Neighbor order,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Up → Right → Down → Left,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Coverage policy,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,"Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Demo goal,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QLabel,,Choose start and goal in Map Editor. Coverage mode does not require a goal.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,algorithm_setup,QComboBox,,BFS,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,algorithm_setup,QComboBox,,Coverage,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,algorithm_setup,QComboBox,,Choose a demo goal…,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,PageTitle,2D Simulation,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,simulation_2d,QLabel,PageSubtitle,"Exploration, route, cleaning and robot state come from the simulation engine.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Battery,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Elapsed time,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Lifetime remaining,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Coverage,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Current target,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Steps,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Status,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Legend: # wall   · free (dotted)   ? unknown (hatch)   D door (stripe)   • explored   ◇ frontier   → route   * cleaned  ,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,Playback,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QLabel,,1×,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Run,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Pause,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Resume,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Step,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Reset,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Stop,#ffffff,#b91c1c,6.47,4.5,True
+light,1.5,1600x900,simulation_2d,QPushButton,,Show latest state,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,simulation_3d_launcher,QLabel,PageTitle,3D Simulation,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,simulation_3d_launcher,QLabel,PageSubtitle,3D renderer launcher; map and movement state are shared with the simulation engine.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,simulation_3d_launcher,QLabel,,The 3D renderer is maintained as a separate visualization module.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_3d_launcher,QLabel,,3D renderer integration is not configured in this build.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,simulation_3d_launcher,QPushButton,,Open 3D renderer,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,results_dashboard,QLabel,PageTitle,Results Dashboard,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,results_dashboard,QLabel,PageSubtitle,Metrics are read from the completed engine run.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,results_dashboard,QLabel,,No completed run yet.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1600x900,report_export,QLabel,PageTitle,Report Export,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1600x900,report_export,QLabel,PageSubtitle,Save the current experiment configuration and run metrics locally.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1600x900,report_export,QPushButton,,Save experiment configuration as JSON…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1600x900,report_export,QPushButton,,Export current run as CSV…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,project_home,QLabel,PageTitle,Project Home,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,project_home,QLabel,PageSubtitle,"Load a map, configure a run, and inspect results.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,project_home,QLabel,,Project overview,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,project_home,QLabel,,"Smart Vacuum — route planning, resource simulation, and coverage control.",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,project_home,QLabel,,"Map: 1.0-draft Dimensions: (127, 120) Start: (118, 54)",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,project_home,QLabel,,Recent experiments and runs,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,project_home,QLabel,,Recent maps,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,project_home,QPushButton,,Load department map v1,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1920x1080,project_home,QPushButton,,Open map folder…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,project_home,QPushButton,,Create experiment,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,project_home,QPushButton,,Load experiment JSON…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,project_home,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,project_home,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,map_editor,QLabel,PageTitle,Map Editor,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,map_editor,QLabel,PageSubtitle,"Import/calibrate plans, paint occupancy states, and validate start/goal cells.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,map_editor,QLabel,,Paint state,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,map_editor,QLabel,,Validation,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,map_editor,QPushButton,,Pick start,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,map_editor,QPushButton,,Pick goal,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,map_editor,QPushButton,,Paint cells,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,map_editor,QPushButton,,Undo,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,map_editor,QPushButton,,Redo,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,map_editor,QComboBox,,FREE,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,map_editor,QListWidget,,list,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,PageTitle,Robot Configuration,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,robot_configuration,QLabel,PageSubtitle,Battery and operational lifetime are independent simulation limits.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Limits,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Battery capacity,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Operational lifetime,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Speed,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Diameter,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Cleaning width,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Move energy / step,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Clean energy / cell,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Summary,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QLabel,,Estimated max move steps: 2000 Operational lifetime: 30.0 min Cleaning width: 0.300 m,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,robot_configuration,QPushButton,,Default,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,robot_configuration,QPushButton,,Low battery,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,robot_configuration,QPushButton,,Short lifetime,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,robot_configuration,QPushButton,,Apply configuration,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,100.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,1800.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.2500,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.350,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.300,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.05000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QLineEdit,qt_spinbox_lineedit,0.02000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,100.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,1800.000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,0.2500,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,0.350,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,0.300,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,0.05000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,robot_configuration,QDoubleSpinBox,,0.02000,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,PageTitle,Algorithm Setup,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,algorithm_setup,QLabel,PageSubtitle,Choose the point-to-point planner and mission mode.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Algorithm,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Mission mode,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Heuristic,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Manhattan distance × minimum step cost (A* / Greedy),#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Neighbor order,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Up → Right → Down → Left,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Coverage policy,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,"Nearest uncleaned raw-reachable cell (Manhattan; row, column ties)",#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Demo goal,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QLabel,,Choose start and goal in Map Editor. Coverage mode does not require a goal.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,algorithm_setup,QComboBox,,BFS,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,algorithm_setup,QComboBox,,Coverage,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,algorithm_setup,QComboBox,,Choose a demo goal…,#0f172a,#ffffff,17.853,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,PageTitle,2D Simulation,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,simulation_2d,QLabel,PageSubtitle,"Exploration, route, cleaning and robot state come from the simulation engine.",#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Battery,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Elapsed time,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Lifetime remaining,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Coverage,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Current target,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Steps,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Status,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,—,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Legend: # wall   · free (dotted)   ? unknown (hatch)   D door (stripe)   • explored   ◇ frontier   → route   * cleaned  ,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,Playback,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QLabel,,1×,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Run,#ffffff,#0e7490,5.358,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Pause,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Resume,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Step,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Reset,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Stop,#ffffff,#b91c1c,6.47,4.5,True
+light,1.5,1920x1080,simulation_2d,QPushButton,,Show latest state,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,simulation_3d_launcher,QLabel,PageTitle,3D Simulation,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,simulation_3d_launcher,QLabel,PageSubtitle,3D renderer launcher; map and movement state are shared with the simulation engine.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,simulation_3d_launcher,QLabel,,The 3D renderer is maintained as a separate visualization module.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_3d_launcher,QLabel,,3D renderer integration is not configured in this build.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,simulation_3d_launcher,QPushButton,,Open 3D renderer,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,results_dashboard,QLabel,PageTitle,Results Dashboard,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,results_dashboard,QLabel,PageSubtitle,Metrics are read from the completed engine run.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,results_dashboard,QLabel,,No completed run yet.,#0f172a,#f4f6fa,16.5,4.5,True
+light,1.5,1920x1080,report_export,QLabel,PageTitle,Report Export,#0f172a,#f4f6fa,16.5,3.0,True
+light,1.5,1920x1080,report_export,QLabel,PageSubtitle,Save the current experiment configuration and run metrics locally.,#475569,#f4f6fa,7.004,4.5,True
+light,1.5,1920x1080,report_export,QPushButton,,Save experiment configuration as JSON…,#0f172a,#eef2f7,15.88,4.5,True
+light,1.5,1920x1080,report_export,QPushButton,,Export current run as CSV…,#0f172a,#eef2f7,15.88,4.5,True

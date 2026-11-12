@@ -1,0 +1,1190 @@
+{
+  "schema_version": 1,
+  "kind": "run_record",
+  "run_id": "72b0efa56c5265d9a40200e397e35769dd844441fc348d685f129135b0a795cf",
+  "created_utc": "2026-11-12T00:22:37.942315+00:00",
+  "project": {
+    "name": "Smart Vacuum",
+    "version": "0.1.0",
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+    "software": {}
+  },
+  "map": {
+    "id": "imported",
+    "version": "p8-sample-v1",
+    "sha256": "127d4fb51b79b641b06a9c622f07ba4e69b213b5be6a13e3e1cda2014103de88",
+    "rows": 6,
+    "cols": 6,
+    "cell_m": 1.0,
+    "origin_px": [
+      0.0,
+      0.0
+    ],
+    "grid": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "experiment": {
+    "mode": "coverage",
+    "algorithm": "dfs",
+    "algorithm_settings": {
+      "max_expansions": 20000,
+      "time_budget_s": 2.0
+    },
+    "start": [
+      0,
+      0
+    ],
+    "goal": null,
+    "seed": 17,
+    "robot": {
+      "diameter_m": 0.35,
+      "cleaning_width_m": 0.3,
+      "speed_m_per_s": 0.25,
+      "battery_capacity_units": 100.0,
+      "operational_lifetime_s": 1800.0,
+      "move_energy_units_per_step": 0.05,
+      "clean_energy_units_per_cell": 0.02,
+      "idle_energy_units_per_s": 0.001,
+      "safety_reserve_units": 0.0,
+      "move_energy_units_per_m": null,
+      "clean_energy_units_per_s": null,
+      "cleaning_seconds_per_cell": 0.0,
+      "turn_energy_units": 0.0,
+      "turn_time_s": 0.0,
+      "charge_recleaned_cells": false,
+      "provisional": true,
+      "editable_in_ui": true
+    },
+    "policy": {
+      "id": "nearest_uncleaned_manhattan_v1",
+      "configuration": {}
+    },
+    "neighbor_order": [
+      "up",
+      "right",
+      "down",
+      "left"
+    ],
+    "movement_model": "four-neighbor-cardinal",
+    "cost_model": {
+      "transition": "unit"
+    },
+    "heuristic": "manhattan",
+    "search_budgets": {
+      "max_expansions": 20000,
+      "time_budget_s": 2.0
+    }
+  },
+  "raw_results": {
+    "search_results": [
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 2,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.97999494150281e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 3,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.660004146397114e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 2,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00013890000991523266
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 3,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 5.779997445642948e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 3,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 5.849997978657484e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 2,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 3.85999446734786e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 30,
+        "generated": 84,
+        "peak_frontier": 10,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0005186999915167689
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 30,
+        "generated": 86,
+        "peak_frontier": 11,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0006531999679282308
+      },
+      {
+        "found": true,
+        "path_length_steps": 18,
+        "path_cost": 18.0,
+        "expanded": 21,
+        "generated": 58,
+        "peak_frontier": 10,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00044760003220289946
+      },
+      {
+        "found": true,
+        "path_length_steps": 8,
+        "path_cost": 8.0,
+        "expanded": 26,
+        "generated": 74,
+        "peak_frontier": 11,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.000741399941034615
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 30,
+        "generated": 84,
+        "peak_frontier": 12,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0007468000985682011
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 30,
+        "generated": 86,
+        "peak_frontier": 11,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0011215999256819487
+      },
+      {
+        "found": true,
+        "path_length_steps": 2,
+        "path_cost": 2.0,
+        "expanded": 29,
+        "generated": 80,
+        "peak_frontier": 10,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0016673000063747168
+      },
+      {
+        "found": true,
+        "path_length_steps": 15,
+        "path_cost": 15.0,
+        "expanded": 16,
+        "generated": 47,
+        "peak_frontier": 12,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0007517000194638968
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 30,
+        "generated": 85,
+        "peak_frontier": 11,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0007695999229326844
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 30,
+        "generated": 86,
+        "peak_frontier": 11,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0005477999802678823
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 2,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.170000415295362e-05
+      }
+    ],
+    "coverage_result": {
+      "coverage_percent": 100.0,
+      "raw_coverage_percent": 88.57142857142857,
+      "remaining_cells": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "unreachable_cells": [],
+      "structurally_uncoverable": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "cleanable_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "stop_reason": "mission_complete"
+    },
+    "final_robot_state": {
+      "position": [
+        4,
+        0
+      ],
+      "heading": "N",
+      "battery_remaining": 96.58000000000028,
+      "elapsed_time_s": 224.0,
+      "lifetime_remaining_s": 1576.0,
+      "status": "stopped",
+      "cleaned_count": 31,
+      "step_count": 56
+    },
+    "cleaned_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "visualization": {
+      "explored_cells": [
+        [
+          0,
+          5
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "route_cells": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "cleaned_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    }
+  },
+  "metrics": {
+    "expanded": 279,
+    "generated": 787,
+    "repeated_expansions": 0,
+    "peak_frontier": 12,
+    "path_length_steps": 56,
+    "path_length_m": 56.0,
+    "path_cost": 56.0,
+    "executed_steps": 56,
+    "executed_distance_m": 56.0,
+    "search_time_s": 0.008457599789835513,
+    "simulated_travel_time_s": 224.0,
+    "battery_consumed_units": 3.4199999999997175,
+    "battery_remaining_units": 96.58000000000028,
+    "battery_consumed_percent": 3.4199999999997175,
+    "battery_remaining_percent": 96.5800000000003,
+    "lifetime_consumed_s": 224.0,
+    "lifetime_remaining_s": 1576.0,
+    "lifetime_consumed_min": 3.7333333333333334,
+    "lifetime_remaining_min": 26.266666666666666,
+    "lifetime_consumed_percent": 12.444444444444445,
+    "stop_reason": "mission_complete",
+    "cleaned_cells": 31,
+    "coverage_numerator_cells": 31,
+    "coverage_denominator_cells": 35,
+    "raw_coverage_percent": 88.57142857142857,
+    "achievable_numerator_cells": 31,
+    "achievable_denominator_cells": 31,
+    "achievable_coverage_percent": 100.0,
+    "remaining_cells": 4,
+    "unreachable_cells": 0,
+    "structurally_uncoverable_cells": 4
+  },
+  "event_log": {
+    "schema_version": 1,
+    "path": "run_72b0efa56c5265d9a40200e397e35769dd844441fc348d685f129135b0a795cf_20261112T002237942315_0000.events.jsonl",
+    "sha256": "8d1f79dbed3698583ed096a4d166977f0fb0c80b79423d18c03ec51ecaf3d1e8",
+    "event_count": 197
+  }
+}

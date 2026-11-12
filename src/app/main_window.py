@@ -7,20 +7,24 @@ from pathlib import Path
 
 import numpy as np
 from PySide6.QtCore import Qt, QTimer, Signal
-from PySide6.QtGui import QKeySequence, QShortcut
+from PySide6.QtGui import QIcon, QKeySequence, QShortcut
 from PySide6.QtWidgets import (
+    QApplication,
     QComboBox, QDoubleSpinBox, QFileDialog, QFormLayout, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QListWidget, QMainWindow, QMessageBox, QPushButton,
-    QProgressBar, QScrollArea, QSlider, QSpinBox, QStackedWidget, QTabWidget, QListWidgetItem,
+    QLabel, QListWidget, QMainWindow, QMessageBox, QPushButton,
+    QProgressBar, QSlider, QStackedWidget, QTabWidget, QListWidgetItem,
     QVBoxLayout, QWidget,
 )
 
 from src.algorithms.registry import REGISTRY
 from src.app.app_controller import AppController
+from src.app.config import UiSettings, load_ui_settings, save_ui_settings
 from src.app.simulation_worker import SimulationWorker
+from src.app.theme import apply_theme
 from src.map_processing.spec_loader import load_spec
 from src.app import strings as T
 from src.map_processing.constants import CellState
+from src.app.widgets import Banner, Card, MetricTile, PageHeader, StatusChip
 from src.robot.config import RobotConfig
 from src.visualization.two_d.map_canvas import MapCanvas
 from src.visualization.three_d.client import ThreeDClient
@@ -32,7 +36,7 @@ class CalibrationImage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.image = None; self.points = []
-        self.setMinimumSize(320, 220); self.setStyleSheet("background:#eef2f6;border:1px solid #cbd5e1")
+        self.setMinimumSize(320, 220)
 
     def load(self, path):
         from PySide6.QtGui import QPixmap
@@ -46,41 +50,81 @@ class CalibrationImage(QWidget):
 
     def paintEvent(self, event):
         from PySide6.QtGui import QPainter, QPen, QColor
-        painter = QPainter(self); painter.fillRect(self.rect(), QColor("#eef2f6"))
+        painter = QPainter(self)
+        painter.fillRect(self.rect(), self.palette().color(self.backgroundRole()))
         if self.image and not self.image.isNull():
             pix = self.image.scaled(self.size(), Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
             origin = self.rect().center() - pix.rect().center(); painter.drawPixmap(origin, pix)
         else:
-            painter.setPen(QColor("#475569")); painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter,
+            painter.setPen(self.palette().color(self.foregroundRole())); painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter,
                 "Load a floor-plan image, then click the two reference points")
-        painter.setPen(QPen(QColor("#D92D20"), 3))
+        painter.setPen(QPen(self.palette().color(self.palette().ColorRole.Highlight), 3))
         for point in self.points: painter.drawEllipse(int(point[0])-5, int(point[1])-5, 10, 10)
 
 
 class MainWindow(QMainWindow):
     """Eight-screen application with controller-mediated domain operations."""
-    def __init__(self, app_controller: AppController | None = None):
+    def __init__(self, app_controller: AppController | None = None, theme_mode: str | None = None):
         super().__init__()
         self.controller = app_controller or AppController()
+        self.ui_settings = load_ui_settings()
+        self.theme_mode = theme_mode or self.ui_settings.theme
         self.setWindowTitle(T.APP_TITLE); self.resize(1440, 900)
+        self.setWindowIcon(QIcon(str(Path(__file__).resolve().parents[2] / "assets" / "brand" / "app_icon.ico")))
         self._worker: SimulationWorker | None = None
         self._three_d_client=ThreeDClient(self)
         self._three_d_client.process.finished.connect(lambda *_:self.launch_3d.setText("Launch 3D"))
         self._target = None; self._last_seq = -1; self._close_pending = False
         self._build_shell(); self._build_pages(); self._connect()
+        apply_theme(QApplication.instance(), self.theme_mode, window=self)
         self._three_d_client.status.connect(self.three_d_status.setText)
         # Snapshot/event presentation is intentionally capped at 10 Hz. The
         # worker still executes every action; this bounds GUI paint work.
         self.timer = QTimer(self); self.timer.setInterval(100); self.timer.timeout.connect(self._poll_run)
         self._shortcuts()
+        self.status_chip = StatusChip("idle")
+        self.theme_toggle = QPushButton("Theme: Light" if self.theme_mode == "light" else "Theme: Dark")
+        self.theme_toggle.clicked.connect(self._toggle_theme)
+        self.statusBar().addPermanentWidget(self.status_chip)
+        self.statusBar().addPermanentWidget(self.theme_toggle)
         self.statusBar().showMessage(f"Map: {self.controller.map_version}  |  {T.STATUS_IDLE}")
 
     def _build_shell(self):
-        root = QWidget(); layout = QHBoxLayout(root); layout.setContentsMargins(0,0,0,0); layout.setSpacing(0)
-        self.nav = QListWidget(); self.nav.setFixedWidth(220); self.nav.addItems(T.NAVIGATION); self.nav.setCurrentRow(0)
-        self.nav.setStyleSheet("QListWidget{background:#101828;color:#e4e7ec;border:0;padding:10px;font-size:14px} QListWidget::item{padding:13px;border-radius:6px} QListWidget::item:selected{background:#344054;color:white}")
-        self.stack = QStackedWidget(); layout.addWidget(self.nav); layout.addWidget(self.stack,1)
-        self.setCentralWidget(root); self.setStyleSheet("QMainWindow{background:#f8fafc} QPushButton{padding:7px 12px} QGroupBox{font-weight:600}")
+        root = QWidget()
+        layout = QHBoxLayout(root)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+
+        sidebar = QFrame()
+        sidebar.setObjectName("Sidebar")
+        sidebar.setFixedWidth(240)
+        side_layout = QVBoxLayout(sidebar)
+        side_layout.setContentsMargins(14, 16, 14, 16)
+        side_layout.setSpacing(8)
+        brand = QLabel("Smart Vacuum")
+        brand.setObjectName("SidebarBrandTitle")
+        side_layout.addWidget(brand)
+        self.nav = QListWidget()
+        nav_icons = (
+            "home.svg",
+            "grid.svg",
+            "robot.svg",
+            "route.svg",
+            "play.svg",
+            "cube.svg",
+            "chart.svg",
+            "report.svg",
+        )
+        icon_root = Path(__file__).resolve().parents[2] / "assets" / "icons"
+        for label, icon_name in zip(T.NAVIGATION, nav_icons):
+            self.nav.addItem(QListWidgetItem(QIcon(str(icon_root / icon_name)), label))
+        self.nav.setCurrentRow(0)
+        side_layout.addWidget(self.nav, 1)
+
+        self.stack = QStackedWidget()
+        layout.addWidget(sidebar)
+        layout.addWidget(self.stack, 1)
+        self.setCentralWidget(root)
 
     def _build_pages(self):
         self.home = self._home_page(); self.editor = self._editor_page(); self.robot_page = self._robot_page()
@@ -90,31 +134,52 @@ class MainWindow(QMainWindow):
             self.stack.addWidget(page)
 
     def _heading(self, title, subtitle=""):
-        box=QWidget(); lay=QVBoxLayout(box); lay.setContentsMargins(0,0,0,12)
-        label=QLabel(title); label.setStyleSheet("font-size:24px;font-weight:700;color:#101828")
-        lay.addWidget(label)
-        if subtitle:
-            sub=QLabel(subtitle); sub.setStyleSheet("color:#667085;font-size:13px"); lay.addWidget(sub)
-        return box
+        return PageHeader(title, subtitle)
 
     def _page(self, title, subtitle=""):
-        page=QWidget(); lay=QVBoxLayout(page); lay.setContentsMargins(24,20,24,20); lay.addWidget(self._heading(title,subtitle)); return page,lay
+        page = QWidget()
+        lay = QVBoxLayout(page)
+        lay.setContentsMargins(24, 20, 24, 20)
+        lay.setSpacing(16)
+        lay.addWidget(self._heading(title, subtitle))
+        return page, lay
+
+    def _toggle_theme(self):
+        self.theme_mode = "dark" if self.theme_mode == "light" else "light"
+        apply_theme(QApplication.instance(), self.theme_mode, window=self)
+        self.theme_toggle.setText("Theme: Light" if self.theme_mode == "light" else "Theme: Dark")
+        save_ui_settings(UiSettings(theme=self.theme_mode))
 
     def _home_page(self):
-        page,lay=self._page("Project Home","Load a map, configure a run, and inspect results.")
-        self.home_map_button=QPushButton(T.LOAD_DEPARTMENT); self.home_open_button=QPushButton("Open map folder…")
-        self.home_new_button=QPushButton("Create experiment configuration")
-        self.home_load_config=QPushButton("Load experiment JSON…")
-        row=QHBoxLayout(); row.addWidget(self.home_map_button); row.addWidget(self.home_open_button); row.addWidget(self.home_new_button); row.addWidget(self.home_load_config); row.addStretch()
-        lay.addLayout(row)
-        card=QFrame(); card.setStyleSheet("QFrame{background:white;border:1px solid #eaecf0;border-radius:10px;padding:14px}")
-        cardlay=QVBoxLayout(card); cardlay.addWidget(QLabel("Project overview")); cardlay.addWidget(QLabel("Smart Vacuum — route planning, resource simulation, and coverage control."))
-        self.home_summary=QLabel("No map loaded."); cardlay.addWidget(self.home_summary); lay.addWidget(card)
-        cardlay.addWidget(QLabel("Recent experiments and runs"))
-        self.recent_list=QListWidget(); self.recent_list.setMaximumHeight(220); cardlay.addWidget(self.recent_list)
-        cardlay.addWidget(QLabel("Recent maps"))
-        self.recent_maps_list=QListWidget(); self.recent_maps_list.setMaximumHeight(140); cardlay.addWidget(self.recent_maps_list)
-        lay.addStretch()
+        page, lay = self._page("Project Home", "Load a map, configure a run, and inspect results.")
+
+        action_row = QHBoxLayout()
+        self.home_map_button = QPushButton(T.LOAD_DEPARTMENT)
+        self.home_map_button.setProperty("variant", "primary")
+        self.home_open_button = QPushButton("Open map folder…")
+        self.home_new_button = QPushButton("Create experiment")
+        self.home_load_config = QPushButton("Load experiment JSON…")
+        for button in (self.home_map_button, self.home_open_button, self.home_new_button, self.home_load_config):
+            action_row.addWidget(button)
+        lay.addLayout(action_row)
+
+        card = Card()
+        card.layout.addWidget(QLabel("Project overview"))
+        card.layout.addWidget(QLabel("Smart Vacuum — route planning, resource simulation, and coverage control."))
+        self.home_summary = QLabel("No map loaded.")
+        card.layout.addWidget(self.home_summary)
+
+        card.layout.addWidget(QLabel("Recent experiments and runs"))
+        self.recent_list = QListWidget()
+        self.recent_list.setMinimumHeight(160)
+        card.layout.addWidget(self.recent_list)
+
+        card.layout.addWidget(QLabel("Recent maps"))
+        self.recent_maps_list = QListWidget()
+        self.recent_maps_list.setMinimumHeight(110)
+        card.layout.addWidget(self.recent_maps_list)
+        lay.addWidget(card)
+        lay.addStretch(1)
         return page
 
     def _editor_page(self):
@@ -138,18 +203,45 @@ class MainWindow(QMainWindow):
         return page
 
     def _robot_page(self):
-        page,lay=self._page("Robot Configuration","Battery and operational lifetime are independent simulation limits.")
-        form=QFormLayout(); self.robot_fields={}
+        page, lay = self._page("Robot Configuration", "Battery and operational lifetime are independent simulation limits.")
+        body = QHBoxLayout()
+        limits_card = Card()
+        limits_card.layout.addWidget(QLabel("Limits"))
+        form = QFormLayout()
+        self.robot_fields = {}
         specs=(('battery_capacity_units','Battery capacity',0,1e9,100,3),('operational_lifetime_s','Operational lifetime',0,1e9,1800,3),
                ('speed_m_per_s','Speed',.001,100,.25,4),('diameter_m','Diameter',.01,10,.35,3),
                ('cleaning_width_m','Cleaning width',.001,1,.30,3),('move_energy_units_per_step','Move energy / step',0,1e6,.05,5),
                ('clean_energy_units_per_cell','Clean energy / cell',0,1e6,.02,5))
         for key,label,minimum,maximum,value,decimals in specs:
-            spin=QDoubleSpinBox(); spin.setRange(minimum,maximum); spin.setDecimals(decimals); spin.setValue(value); self.robot_fields[key]=spin; form.addRow(label,spin)
-        lay.addLayout(form); presets=QHBoxLayout()
+            spin = QDoubleSpinBox()
+            spin.setRange(minimum, maximum)
+            spin.setDecimals(decimals)
+            spin.setValue(value)
+            self.robot_fields[key] = spin
+            form.addRow(label, spin)
+        limits_card.layout.addLayout(form)
+
+        presets = QHBoxLayout()
         for text,button_name in (("Default","default"),("Low battery","low"),("Short lifetime","short")):
-            b=QPushButton(text); setattr(self,f"preset_{button_name}",b); presets.addWidget(b)
-        lay.addLayout(presets); self.robot_save=QPushButton("Apply configuration"); lay.addWidget(self.robot_save); lay.addStretch()
+            b = QPushButton(text)
+            setattr(self, f"preset_{button_name}", b)
+            presets.addWidget(b)
+        limits_card.layout.addLayout(presets)
+        self.robot_save = QPushButton("Apply configuration")
+        self.robot_save.setProperty("variant", "primary")
+        limits_card.layout.addWidget(self.robot_save)
+
+        summary = Card()
+        summary.layout.addWidget(QLabel("Summary"))
+        self.robot_summary = QLabel("Apply a configuration to compute derived values.")
+        self.robot_summary.setWordWrap(True)
+        summary.layout.addWidget(self.robot_summary)
+
+        body.addWidget(limits_card, 2)
+        body.addWidget(summary, 1)
+        lay.addLayout(body)
+        lay.addStretch(1)
         return page
 
     def _algorithm_page(self):
@@ -174,19 +266,40 @@ class MainWindow(QMainWindow):
         return page
 
     def _simulation_page(self):
-        page,lay=self._page("2D Simulation","Exploration, route, cleaning and robot state come from the simulation engine.")
-        body=QHBoxLayout(); self.sim_canvas=MapCanvas(); body.addWidget(self.sim_canvas,1)
-        panel=QVBoxLayout(); self.hud={}
-        for key,label in (("battery","Battery"),("elapsed","Elapsed time"),("lifetime","Lifetime remaining"),("coverage","Coverage"),("target","Current target"),("steps","Steps"),("status","Status")):
-            panel.addWidget(QLabel(label)); value=QLabel("—"); value.setStyleSheet("font-size:17px;font-weight:600;color:#344054"); self.hud[key]=value; panel.addWidget(value)
-        self.battery_bar=QProgressBar(); panel.addWidget(self.battery_bar); panel.addStretch(); body.addLayout(panel)
-        lay.addLayout(body,1); lay.addWidget(QLabel(T.LEGEND))
+        page, lay = self._page("2D Simulation", "Exploration, route, cleaning and robot state come from the simulation engine.")
+        body = QHBoxLayout()
+        self.sim_canvas = MapCanvas()
+        body.addWidget(self.sim_canvas, 4)
+        panel_card = Card()
+        panel = QVBoxLayout()
+        self.hud = {}
+        for key, label in (("battery", "Battery"), ("elapsed", "Elapsed time"), ("lifetime", "Lifetime remaining"), ("coverage", "Coverage"), ("target", "Current target"), ("steps", "Steps"), ("status", "Status")):
+            tile = MetricTile(label)
+            self.hud[key] = tile.value
+            panel.addWidget(tile)
+        self.battery_bar = QProgressBar()
+        panel.addWidget(self.battery_bar)
+        panel_card.layout.addLayout(panel)
+        body.addWidget(panel_card, 2)
+        lay.addLayout(body, 1)
+        legend = QLabel(T.LEGEND)
+        legend.setProperty("variant", "muted")
+        legend.setWordWrap(True)
+        lay.addWidget(legend)
         controls=QHBoxLayout(); self.run_button=QPushButton(T.RUN); self.pause_button=QPushButton(T.PAUSE); self.resume_button=QPushButton(T.RESUME); self.step_button=QPushButton(T.STEP); self.reset_button=QPushButton(T.RESET); self.stop_button=QPushButton(T.STOP)
         for button in (self.run_button,self.pause_button,self.resume_button,self.step_button,self.reset_button,self.stop_button): controls.addWidget(button)
+        self.run_button.setProperty("variant", "primary")
+        self.stop_button.setProperty("variant", "danger")
         controls.addWidget(QLabel("Playback")); self.speed_slider=QSlider(Qt.Orientation.Horizontal); self.speed_slider.setRange(0,6); self.speed_slider.setValue(2); controls.addWidget(self.speed_slider,1)
         self.speed_label=QLabel("1×"); controls.addWidget(self.speed_label)
         self.skip_to_end=QPushButton("Show latest state"); controls.addWidget(self.skip_to_end)
-        lay.addLayout(controls); self.stop_reason=QLabel(""); self.stop_reason.setStyleSheet("color:#B42318;font-weight:700"); lay.addWidget(self.stop_reason)
+        lay.addLayout(controls)
+        self.stop_banner = Banner("warning", "")
+        self.stop_banner.hide()
+        lay.addWidget(self.stop_banner)
+        self.stop_reason=QLabel("")
+        self.stop_reason.setProperty("variant", "muted")
+        lay.addWidget(self.stop_reason)
         return page
 
     def _three_d_page(self):
@@ -197,8 +310,13 @@ class MainWindow(QMainWindow):
 
     def _results_page(self):
         page,lay=self._page("Results Dashboard","Metrics are read from the completed engine run.")
-        self.results_text=QLabel("No completed run yet."); self.results_text.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
-        self.results_text.setStyleSheet("background:white;padding:18px;border:1px solid #eaecf0;border-radius:8px"); lay.addWidget(self.results_text); lay.addStretch()
+        card = Card()
+        self.results_text=QLabel("No completed run yet.")
+        self.results_text.setWordWrap(True)
+        self.results_text.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
+        card.layout.addWidget(self.results_text)
+        lay.addWidget(card)
+        lay.addStretch()
         return page
 
     def _export_page(self):
@@ -243,7 +361,17 @@ class MainWindow(QMainWindow):
 
     def _refresh(self):
         c=self.controller; self.statusBar().showMessage(f"Map: {c.map_version}  |  {c.run_state.title()}")
+        self.status_chip.set_state(c.run_state)
         self.home_summary.setText(f"Map: {c.map_version}\nDimensions: {c.map.shape if c.map else '—'}\nStart: {c.start or 'not set'}")
+        if c.robot is not None:
+            cfg = c.robot.config
+            steps_est = int(cfg.battery_capacity_units / max(cfg.move_energy_units_per_step, 1e-9))
+            mins = cfg.operational_lifetime_s / 60.0
+            self.robot_summary.setText(
+                f"Estimated max move steps: {steps_est}\n"
+                f"Operational lifetime: {mins:.1f} min\n"
+                f"Cleaning width: {cfg.cleaning_width_m:.3f} m"
+            )
         for canvas in (self.editor_canvas,self.sim_canvas): canvas.set_map(c.map.grid if c.map else None,c.start,c.goal)
         self.validation.clear()
         issues=c.validation_issues()
@@ -259,7 +387,10 @@ class MainWindow(QMainWindow):
         self.recent_list.clear()
         for record in self.controller.recent_experiments()[:12]:
             kind = "Run" if record.get("kind") == "run_record" else "Config"
-            label = f"{kind}: {record.get('algorithm', '—')} · {record.get('mode', '—')} · {record.get('map_version', '—')}"
+            experiment = record.get("experiment", {})
+            label = (f"{kind}: {record.get('algorithm', experiment.get('algorithm', '—'))} · "
+                     f"{record.get('mode', experiment.get('mode', '—'))} · "
+                     f"{record.get('map_version', record.get('map', {}).get('version', '—'))}")
             item = QListWidgetItem(label)
             item.setData(Qt.ItemDataRole.UserRole, record["_path"])
             self.recent_list.addItem(item)
@@ -323,6 +454,7 @@ class MainWindow(QMainWindow):
             self.stop_reason.setText(""); self._last_seq=-1
             if self._three_d_client.is_running:self._three_d_client.begin_run(self.controller.start)
             self._worker=SimulationWorker(self.controller); self._worker.finished_result.connect(self._run_finished); self._worker.failed.connect(self._run_failed)
+            self._worker.record_failed.connect(lambda message: self.statusBar().showMessage(f"Run finished; record save failed: {message}"))
             self._worker.start(); self.timer.start(); self.hud['status'].setText("Running"); self._set_controls(True)
         except Exception as exc: QMessageBox.warning(self,"Cannot start run",str(exc))
 
@@ -333,7 +465,7 @@ class MainWindow(QMainWindow):
         # sequence already rendered instead of rescanning its whole history
         # on every UI tick (which grows increasingly expensive in long runs).
         new_events=[]
-        for event in reversed(sim.events.events):
+        for event in reversed(sim.events.snapshot_events()):
             if event.seq <= self._last_seq:
                 break
             new_events.append(event)
@@ -371,10 +503,8 @@ class MainWindow(QMainWindow):
 
     def _run_finished(self,result):
         self.controller.run_result=result; self.controller.run_state="complete"; self.timer.stop()
-        try:self.controller.record_completed_run(result)
-        except OSError as exc:self.statusBar().showMessage(f"Run finished; could not save recent-run summary: {exc}")
         self._refresh_recent_list()
-        self.hud['status'].setText("Complete"); self._set_controls(False); self._poll_run()
+        self.hud['status'].setText("Complete"); self._set_controls(False); self._poll_run(); self.status_chip.set_state("complete")
         if self.controller.mode=="point_to_point" and self.controller.search_events is not None:
             event_log=self.controller.search_events
             self._three_d_client.send_events(getattr(event_log,"events",event_log))
@@ -388,16 +518,20 @@ class MainWindow(QMainWindow):
 
     def _run_failed(self,message):
         self.controller.run_state="error"; self.timer.stop(); self.stop_reason.setText(f"Error: {message}"); self.hud['status'].setText("Error"); self._set_controls(False)
+        self.status_chip.set_state("error")
+        self.stop_banner.set_kind("error")
+        self.stop_banner.set_text(f"Simulation error: {message}")
+        self.stop_banner.show()
 
     def _pause(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.pause()
         self._three_d_client.send("pause")
-        self.controller.run_state="paused"; self.hud['status'].setText("Paused")
+        self.controller.run_state="paused"; self.hud['status'].setText("Paused"); self.status_chip.set_state("paused")
 
     def _resume(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.resume()
         self._three_d_client.send("play")
-        self.controller.run_state="running"; self.hud['status'].setText("Running")
+        self.controller.run_state="running"; self.hud['status'].setText("Running"); self.status_chip.set_state("running")
 
     def _step(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.step_once(); self.controller.run_state="paused"
@@ -410,7 +544,7 @@ class MainWindow(QMainWindow):
     def _stop(self):
         if self.controller.coverage_controller:self.controller.coverage_controller.cancel()
         self._three_d_client.send("pause")
-        self.controller.run_state="stopping"; self.hud['status'].setText("Stopping…")
+        self.controller.run_state="stopping"; self.hud['status'].setText("Stopping…"); self.status_chip.set_state("stopped")
 
     def _reset(self):
         if self._worker is not None and self._worker.isRunning():
@@ -420,7 +554,8 @@ class MainWindow(QMainWindow):
         if self.controller.coverage_controller:self.controller.coverage_controller.reset()
         self.controller.coverage_controller=None; self.controller.run_state="idle"; self._target=None
         self.sim_canvas.set_map(self.controller.map.grid if self.controller.map else None,self.controller.start,self.controller.goal)
-        self.hud['status'].setText("Ready"); self.stop_reason.clear()
+        self.hud['status'].setText("Ready"); self.stop_reason.clear(); self.status_chip.set_state("idle")
+        self.stop_banner.hide()
 
     def _set_controls(self,running):
         self.run_button.setEnabled(not running); self.pause_button.setEnabled(running); self.resume_button.setEnabled(running)
@@ -431,14 +566,34 @@ class MainWindow(QMainWindow):
         if robot is None:return
         if c.mode=="coverage" and c.run_result is not None:
             r=c.run_result
+            self.stop_reason.setText(f"Stopped: {r.stop_reason.value}")
             text=(f"Algorithm: {c.algorithm}\nMode: Coverage\nCoverage (achievable): {r.coverage_percent:.2f}%\n"
                   f"Raw coverage: {r.raw_coverage_percent:.2f}%\nSteps: {robot.state.step_count}\n"
                   f"Energy used: {robot.config.battery_capacity_units-robot.state.battery_remaining:.3f}\n"
-                  f"Simulated time: {robot.state.elapsed_time_s:.3f} s\nStop reason: {r.stop_reason.value}\n"
+                  f"Battery remaining: {robot.state.battery_remaining:.3f} / {robot.config.battery_capacity_units:.3f}\n"
+                  f"Simulated time: {robot.state.elapsed_time_s:.3f} s\nLifetime remaining: {robot.state.lifetime_remaining_s:.3f} s\nStop reason: {r.stop_reason.value}\n"
                   f"Planner wall time: {r.planner_wall_time_s:.4f} s\nRemaining: {len(r.remaining_cells)} cells")
         else:
             result=c.search_result
             text=f"Algorithm: {c.algorithm}\nMode: Point to point\nFound: {result.found if result else False}\nPath steps: {result.path_length_steps if result else '—'}\nPlanner wall time: {result.execution_time_s:.4f} s" if result else "No completed result."
+        if c.mode != "coverage" and c.search_result is not None:
+            result=c.search_result
+            reason=(robot.termination_reason.value if robot.termination_reason else
+                    "mission_complete" if result.found and robot.state.position==c.goal else
+                    "no_path" if not result.found else "in_progress")
+            self.stop_reason.setText(f"Stopped: {reason}")
+            text += (f"\nSteps: {robot.state.step_count}\nBattery remaining: {robot.state.battery_remaining:.3f} / "
+                     f"{robot.config.battery_capacity_units:.3f}\nSimulated time: {robot.state.elapsed_time_s:.3f} s\n"
+                     f"Lifetime remaining: {robot.state.lifetime_remaining_s:.3f} s\nStop reason: {reason}")
+        self.hud["battery"].setText(f"{robot.state.battery_remaining:.2f} / {robot.config.battery_capacity_units:.2f}")
+        self.hud["elapsed"].setText(f"{robot.state.elapsed_time_s:.2f} s")
+        self.hud["lifetime"].setText(f"{robot.state.lifetime_remaining_s:.2f} s")
+        if c.mode == "coverage" and c.run_result is not None:
+            self.hud["coverage"].setText(f"{c.run_result.raw_coverage_percent:.2f}% raw")
+        self.hud["steps"].setText(str(robot.state.step_count))
+        self.hud["status"].setText("Complete")
+        self.battery_bar.setRange(0,100)
+        self.battery_bar.setValue(int(100*robot.state.battery_remaining/max(robot.config.battery_capacity_units,1e-9)))
         self.results_text.setText(text)
 
     def _save_config(self):

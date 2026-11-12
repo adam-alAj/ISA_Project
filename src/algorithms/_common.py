@@ -22,7 +22,12 @@ def json_node(node: Any) -> Any:
 
 
 class SearchContext(Generic[NodeT]):
-    """Per-call mutable accounting; never shared between algorithm invocations."""
+    """Per-call mutable counters per ``docs/search_counters.md``.
+
+    These values are raw planner accounting; see ``docs/metrics.md`` for the
+    aggregate semantics used by reports. Context state is never shared across
+    invocations.
+    """
 
     def __init__(self, problem: SearchProblem[NodeT], options: SearchOptions | None) -> None:
         self.problem = problem

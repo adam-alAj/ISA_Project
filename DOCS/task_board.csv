@@ -138,7 +138,7 @@
 "P6.18","Ensure long-running search/simulation does not freeze the UI (worker thread or task runner).","P6","P1","<TBD>","Done","P5"
 "P6.19","Handle worker cancellation and safe UI updates.","P6","P1","<TBD>","Done","P5"
 "P6.20","Add configuration save/load and recent map/run access.","P6","P1","<TBD>","Done","P5"
-"P6.21","Perform UI usability testing with a user unfamiliar with the code.","P6","P2","<TBD>","Human Action","P5"
+"P6.21","Perform UI usability testing with a user unfamiliar with the code.","P6","P2","<TBD>","Deferred - HUMAN ACTION (P9.16)","P5"
 "P6.22","Verify UI results match underlying engine data.","P6","P1","<TBD>","Done","P5"
 "P7.01","Create a minimal Ursina prototype and validate performance on target hardware.","P7","P0","<TBD>","In Progress","P5"
 "P7.02","Define conversion from grid/image/world coordinates to 3D scene coordinates.","P7","P1","<TBD>","Done","P5"
@@ -221,3 +221,4 @@
 "P10.19","Conduct a complete rehearsal on the presentation machine.","P10","P1","<TBD>","Not Started","P9"
 "P10.20","Deliver source code, documentation, map assets, reports, test evidence and presentation.","P10","P0","<TBD>","Not Started","P9"
 "P5-GATE","P5 acceptance checks and evidence report: reports/qa/p5_gate_result.md","P5","P0","<TBD>","Done","P3;P4"
+"P6-GATE","Automated P6 acceptance checks and evidence: reports/qa/p6_gate_result.md; usability deferred to P9.16","P6","P0","<TBD>","Done","P5"

@@ -1,0 +1,1146 @@
+{
+  "schema_version": 1,
+  "kind": "run_record",
+  "run_id": "7a74c71ca606f45eab6be36463cab4a069f202341a62cee07db008002b5deb8c",
+  "created_utc": "2026-11-12T00:22:40.375615+00:00",
+  "project": {
+    "name": "Smart Vacuum",
+    "version": "0.1.0",
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+    "software": {}
+  },
+  "map": {
+    "id": "imported",
+    "version": "p8-sample-v1",
+    "sha256": "127d4fb51b79b641b06a9c622f07ba4e69b213b5be6a13e3e1cda2014103de88",
+    "rows": 6,
+    "cols": 6,
+    "cell_m": 1.0,
+    "origin_px": [
+      0.0,
+      0.0
+    ],
+    "grid": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "experiment": {
+    "mode": "coverage",
+    "algorithm": "iddfs",
+    "algorithm_settings": {
+      "max_expansions": 20000,
+      "time_budget_s": 2.0
+    },
+    "start": [
+      0,
+      0
+    ],
+    "goal": null,
+    "seed": 17,
+    "robot": {
+      "diameter_m": 0.35,
+      "cleaning_width_m": 0.3,
+      "speed_m_per_s": 0.25,
+      "battery_capacity_units": 100.0,
+      "operational_lifetime_s": 1800.0,
+      "move_energy_units_per_step": 0.05,
+      "clean_energy_units_per_cell": 0.02,
+      "idle_energy_units_per_s": 0.001,
+      "safety_reserve_units": 0.0,
+      "move_energy_units_per_m": null,
+      "clean_energy_units_per_s": null,
+      "cleaning_seconds_per_cell": 0.0,
+      "turn_energy_units": 0.0,
+      "turn_time_s": 0.0,
+      "charge_recleaned_cells": false,
+      "provisional": true,
+      "editable_in_ui": true
+    },
+    "policy": {
+      "id": "nearest_uncleaned_manhattan_v1",
+      "configuration": {}
+    },
+    "neighbor_order": [
+      "up",
+      "right",
+      "down",
+      "left"
+    ],
+    "movement_model": "four-neighbor-cardinal",
+    "cost_model": {
+      "transition": "unit"
+    },
+    "heuristic": "manhattan",
+    "search_budgets": {
+      "max_expansions": 20000,
+      "time_budget_s": 2.0
+    }
+  },
+  "raw_results": {
+    "search_results": [
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 4,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 9.439990390092134e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 6,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.620003841817379e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 4,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00010740000288933516
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 6,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00016259995754808187
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 6,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 8.780008647590876e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 4,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 7.730000652372837e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 11,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00012850004713982344
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 17,
+        "peak_frontier": 4,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00018639990594238043
+      },
+      {
+        "found": true,
+        "path_length_steps": 4,
+        "path_cost": 4.0,
+        "expanded": 17,
+        "generated": 81,
+        "peak_frontier": 3,
+        "repeated_expansions": 8,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0008472000481560826
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 7,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.0001129999291151762
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 10,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00012320000678300858
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 7,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 9.679992217570543e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 8,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 9.06999921426177e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 4,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 8.070003241300583e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 16,
+        "peak_frontier": 4,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 9.830005001276731e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 13,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 8.139992132782936e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 7,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 5.709996912628412e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 10,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.330001633614302e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 6,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 4.6200002543628216e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 6,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 4.640000406652689e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 8,
+        "peak_frontier": 4,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 5.319993942975998e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 4,
+        "peak_frontier": 2,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 4.379998426884413e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 8,
+        "peak_frontier": 4,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 4.889990668743849e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 10,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.760004907846451e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 9,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 5.6699966080486774e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 9,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 6.940006278455257e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 11,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 8.219992741942406e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 15,
+        "peak_frontier": 4,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 7.780001033097506e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 1,
+        "path_cost": 1.0,
+        "expanded": 1,
+        "generated": 12,
+        "peak_frontier": 3,
+        "repeated_expansions": 0,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 8.629995863884687e-05
+      },
+      {
+        "found": true,
+        "path_length_steps": 2,
+        "path_cost": 2.0,
+        "expanded": 4,
+        "generated": 35,
+        "peak_frontier": 5,
+        "repeated_expansions": 1,
+        "termination_reason": "goal_found",
+        "path": [],
+        "execution_time_s": 0.00019689998589456081
+      }
+    ],
+    "coverage_result": {
+      "coverage_percent": 100.0,
+      "raw_coverage_percent": 88.57142857142857,
+      "remaining_cells": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "unreachable_cells": [],
+      "structurally_uncoverable": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          2
+        ]
+      ],
+      "cleanable_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "stop_reason": "mission_complete"
+    },
+    "final_robot_state": {
+      "position": [
+        5,
+        5
+      ],
+      "heading": "E",
+      "battery_remaining": 97.68000000000022,
+      "elapsed_time_s": 136.0,
+      "lifetime_remaining_s": 1664.0,
+      "status": "stopped",
+      "cleaned_count": 31,
+      "step_count": 34
+    },
+    "cleaned_cells": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "visualization": {
+      "explored_cells": [
+        [
+          1,
+          4
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "route_cells": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "cleaned_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    }
+  },
+  "metrics": {
+    "expanded": 49,
+    "generated": 354,
+    "repeated_expansions": 9,
+    "peak_frontier": 5,
+    "path_length_steps": 34,
+    "path_length_m": 34.0,
+    "path_cost": 34.0,
+    "executed_steps": 34,
+    "executed_distance_m": 34.0,
+    "search_time_s": 0.0034376996336504817,
+    "simulated_travel_time_s": 136.0,
+    "battery_consumed_units": 2.31999999999978,
+    "battery_remaining_units": 97.68000000000022,
+    "battery_consumed_percent": 2.31999999999978,
+    "battery_remaining_percent": 97.68000000000022,
+    "lifetime_consumed_s": 136.0,
+    "lifetime_remaining_s": 1664.0,
+    "lifetime_consumed_min": 2.2666666666666666,
+    "lifetime_remaining_min": 27.733333333333334,
+    "lifetime_consumed_percent": 7.555555555555555,
+    "stop_reason": "mission_complete",
+    "cleaned_cells": 31,
+    "coverage_numerator_cells": 31,
+    "coverage_denominator_cells": 35,
+    "raw_coverage_percent": 88.57142857142857,
+    "achievable_numerator_cells": 31,
+    "achievable_denominator_cells": 31,
+    "achievable_coverage_percent": 100.0,
+    "remaining_cells": 4,
+    "unreachable_cells": 0,
+    "structurally_uncoverable_cells": 4
+  },
+  "event_log": {
+    "schema_version": 1,
+    "path": "run_7a74c71ca606f45eab6be36463cab4a069f202341a62cee07db008002b5deb8c_20261112T002240375615_0000.events.jsonl",
+    "sha256": "dcd052cc22e9396cf327a2ace52518809a8d056a94f9b4dd3df6e4927728f4e2",
+    "event_count": 192
+  }
+}

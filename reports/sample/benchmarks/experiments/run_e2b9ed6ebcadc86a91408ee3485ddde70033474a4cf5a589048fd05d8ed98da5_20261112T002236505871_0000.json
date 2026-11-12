@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "kind": "run_record",
+  "run_id": "e2b9ed6ebcadc86a91408ee3485ddde70033474a4cf5a589048fd05d8ed98da5",
+  "created_utc": "2026-11-12T00:22:36.505871+00:00",
+  "project": {
+    "name": "Smart Vacuum",
+    "version": "0.1.0",
+    "python": "3.12.10",
+    "os": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+    "software": {}
+  },
+  "map": {
+    "id": "imported",
+    "version": "p8-sample-v1",
+    "sha256": "127d4fb51b79b641b06a9c622f07ba4e69b213b5be6a13e3e1cda2014103de88",
+    "rows": 6,
+    "cols": 6,
+    "cell_m": 1.0,
+    "origin_px": [
+      0.0,
+      0.0
+    ],
+    "grid": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "experiment": {
+    "mode": "point_to_point",
+    "algorithm": "greedy",
+    "algorithm_settings": {
+      "max_expansions": 20000,
+      "time_budget_s": 2.0
+    },
+    "start": [
+      0,
+      0
+    ],
+    "goal": [
+      5,
+      5
+    ],
+    "seed": 17,
+    "robot": {
+      "diameter_m": 0.35,
+      "cleaning_width_m": 0.3,
+      "speed_m_per_s": 0.25,
+      "battery_capacity_units": 100.0,
+      "operational_lifetime_s": 1800.0,
+      "move_energy_units_per_step": 0.05,
+      "clean_energy_units_per_cell": 0.02,
+      "idle_energy_units_per_s": 0.001,
+      "safety_reserve_units": 0.0,
+      "move_energy_units_per_m": null,
+      "clean_energy_units_per_s": null,
+      "cleaning_seconds_per_cell": 0.0,
+      "turn_energy_units": 0.0,
+      "turn_time_s": 0.0,
+      "charge_recleaned_cells": false,
+      "provisional": true,
+      "editable_in_ui": true
+    },
+    "policy": null,
+    "neighbor_order": [
+      "up",
+      "right",
+      "down",
+      "left"
+    ],
+    "movement_model": "four-neighbor-cardinal",
+    "cost_model": {
+      "transition": "unit"
+    },
+    "heuristic": "manhattan",
+    "search_budgets": {
+      "max_expansions": 20000,
+      "time_budget_s": 2.0
+    }
+  },
+  "raw_results": {
+    "search_results": [
+      {
+        "found": true,
+        "path": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            5
+          ]
+        ],
+        "path_length_steps": 10,
+        "path_cost": 10.0,
+        "expanded": 10,
+        "generated": 27,
+        "peak_frontier": 8,
+        "repeated_expansions": 0,
+        "execution_time_s": 0.0006523000774905086,
+        "termination_reason": "goal_found"
+      }
+    ],
+    "coverage_result": null,
+    "final_robot_state": {
+      "position": [
+        5,
+        5
+      ],
+      "heading": "S",
+      "battery_remaining": 99.30000000000007,
+      "elapsed_time_s": 40.0,
+      "lifetime_remaining_s": 1760.0,
+      "status": "stopped",
+      "cleaned_count": 10,
+      "step_count": 10
+    },
+    "cleaned_cells": [
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        0,
+        4
+      ],
+      [
+        0,
+        5
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "visualization": {
+      "explored_cells": [
+        [
+          2,
+          5
+        ]
+      ],
+      "route_cells": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "cleaned_cells": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ]
+    }
+  },
+  "metrics": {
+    "expanded": 10,
+    "generated": 27,
+    "repeated_expansions": 0,
+    "peak_frontier": 8,
+    "path_length_steps": 10,
+    "path_length_m": 10.0,
+    "path_cost": 10.0,
+    "executed_steps": 10,
+    "executed_distance_m": 10.0,
+    "search_time_s": 0.0006523000774905086,
+    "simulated_travel_time_s": 40.0,
+    "battery_consumed_units": 0.6999999999999318,
+    "battery_remaining_units": 99.30000000000007,
+    "battery_consumed_percent": 0.6999999999999318,
+    "battery_remaining_percent": 99.30000000000007,
+    "lifetime_consumed_s": 40.0,
+    "lifetime_remaining_s": 1760.0,
+    "lifetime_consumed_min": 0.6666666666666666,
+    "lifetime_remaining_min": 29.333333333333332,
+    "lifetime_consumed_percent": 2.2222222222222223,
+    "stop_reason": "mission_complete",
+    "cleaned_cells": 10,
+    "coverage_numerator_cells": null,
+    "coverage_denominator_cells": null,
+    "raw_coverage_percent": null,
+    "achievable_numerator_cells": null,
+    "achievable_denominator_cells": null,
+    "achievable_coverage_percent": null,
+    "remaining_cells": null,
+    "unreachable_cells": null,
+    "structurally_uncoverable_cells": null
+  },
+  "event_log": {
+    "schema_version": 1,
+    "path": "run_e2b9ed6ebcadc86a91408ee3485ddde70033474a4cf5a589048fd05d8ed98da5_20261112T002236505871_0000.events.jsonl",
+    "sha256": "18ac06040515f24e43f7d429412666db3f284eafe193c4c2829b396ff066e493",
+    "event_count": 34
+  }
+}

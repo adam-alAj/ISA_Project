@@ -9,12 +9,13 @@ from pathlib import Path
 
 from src.algorithms.problem import SearchProblem
 from src.robot.state import StopReason
-from src.simulation.events import EventLog, SimulationSnapshot
+from src.simulation.events import EventLog, SimulationSnapshot, search_result_metrics
 from src.simulation.executor import RouteExecutor
 
 
 @dataclass(frozen=True)
 class CoverageResult:
+    """Final coverage values following ``docs/metrics.md`` §4 definitions."""
     coverage_percent: float
     raw_coverage_percent: float
     remaining_cells: tuple
@@ -66,6 +67,7 @@ class CoverageController:
                     return
                 self._control.wait(.1)
     def reset(self):
+        self.events.close()
         self.robot.reset(); self.events = EventLog(sink_path=self.event_sink_path); self.snapshots.clear(); self._cancel.clear()
 
     def run(self):
@@ -110,7 +112,8 @@ class CoverageController:
             if self.robot.state != before.state or not (self.robot.cleaning.cleaned == before.cleaned).all():
                 raise RuntimeError("planner mutated robot state or cleaning layer")
             self.events.emit("SearchFinished", self.robot.state.elapsed_time_s, found=result.found,
-                             wall_time_s=duration, explored=result.trace or ())
+                             wall_time_s=duration, **search_result_metrics(result),
+                             explored=result.trace or ())
             if not result.found:
                 excluded.add(target); unreachable.add(target)
                 self.events.emit("TargetUnreachable", self.robot.state.elapsed_time_s, target=target,
@@ -134,5 +137,6 @@ class CoverageController:
         ach = self.cleanable.achievable_cells
         achpct = 100*len(clean_cells & ach)/len(ach) if ach else 100.0
         self.events.emit("RunStopped", self.robot.state.elapsed_time_s, reason=stop.value)
+        self.events.close()
         return CoverageResult(achpct, rawpct, tuple(remaining), tuple(sorted(unreachable)),
                               tuple(sorted(self.cleanable.structurally_uncoverable)), stop, planner_time, iterations, self.run_id)

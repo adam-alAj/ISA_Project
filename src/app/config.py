@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -13,6 +14,13 @@ class AppConfig:
 
     root_dir: Path
     logs_dir: Path
+
+
+@dataclass(frozen=True)
+class UiSettings:
+    """Presentation preferences persisted per user profile."""
+
+    theme: str = "light"
 
 
 def config_dir() -> Path:
@@ -33,3 +41,25 @@ def load_config() -> AppConfig:
     logs = root / "logs"
     logs.mkdir(parents=True, exist_ok=True)
     return AppConfig(root_dir=root, logs_dir=logs)
+
+
+def ui_settings_path() -> Path:
+    return config_dir() / "ui_settings.json"
+
+
+def load_ui_settings() -> UiSettings:
+    path = ui_settings_path()
+    if not path.exists():
+        return UiSettings()
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        theme = data.get("theme", "light")
+        return UiSettings(theme=theme if theme in {"light", "dark"} else "light")
+    except (OSError, ValueError, TypeError):
+        return UiSettings()
+
+
+def save_ui_settings(settings: UiSettings) -> None:
+    path = ui_settings_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({"theme": settings.theme}, indent=2), encoding="utf-8")

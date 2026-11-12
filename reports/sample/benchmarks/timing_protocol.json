@@ -1,0 +1,266 @@
+{
+  "point_to_point:bfs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.0007615999784320593,
+    "repetitions": 5,
+    "samples_s": [
+      0.0012888000346720219,
+      0.00042799999937415123,
+      0.000555400038138032,
+      0.0004288000054657459,
+      0.0010055999737232924
+    ],
+    "median_s": 0.000555400038138032,
+    "q1_s": 0.0004288000054657459,
+    "q3_s": 0.0010055999737232924,
+    "iqr_s": 0.0005767999682575464,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "point_to_point:dfs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.0002706999657675624,
+    "repetitions": 5,
+    "samples_s": [
+      0.00023909995798021555,
+      0.0005907999584451318,
+      0.00017300003673881292,
+      0.00019809999503195286,
+      0.00026400003116577864
+    ],
+    "median_s": 0.00023909995798021555,
+    "q1_s": 0.00019809999503195286,
+    "q3_s": 0.00026400003116577864,
+    "iqr_s": 6.590003613382578e-05,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "point_to_point:ucs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.0009047999046742916,
+    "repetitions": 5,
+    "samples_s": [
+      0.0008435000199824572,
+      0.0011152999941259623,
+      0.0012978999875485897,
+      0.0012440999271348119,
+      0.0006237999768927693
+    ],
+    "median_s": 0.0011152999941259623,
+    "q1_s": 0.0008435000199824572,
+    "q3_s": 0.0012440999271348119,
+    "iqr_s": 0.0004005999071523547,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "point_to_point:greedy": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.00020210002548992634,
+    "repetitions": 5,
+    "samples_s": [
+      0.00016579998191446066,
+      0.0002924000145867467,
+      0.00022980000358074903,
+      0.0006523000774905086,
+      0.0006000000284984708
+    ],
+    "median_s": 0.0002924000145867467,
+    "q1_s": 0.00022980000358074903,
+    "q3_s": 0.0006000000284984708,
+    "iqr_s": 0.00037020002491772175,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "point_to_point:astar": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.0009215000318363309,
+    "repetitions": 5,
+    "samples_s": [
+      0.0009281999664381146,
+      0.0006449999054893851,
+      0.00023729994427412748,
+      0.0004221999552100897,
+      0.0006417999975383282
+    ],
+    "median_s": 0.0006417999975383282,
+    "q1_s": 0.0004221999552100897,
+    "q3_s": 0.0006449999054893851,
+    "iqr_s": 0.00022279995027929544,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "point_to_point:iddfs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.010918099898844957,
+    "repetitions": 5,
+    "samples_s": [
+      0.006226299912668765,
+      0.005062200012616813,
+      0.004623699933290482,
+      0.0028325000312179327,
+      0.0033455999800935388
+    ],
+    "median_s": 0.004623699933290482,
+    "q1_s": 0.0033455999800935388,
+    "q3_s": 0.005062200012616813,
+    "iqr_s": 0.0017166000325232744,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "coverage:bfs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.002943699830211699,
+    "repetitions": 5,
+    "samples_s": [
+      0.0023212997475638986,
+      0.0016565998084843159,
+      0.0028603996615856886,
+      0.0025877999141812325,
+      0.001995400176383555
+    ],
+    "median_s": 0.0023212997475638986,
+    "q1_s": 0.001995400176383555,
+    "q3_s": 0.0025877999141812325,
+    "iqr_s": 0.0005923997377976775,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "coverage:dfs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.006366700166836381,
+    "repetitions": 5,
+    "samples_s": [
+      0.004971199785359204,
+      0.005321700009517372,
+      0.00672730035148561,
+      0.008660700172185898,
+      0.007024400169029832
+    ],
+    "median_s": 0.00672730035148561,
+    "q1_s": 0.005321700009517372,
+    "q3_s": 0.007024400169029832,
+    "iqr_s": 0.0017027001595124602,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "coverage:ucs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.0051931001944467425,
+    "repetitions": 5,
+    "samples_s": [
+      0.004476399626582861,
+      0.004184499965049326,
+      0.004208899918012321,
+      0.004134900053031743,
+      0.004730399930849671
+    ],
+    "median_s": 0.004208899918012321,
+    "q1_s": 0.004184499965049326,
+    "q3_s": 0.004476399626582861,
+    "iqr_s": 0.0002918996615335345,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "coverage:greedy": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.003018999588675797,
+    "repetitions": 5,
+    "samples_s": [
+      0.0023631001822650433,
+      0.002546000061556697,
+      0.003171099699102342,
+      0.0037572000874206424,
+      0.00440990028437227
+    ],
+    "median_s": 0.003171099699102342,
+    "q1_s": 0.002546000061556697,
+    "q3_s": 0.0037572000874206424,
+    "iqr_s": 0.0012112000258639455,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "coverage:astar": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.002623600186780095,
+    "repetitions": 5,
+    "samples_s": [
+      0.003087999648414552,
+      0.0037894999841228127,
+      0.0036036998499184847,
+      0.003253599861636758,
+      0.0020147996256127954
+    ],
+    "median_s": 0.003253599861636758,
+    "q1_s": 0.003087999648414552,
+    "q3_s": 0.0036036998499184847,
+    "iqr_s": 0.0005157002015039325,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  },
+  "coverage:iddfs": {
+    "seed": 17,
+    "warmup_discarded": true,
+    "warmup_seconds_discarded": 0.005149600096046925,
+    "repetitions": 5,
+    "samples_s": [
+      0.004317699815146625,
+      0.003606399870477617,
+      0.0030759001383557916,
+      0.003968099597841501,
+      0.004924799664877355
+    ],
+    "median_s": 0.003968099597841501,
+    "q1_s": 0.003606399870477617,
+    "q3_s": 0.004317699815146625,
+    "iqr_s": 0.0007112999446690083,
+    "machine": {
+      "python": "3.12.10",
+      "os": "Windows-11-10.0.26200-SP0",
+      "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel"
+    }
+  }
+}

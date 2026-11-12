@@ -5,8 +5,9 @@ import numpy as np
 from PySide6.QtCore import QPoint, QPointF, QRectF, Qt, Signal
 from PySide6.QtGui import QColor, QFont, QImage, QPainter, QPen, QPolygonF
 from PySide6.QtWidgets import QGraphicsScene, QGraphicsView
+from src.app.theme.map_palette import CANVAS_COLORS, MAP_STATES, OCCUPANCY_TO_STATE
 
-PALETTE = {0: QColor("#F4F1E8"), 1: QColor("#30343B"), 2: QColor("#E5B94D"), 3: QColor("#168A8A")}
+PALETTE = {index: QColor(MAP_STATES[state]["color"]) for index, state in OCCUPANCY_TO_STATE.items()}
 
 
 class MapCanvas(QGraphicsView):
@@ -19,7 +20,7 @@ class MapCanvas(QGraphicsView):
         self.setMinimumSize(480, 360)
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setRenderHint(QPainter.RenderHint.Antialiasing, False)
-        self.setBackgroundBrush(QColor("#F8FAFC"))
+        self.setBackgroundBrush(QColor(CANVAS_COLORS["background"]))
         self.setDragMode(QGraphicsView.DragMode.NoDrag)
         self.grid = None
         self.start = self.goal = self.robot = None
@@ -70,7 +71,9 @@ class MapCanvas(QGraphicsView):
                 painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
                 for r,c in changed:painter.fillRect(QRectF(int(c)*8,int(r)*8,8,8),Qt.GlobalColor.transparent)
                 painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
-                painter.setPen(QPen(Qt.PenStyle.NoPen)); painter.setBrush(QColor(30,150,90,150))
+                explored_color = QColor(MAP_STATES["cleaned"]["color"])
+                explored_color.setAlpha(150)
+                painter.setPen(QPen(Qt.PenStyle.NoPen)); painter.setBrush(explored_color)
                 for r,c in changed:
                     if new_cleaned[r,c]:painter.drawEllipse(QRectF(int(c)*8+2,int(r)*8+2,4,4))
                 painter.end(); self.cleaned=np.array(new_cleaned,copy=True)
@@ -82,7 +85,7 @@ class MapCanvas(QGraphicsView):
                 painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_Clear)
                 for r,c in removed:painter.fillRect(QRectF(c*4,r*4,4,4),Qt.GlobalColor.transparent)
                 painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceOver)
-                painter.setPen(QPen(Qt.PenStyle.NoPen)); painter.setBrush(QColor("#E67E22"))
+                painter.setPen(QPen(Qt.PenStyle.NoPen)); painter.setBrush(QColor(MAP_STATES["explored"]["color"]))
                 for r,c in added:painter.drawEllipse(QRectF(c*4+1,r*4+1,2,2))
                 painter.end(); self.explored=new_explored
         if frontier is not None:
@@ -100,11 +103,14 @@ class MapCanvas(QGraphicsView):
                 state=int(self.grid[r,c]); cell=QRectF(c*scale,r*scale,scale,scale)
                 painter.fillRect(cell,PALETTE.get(state,PALETTE[2]))
                 if state==1:
-                    painter.setPen(QPen(QColor("#62676F"),1)); painter.drawLine(c*scale,r*scale,(c+1)*scale,(r+1)*scale); painter.drawLine((c+1)*scale,r*scale,c*scale,(r+1)*scale)
+                    painter.setPen(QPen(QColor(CANVAS_COLORS["wall_hatch"]),1)); painter.drawLine(c*scale,r*scale,(c+1)*scale,(r+1)*scale); painter.drawLine((c+1)*scale,r*scale,c*scale,(r+1)*scale)
+                elif state==0:
+                    # A restrained centre dot gives FREE cells a non-colour cue.
+                    painter.setPen(QPen(QColor(CANVAS_COLORS["free_dot"]),1)); painter.drawPoint(c*scale+scale//2,r*scale+scale//2)
                 elif state==2:
-                    painter.setPen(QPen(QColor("#8A6814"),1)); painter.drawLine(c*scale,(r+1)*scale,(c+1)*scale,r*scale)
+                    painter.setPen(QPen(QColor(CANVAS_COLORS["door_stripe"]),1)); painter.drawLine(c*scale,(r+1)*scale,(c+1)*scale,r*scale)
                 elif state==3:
-                    painter.setPen(QPen(QColor("#063F46"),1.5)); painter.drawLine(c*scale+2,r*scale+4,(c+1)*scale-2,r*scale+4)
+                    painter.setPen(QPen(QColor(CANVAS_COLORS["unknown_stripe"]),1.5)); painter.drawLine(c*scale+2,r*scale+4,(c+1)*scale-2,r*scale+4)
         painter.end(); self._base_image=image
 
     def render_content(self, width: int, height: int, *, include_marker_labels: bool = True) -> QImage:
@@ -114,7 +120,7 @@ class MapCanvas(QGraphicsView):
         same cached occupancy and overlay painting used by the live view.
         """
         image = QImage(width, height, QImage.Format.Format_RGBA8888)
-        image.fill(QColor("#F8FAFC"))
+        image.fill(QColor(CANVAS_COLORS["background"]))
         if self.grid is None:
             return image
         rows, cols = self.grid.shape
@@ -139,9 +145,9 @@ class MapCanvas(QGraphicsView):
         self.setCursor(Qt.CursorShape.CrossCursor if mode != "none" else Qt.CursorShape.ArrowCursor)
 
     def drawBackground(self, painter: QPainter, rect: QRectF):
-        painter.fillRect(rect, QColor("#F8FAFC"))
+        painter.fillRect(rect, QColor(CANVAS_COLORS["background"]))
         if self.grid is None:
-            painter.setPen(QColor("#475569")); painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, "Load a map to begin")
+            painter.setPen(QColor(CANVAS_COLORS["empty_text"])); painter.drawText(rect, Qt.AlignmentFlag.AlignCenter, "Load a map to begin")
             return
         rows,cols=self.grid.shape; scene=QRectF(0,0,cols,rows)
         painter.drawImage(scene,self._base_image)
@@ -156,27 +162,27 @@ class MapCanvas(QGraphicsView):
         if not self._cleaned_image.isNull():painter.drawImage(scene,self._cleaned_image)
         if not self._explored_image.isNull():painter.drawImage(scene,self._explored_image)
         if self.path:
-            painter.setPen(QPen(QColor("#B42318"),.45,Qt.PenStyle.SolidLine,Qt.PenCapStyle.RoundCap))
+            painter.setPen(QPen(QColor(CANVAS_COLORS["route"]),.45,Qt.PenStyle.SolidLine,Qt.PenCapStyle.RoundCap))
             points=QPolygonF([QPointF(c+.5,r+.5) for r,c in self.path])
             if len(points) > 1:
                 painter.drawPolyline(points)
         if self.frontier:
-            painter.setPen(QPen(QColor("#7A3E9D"),.06)); painter.setBrush(Qt.BrushStyle.NoBrush)
+            painter.setPen(QPen(QColor(MAP_STATES["frontier"]["color"]),.06)); painter.setBrush(Qt.BrushStyle.NoBrush)
             for r,c in self.frontier:
                 painter.drawPolygon(QPolygonF((QPointF(c+.5,r+.12),QPointF(c+.88,r+.5),QPointF(c+.5,r+.88),QPointF(c+.12,r+.5))))
-        self._marker(painter,self.start,"S",QColor("#155EEF"),False)
-        self._marker(painter,self.goal,"G",QColor("#7A3E9D"),False)
-        self._marker(painter,self.robot,"R",QColor("#D92D20"),True)
+        self._marker(painter,self.start,"S",QColor(MAP_STATES["start"]["color"]),False)
+        self._marker(painter,self.goal,"G",QColor(MAP_STATES["frontier"]["color"]),False)
+        self._marker(painter,self.robot,"R",QColor(MAP_STATES["robot"]["color"]),True)
         painter.restore()
 
     def _marker(self,painter,cell,label,color,circle):
         if cell is None:return
         r,c=cell; rect=QRectF(c+.12,r+.12,.76,.76)
-        painter.setPen(QPen(QColor("white"),.06)); painter.setBrush(color)
+        painter.setPen(QPen(QColor(CANVAS_COLORS["marker_text"]),.06)); painter.setBrush(color)
         if circle:painter.drawEllipse(rect)
         else:painter.drawRect(rect)
         if getattr(self, "show_marker_labels", True):
-            font=QFont("Segoe UI"); font.setWeight(QFont.Weight.Bold); font.setPointSizeF(.38); painter.setFont(font); painter.setPen(Qt.GlobalColor.white)
+            font=QFont("Segoe UI"); font.setWeight(QFont.Weight.Bold); font.setPointSizeF(.38); painter.setFont(font); painter.setPen(QColor(CANVAS_COLORS["marker_text"]))
             painter.drawText(rect,Qt.AlignmentFlag.AlignCenter,label)
 
     def mousePressEvent(self,event):

@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import threading
 import time
+import uuid
 from dataclasses import asdict
 from datetime import datetime, timezone
 from collections import deque
@@ -25,6 +26,8 @@ from src.robot.config import RobotConfig
 from src.robot.vacuum_robot import Robot
 from src.simulation.modes import CoverageMission, PointToPointMission
 from src.simulation.simulation_engine import SimulationEngine
+from src.analytics.metrics import extract_metrics
+from src.analytics.records import machine_info, map_sha256, save_run_record, software_versions, stable_run_id
 
 
 class AppController(QObject):
@@ -41,6 +44,7 @@ class AppController(QObject):
         self.start: tuple[int, int] | None = None
         self.goal: tuple[int, int] | None = None
         self.algorithm = "bfs"
+        self.experiment_seed: int | None = None
         self.mode = "coverage"
         self.robot_config = RobotConfig()
         self.robot: Robot | None = None
@@ -162,7 +166,10 @@ class AppController(QObject):
         with self._trace_lock: self._trace_cells.clear()
         with self._trace_lock: self._frontier_cells.clear()
         self._trace_event_count = 0
-        return CoverageController(self.robot, cleanable, policy, REGISTRY[self.algorithm], self.algorithm, options=options)
+        self.experiments_dir.mkdir(parents=True, exist_ok=True)
+        event_path = self.experiments_dir / f".pending_{uuid.uuid4().hex}.jsonl"
+        return CoverageController(self.robot, cleanable, policy, REGISTRY[self.algorithm], self.algorithm,
+                                  options=options, event_sink_path=event_path)
 
     def _trace_event(self, event: dict) -> None:
         node = event.get("node")
@@ -198,6 +205,8 @@ class AppController(QObject):
             return self.engine.run_coverage(CoverageMission(self.coverage_controller.policy), self.coverage_controller)
         if self.goal is None:
             raise ValueError("Choose a point-to-point goal first.")
+        self.experiments_dir.mkdir(parents=True, exist_ok=True)
+        self.engine.event_sink_path = self.experiments_dir / f".pending_{uuid.uuid4().hex}.jsonl"
         with self._trace_lock: self._trace_cells.clear()
         with self._trace_lock: self._frontier_cells.clear()
         self._trace_event_count = 0
@@ -256,7 +265,12 @@ class AppController(QObject):
         """Read saved configurations and run summaries from data/experiments."""
         self.experiments_dir.mkdir(parents=True, exist_ok=True)
         records = []
-        for file in sorted(self.experiments_dir.glob("*.json"), key=lambda item: item.stat().st_mtime, reverse=True):
+        # The directory can contain many large versioned records with embedded
+        # canonical grids. The home screen needs only the newest dozen entries;
+        # parsing the entire history here stalls Qt's GUI thread.
+        newest_files = sorted(self.experiments_dir.glob("*.json"),
+                              key=lambda item: item.stat().st_mtime, reverse=True)[:12]
+        for file in newest_files:
             try:
                 record = json.loads(file.read_text(encoding="utf-8"))
                 if isinstance(record,dict) and record.get("kind") in ("experiment_config", "run_record"):
@@ -287,23 +301,82 @@ class AppController(QObject):
         return [row for row in records if Path(row.get("path","" )).exists()]
 
     def record_completed_run(self, result) -> Path:
-        """Persist a compact run summary in the local experiment directory."""
+        """Persist a versioned P8 record and its immutable event stream sidecar."""
         self.experiments_dir.mkdir(parents=True, exist_ok=True)
         robot = self.robot
-        document = {"schema_version": 1, "kind": "run_record", "created_utc": datetime.now(timezone.utc).isoformat(),
-                    "map_version": self.map_version, "algorithm": self.algorithm, "mode": self.mode,
-                    "start": self.start, "goal": self.goal, "robot": asdict(self.robot_config),
-                    "steps": robot.state.step_count if robot else 0,
-                    "energy_used": self.robot_config.battery_capacity_units - robot.state.battery_remaining if robot else 0,
-                    "simulated_time_s": robot.state.elapsed_time_s if robot else 0,
-                    "coverage_percent": getattr(result, "coverage_percent", None),
-                    "raw_coverage_percent": getattr(result, "raw_coverage_percent", None),
-                    "stop_reason": getattr(getattr(result, "stop_reason", None), "value", None),
-                    "planner_wall_time_s": getattr(result, "planner_wall_time_s", getattr(result, "execution_time_s", None)),
-                    "map_path": str(self.map_path) if self.map_path else None}
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
-        path = self.experiments_dir / f"run_{stamp}.json"
-        path.write_text(json.dumps(document, indent=2), encoding="utf-8")
+        if self.map is None or robot is None or self.start is None:
+            raise ValueError("A completed run requires a loaded map, valid start, and robot.")
+        coverage_result = result if self.mode == "coverage" else None
+        search_result = self.search_result if self.mode == "point_to_point" else None
+        event_log = (self.coverage_controller.events if self.mode == "coverage" and self.coverage_controller
+                     else self.search_events)
+        events = event_log.snapshot_events() if event_log is not None else ()
+        policy = ({"id": self.coverage_controller.policy.policy_id,
+                   "configuration": getattr(self.coverage_controller.policy, "config", {})}
+                  if self.mode == "coverage" and self.coverage_controller else None)
+        result_rows = []
+        if search_result is not None:
+            result_rows.append({"found": search_result.found, "path": [list(cell) for cell in search_result.path],
+                "path_length_steps": search_result.path_length_steps, "path_cost": search_result.path_cost,
+                "expanded": search_result.expanded, "generated": search_result.generated,
+                "peak_frontier": search_result.peak_frontier,
+                "repeated_expansions": search_result.repeated_expansions,
+                "execution_time_s": search_result.execution_time_s,
+                "termination_reason": search_result.termination_reason.value})
+        else:
+            result_rows = [{k: event.payload.get(k) for k in ("found", "path_length_steps", "path_cost", "expanded",
+                "generated", "peak_frontier", "repeated_expansions", "planner_execution_time_s", "termination_reason")}
+                for event in events if event.type == "SearchFinished"]
+            for row in result_rows:
+                row.update({"found": bool(row.get("found")), "path": [],
+                    "execution_time_s": float(row.pop("planner_execution_time_s", 0.0) or 0.0),
+                    "path_length_steps": row.get("path_length_steps"), "path_cost": row.get("path_cost"),
+                    "expanded": int(row.get("expanded") or 0), "generated": int(row.get("generated") or 0),
+                    "peak_frontier": int(row.get("peak_frontier") or 0),
+                    "repeated_expansions": int(row.get("repeated_expansions") or 0),
+                    "termination_reason": row.get("termination_reason") or "unknown"})
+        coverage_metrics_input = ({"remaining_cells": coverage_result.remaining_cells,
+            "unreachable_cells": coverage_result.unreachable_cells,
+            "structurally_uncoverable": coverage_result.structurally_uncoverable,
+            "cleanable_cells": self.coverage_controller.cleanable.cells}
+            if coverage_result is not None and self.coverage_controller else coverage_result)
+        metrics = extract_metrics(search_result, events, mode=self.mode, cell_m=self.map.cell_m,
+                                  robot_config=self.robot_config, coverage_result=coverage_metrics_input)
+        grid_hash = map_sha256(self.map.grid, self.map.cell_m, self.map.origin_px)
+        algorithm_settings = {"max_expansions": 20000, "time_budget_s": 2.0}
+        experiment = {"mode": self.mode, "algorithm": self.algorithm, "algorithm_settings": algorithm_settings,
+                      "start": list(self.start), "goal": list(self.goal) if self.goal else None, "seed": self.experiment_seed,
+                      "robot": asdict(self.robot_config), "policy": policy,
+                      "neighbor_order": ["up", "right", "down", "left"], "movement_model": "four-neighbor-cardinal",
+                      "cost_model": {"transition": "unit"}, "heuristic": "manhattan",
+                      "search_budgets": algorithm_settings}
+        record = {"schema_version": 1, "kind": "run_record",
+            "run_id": stable_run_id(grid_hash, experiment, self.algorithm, policy, self.experiment_seed),
+            "created_utc": datetime.now(timezone.utc).isoformat(),
+            "project": {"name": "Smart Vacuum", "version": "0.1.0", **machine_info(),
+                        "software": software_versions()},
+            "map": {"id": self.map_path.name if self.map_path else "imported", "version": self.map_version,
+                    "sha256": grid_hash, "rows": int(self.map.grid.shape[0]), "cols": int(self.map.grid.shape[1]),
+                    "cell_m": float(self.map.cell_m), "origin_px": list(self.map.origin_px),
+                    "grid": self.map.grid.tolist()},
+            "experiment": experiment,
+            "raw_results": {"search_results": result_rows,
+                "coverage_result": ({"coverage_percent": coverage_result.coverage_percent,
+                    "raw_coverage_percent": coverage_result.raw_coverage_percent,
+                    "remaining_cells": coverage_result.remaining_cells,
+                    "unreachable_cells": coverage_result.unreachable_cells,
+                    "structurally_uncoverable": coverage_result.structurally_uncoverable,
+                    "cleanable_cells": sorted(self.coverage_controller.cleanable.cells),
+                    "stop_reason": coverage_result.stop_reason.value} if coverage_result else None),
+                "final_robot_state": asdict(robot.state),
+                "cleaned_cells": [list(map(int, cell)) for cell in np.argwhere(robot.cleaning.cleaned)],
+                "visualization": {"explored_cells": [list(c) for c in self.trace_cells()],
+                    "route_cells": ([list(c) for c in search_result.path] if search_result is not None else
+                        [list(event.payload["position"]) for event in events if event.type == "MoveExecuted"]),
+                    "cleaned_cells": [list(map(int, cell)) for cell in np.argwhere(robot.cleaning.cleaned)]}},
+            "metrics": metrics}
+        source_path = getattr(event_log, "sink_path", None) if event_log is not None else None
+        path = save_run_record(record, self.experiments_dir, events, event_source_path=source_path)
         self.recent_experiments()
         return path
 

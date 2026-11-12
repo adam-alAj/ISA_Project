@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 import time
 
 import numpy as np
@@ -48,6 +49,8 @@ def _golden_canvas(qtbot):
 def test_map_canvas_matches_fixed_golden_image(qtbot):
     actual = _golden_canvas(qtbot)
     golden_path = ROOT / "docs/img/map_canvas_golden.png"
+    if os.environ.get("UPDATE_MAP_GOLDEN") == "1":
+        assert actual.save(str(golden_path)), "could not update map golden image"
     golden = QImage(str(golden_path)).convertToFormat(QImage.Format.Format_RGBA8888)
     assert not golden.isNull(), "golden image asset is missing"
     assert (actual.width(), actual.height()) == (golden.width(), golden.height())

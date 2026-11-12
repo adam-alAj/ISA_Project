@@ -1,14 +1,62 @@
-# Search counters and trace schema (draft)
+# Search counter and goal-test contract (Freeze point 5 input)
 
-These semantics are shared by BFS, DFS, UCS, Greedy Best-First, A*, and IDDFS.
+**Status: Frozen**  
+**Date: 2026-11-11**  
+Executable validation: `tests/algorithms/test_search.py` and full suite in
+`reports/qa/p6_gate_result.md` (87 tests passed at freeze preparation).
 
-* **expanded**: a node popped from the frontier whose successors are generated. Goal testing happens on pop before expansion; a popped goal is therefore not counted.
-* **generated**: each successor state produced from an expanded node, including duplicates and already-seen states. The start node is not generated.
-* **peak_frontier**: the largest number of pending entries in the queue, stack, or priority queue. Stale priority-queue entries count until popped.
-* **repeated_expansions**: expansions after the first expansion of the same state. IDDFS counts repeats across depth iterations; A* counts reopens after a strictly better g value.
+These definitions apply to BFS, DFS, UCS, Greedy Best-First, A*, and IDDFS.
+Public result names are defined by `SearchResult` in
+`src/algorithms/result.py`; this document is the single semantic reference.
 
-For a valid `start == goal`, all algorithms return `[start]`, cost and step count zero, and zero expansions/generated nodes. Invalid endpoints are rejected before search. BFS, DFS, UCS, Greedy, and A* test goals when popped. IDDFS tests a state when popped within its depth limit.
+## Counters
 
-Trace is optional. When enabled, events are JSON-serializable dictionaries with an `event` field: `NodeExpanded`, `NodeGenerated`, sampled `FrontierSnapshot`, and `GoalReached`. IDDFS also emits `DepthIterationStarted`. Without trace collection or callback, no event dictionaries are built. Neighbor order is Up, Right, Down, Left. Priority ties use insertion order; A* orders by `(f, h, insertion_counter)`.
+- **expanded**: number of times a state is removed from the active frontier and
+  its successors are generated. Goal testing occurs before expansion, so a
+  popped goal does not increment this count. IDDFS states at the depth cutoff
+  are not expanded; IDDFS still tests their successors for whether a deeper
+  iteration could find a route.
+- **generated**: every successor produced while expanding a state, including
+  duplicate successors, already-discovered states, and successors later
+  rejected by duplicate/depth dominance rules. The initial state is not
+  generated. A depth-limited IDDFS node at its cutoff generates its successors
+  for cutoff detection and those successor events count.
+- **repeated_expansions**: each expansion after the first expansion of the
+  same state within one planner call. IDDFS repeats across depth iterations
+  count. A* reopens after a strictly better path cost count when that causes a
+  subsequent expansion. A state that is generated repeatedly but never
+  expanded contributes nothing to this count.
+- **peak_frontier**: maximum number of pending frontier entries observed
+  during the call, including stale priority-queue entries until popped.
+  Duplicate entries count if the algorithm retains them. The initial frontier
+  has size one for a nontrivial valid search. Invalid endpoint and valid
+  `start == goal` early returns have peak zero.
 
-This is a draft contract pending executable test validation and the environment API freeze.
+## Goal-test and termination rules
+
+- Invalid start/goal validation precedes search; invalid endpoints produce
+  zero expansions and generated nodes.
+- A valid `start == goal` returns path `[start]`, zero steps/cost/expansions/
+  generated/repeats/frontier, and `GOAL_FOUND`.
+- BFS, DFS, UCS, Greedy, and A* test for goal when a state is popped, before
+  expansion. IDDFS tests a state when popped in each depth-limited iteration,
+  before cutoff/expansion processing.
+- Search budget checks may terminate before another expansion. A popped goal
+  is accepted before the expansion-budget check because finding the goal
+  requires no successor generation.
+
+## Trace
+
+Trace is optional and does not alter result counters. When enabled, JSON-safe
+trace records may include `NodeExpanded`, `NodeGenerated`, sampled
+`FrontierSnapshot`, `GoalReached`, and IDDFS `DepthIterationStarted`. Without a
+trace collection or callback, no trace dictionaries are constructed.
+Successor order is Up, Right, Down, Left. Priority ties are FIFO insertion
+order; A* orders by `(f, h, insertion_counter)`.
+
+## Freeze record
+
+The counter meanings and goal-test order are frozen for P8 analytics and
+reporting. A semantic change requires an ADR and updates to the search-counter,
+metrics, comparison, and golden-result tests. Search result field names and
+the trace payload remain governed by Freeze point 3 (ADR-0015).

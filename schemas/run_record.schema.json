@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smart-vacuum.local/schemas/run_record.schema.json",
+  "title": "Smart Vacuum Run Record",
+  "description": "Versioned, reproducible raw result record for one point-to-point or coverage run.",
+  "type": "object",
+  "required": ["schema_version", "kind", "run_id", "created_utc", "project", "map", "experiment", "raw_results", "event_log", "metrics"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "kind": {"const": "run_record"},
+    "run_id": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "created_utc": {"type": "string", "format": "date-time"},
+    "project": {
+      "type": "object",
+      "required": ["name", "version", "python", "os", "cpu"],
+      "properties": {
+        "name": {"const": "Smart Vacuum"},
+        "version": {"type": "string"},
+        "python": {"type": "string"},
+        "os": {"type": "string"},
+        "cpu": {"type": "string"},
+        "software": {"type": "object", "additionalProperties": {"type": "string"}}
+      },
+      "additionalProperties": false
+    },
+    "map": {
+      "type": "object",
+      "required": ["id", "version", "sha256", "rows", "cols", "cell_m", "origin_px", "grid"],
+      "properties": {
+        "id": {"type": "string"},
+        "version": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "rows": {"type": "integer", "minimum": 1},
+        "cols": {"type": "integer", "minimum": 1},
+        "cell_m": {"type": "number", "exclusiveMinimum": 0},
+        "origin_px": {"type": "array", "prefixItems": [{"type": "number"}, {"type": "number"}], "minItems": 2, "maxItems": 2},
+        "grid": {"type": "array", "items": {"type": "array", "items": {"type": "integer", "minimum": 0, "maximum": 255}}}
+      },
+      "additionalProperties": false
+    },
+    "experiment": {
+      "type": "object",
+      "required": ["mode", "algorithm", "algorithm_settings", "start", "goal", "seed", "robot", "policy", "neighbor_order", "movement_model", "cost_model", "heuristic"],
+      "properties": {
+        "mode": {"enum": ["point_to_point", "coverage"]},
+        "algorithm": {"enum": ["bfs", "dfs", "ucs", "greedy", "astar", "iddfs"]},
+        "algorithm_settings": {"type": "object"},
+        "start": {"$ref": "#/$defs/cell"},
+        "goal": {"oneOf": [{"$ref": "#/$defs/cell"}, {"type": "null"}]},
+        "seed": {"oneOf": [{"type": "integer"}, {"type": "null"}]},
+        "robot": {"type": "object"},
+        "policy": {"oneOf": [{"type": "object"}, {"type": "null"}]},
+        "neighbor_order": {"type": "array", "items": {"enum": ["up", "right", "down", "left"]}, "minItems": 4, "maxItems": 4},
+        "movement_model": {"type": "string"},
+        "cost_model": {"type": "object"},
+        "heuristic": {"oneOf": [{"type": "string"}, {"type": "null"}]},
+        "search_budgets": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "raw_results": {
+      "type": "object",
+      "required": ["search_results", "coverage_result", "final_robot_state", "cleaned_cells"],
+      "properties": {
+        "search_results": {"type": "array", "items": {"$ref": "#/$defs/search_result"}},
+        "coverage_result": {"oneOf": [{"type": "object"}, {"type": "null"}]},
+        "final_robot_state": {"type": "object"},
+        "cleaned_cells": {"type": "array", "items": {"$ref": "#/$defs/cell"}},
+        "visualization": {"type": "object", "properties": {
+          "explored_cells": {"type": "array", "items": {"$ref": "#/$defs/cell"}},
+          "route_cells": {"type": "array", "items": {"$ref": "#/$defs/cell"}},
+          "cleaned_cells": {"type": "array", "items": {"$ref": "#/$defs/cell"}}
+        }, "additionalProperties": false}
+      },
+      "additionalProperties": false
+    },
+    "event_log": {
+      "type": "object",
+      "required": ["schema_version", "path", "sha256", "event_count"],
+      "properties": {
+        "schema_version": {"type": "integer", "minimum": 1},
+        "path": {"type": "string", "description": "Relative to this run-record JSON file."},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "event_count": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "metrics": {"type": "object", "description": "Derived values using docs/metrics.md frozen formulas.", "additionalProperties": true}
+  },
+  "$defs": {
+    "cell": {"type": "array", "prefixItems": [{"type": "integer", "minimum": 0}, {"type": "integer", "minimum": 0}], "minItems": 2, "maxItems": 2},
+    "search_result": {
+      "type": "object",
+      "required": ["found", "path", "path_length_steps", "path_cost", "expanded", "generated", "peak_frontier", "repeated_expansions", "execution_time_s", "termination_reason"],
+      "properties": {
+        "found": {"type": "boolean"},
+        "path": {"type": "array", "items": {"$ref": "#/$defs/cell"}},
+        "path_length_steps": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+        "path_cost": {"oneOf": [{"type": "number", "minimum": 0}, {"type": "null"}]},
+        "expanded": {"type": "integer", "minimum": 0},
+        "generated": {"type": "integer", "minimum": 0},
+        "peak_frontier": {"type": "integer", "minimum": 0},
+        "repeated_expansions": {"type": "integer", "minimum": 0},
+        "execution_time_s": {"type": "number", "minimum": 0},
+        "termination_reason": {"type": "string"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

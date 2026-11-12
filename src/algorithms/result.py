@@ -48,7 +48,12 @@ class SearchOptions:
 
 @dataclass(frozen=True)
 class SearchResult(Generic[NodeT]):
-    """Comparable output from any point-to-point search algorithm."""
+    """Comparable point-to-point result; counter semantics are frozen in docs/search_counters.md.
+
+    Metric names, path length/cost, and timing interpretation are defined in
+    ``docs/metrics.md``. These fields are raw planner output, not robot travel
+    or simulated action time.
+    """
 
     found: bool
     path: tuple[NodeT, ...]

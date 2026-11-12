@@ -2,8 +2,9 @@
 from src.simulation.modes import CoverageMission, PointToPointMission
 
 class SimulationEngine:
-    def __init__(self, robot):
+    def __init__(self, robot, event_sink_path=None):
         self.robot = robot
+        self.event_sink_path = event_sink_path
 
     def run_point_to_point(self, mission, planner, options=None):
         if not isinstance(mission, PointToPointMission):
@@ -11,10 +12,10 @@ class SimulationEngine:
         if mission.start != self.robot.state.position:
             raise ValueError("mission start must equal the robot's current position")
         from src.algorithms.problem import SearchProblem
-        from src.simulation.events import EventLog
+        from src.simulation.events import EventLog, search_result_metrics
         from src.simulation.executor import RouteExecutor
         from time import perf_counter
-        events = EventLog(); events.emit("RunStarted", self.robot.state.elapsed_time_s, mode="point_to_point")
+        events = EventLog(sink_path=self.event_sink_path); events.emit("RunStarted", self.robot.state.elapsed_time_s, mode="point_to_point")
         base = SearchProblem.from_grid_map(self.robot.grid_map, mission.start, mission.goal)
         nav = self.robot.footprint.navigable
         problem = SearchProblem(base.start, base.goal,
@@ -25,8 +26,16 @@ class SimulationEngine:
         start = perf_counter(); result = planner(problem, options); wall = perf_counter()-start
         if self.robot.state != before.state or not (self.robot.cleaning.cleaned == before.cleaned).all():
             raise RuntimeError("planner mutated robot state")
-        events.emit("SearchFinished", self.robot.state.elapsed_time_s, found=result.found, wall_time_s=wall)
-        if result.found: RouteExecutor(self.robot, events).execute(result.path)
+        events.emit("SearchFinished", self.robot.state.elapsed_time_s, found=result.found,
+                    wall_time_s=wall, **search_result_metrics(result))
+        if result.found:
+            RouteExecutor(self.robot, events).execute(result.path)
+            if self.robot.termination_reason is None and self.robot.state.position == mission.goal:
+                from src.robot.state import StopReason
+                self.robot.stop(StopReason.MISSION_COMPLETE)
+                events.emit("RunStopped", self.robot.state.elapsed_time_s,
+                            reason=StopReason.MISSION_COMPLETE.value)
+        events.close()
         return result, events
 
     def run_coverage(self, mission: CoverageMission, controller):

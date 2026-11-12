@@ -1,0 +1,46 @@
+{"payload": {"mode": "point_to_point"}, "schema_version": 1, "seq": 0, "t_sim": 0.0, "type": "RunStarted"}
+{"payload": {}, "schema_version": 1, "seq": 1, "t_sim": 0.0, "type": "SearchStarted"}
+{"payload": {"expanded": 292, "found": true, "generated": 1147, "path_cost": 14.0, "path_length_steps": 14, "peak_frontier": 37, "planner_execution_time_s": 0.012615300016477704, "repeated_expansions": 0, "termination_reason": "goal_found", "wall_time_s": 0.01266040001064539}, "schema_version": 1, "seq": 2, "t_sim": 0.0, "type": "SearchFinished"}
+{"payload": {"battery": 9.77, "lifetime": 1799.6, "position": [118, 55]}, "schema_version": 1, "seq": 3, "t_sim": 0.4, "type": "MoveExecuted"}
+{"payload": {"battery": 9.77, "lifetime": 1799.6}, "schema_version": 1, "seq": 4, "t_sim": 0.4, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 54], [117, 55], [117, 56], [118, 54], [118, 55], [118, 56], [119, 54], [119, 55], [119, 56]]}, "schema_version": 1, "seq": 5, "t_sim": 0.4, "type": "CellsCleaned"}
+{"payload": {"battery": 9.66, "lifetime": 1799.1999999999998, "position": [118, 56]}, "schema_version": 1, "seq": 6, "t_sim": 0.8, "type": "MoveExecuted"}
+{"payload": {"battery": 9.66, "lifetime": 1799.1999999999998}, "schema_version": 1, "seq": 7, "t_sim": 0.8, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 57], [118, 57], [119, 57]]}, "schema_version": 1, "seq": 8, "t_sim": 0.8, "type": "CellsCleaned"}
+{"payload": {"battery": 9.55, "lifetime": 1798.7999999999997, "position": [118, 57]}, "schema_version": 1, "seq": 9, "t_sim": 1.2000000000000002, "type": "MoveExecuted"}
+{"payload": {"battery": 9.55, "lifetime": 1798.7999999999997}, "schema_version": 1, "seq": 10, "t_sim": 1.2000000000000002, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 58], [118, 58], [119, 58]]}, "schema_version": 1, "seq": 11, "t_sim": 1.2000000000000002, "type": "CellsCleaned"}
+{"payload": {"battery": 9.440000000000001, "lifetime": 1798.3999999999996, "position": [118, 58]}, "schema_version": 1, "seq": 12, "t_sim": 1.6, "type": "MoveExecuted"}
+{"payload": {"battery": 9.440000000000001, "lifetime": 1798.3999999999996}, "schema_version": 1, "seq": 13, "t_sim": 1.6, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 59], [118, 59], [119, 59]]}, "schema_version": 1, "seq": 14, "t_sim": 1.6, "type": "CellsCleaned"}
+{"payload": {"battery": 9.330000000000002, "lifetime": 1797.9999999999995, "position": [118, 59]}, "schema_version": 1, "seq": 15, "t_sim": 2.0, "type": "MoveExecuted"}
+{"payload": {"battery": 9.330000000000002, "lifetime": 1797.9999999999995}, "schema_version": 1, "seq": 16, "t_sim": 2.0, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 60], [118, 60], [119, 60]]}, "schema_version": 1, "seq": 17, "t_sim": 2.0, "type": "CellsCleaned"}
+{"payload": {"battery": 9.220000000000002, "lifetime": 1797.5999999999995, "position": [118, 60]}, "schema_version": 1, "seq": 18, "t_sim": 2.4, "type": "MoveExecuted"}
+{"payload": {"battery": 9.220000000000002, "lifetime": 1797.5999999999995}, "schema_version": 1, "seq": 19, "t_sim": 2.4, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 61], [118, 61], [119, 61]]}, "schema_version": 1, "seq": 20, "t_sim": 2.4, "type": "CellsCleaned"}
+{"payload": {"battery": 9.110000000000003, "lifetime": 1797.1999999999994, "position": [118, 61]}, "schema_version": 1, "seq": 21, "t_sim": 2.8, "type": "MoveExecuted"}
+{"payload": {"battery": 9.110000000000003, "lifetime": 1797.1999999999994}, "schema_version": 1, "seq": 22, "t_sim": 2.8, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 62], [118, 62], [119, 62]]}, "schema_version": 1, "seq": 23, "t_sim": 2.8, "type": "CellsCleaned"}
+{"payload": {"battery": 9.000000000000004, "lifetime": 1796.7999999999993, "position": [118, 62]}, "schema_version": 1, "seq": 24, "t_sim": 3.1999999999999997, "type": "MoveExecuted"}
+{"payload": {"battery": 9.000000000000004, "lifetime": 1796.7999999999993}, "schema_version": 1, "seq": 25, "t_sim": 3.1999999999999997, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 63], [118, 63], [119, 63]]}, "schema_version": 1, "seq": 26, "t_sim": 3.1999999999999997, "type": "CellsCleaned"}
+{"payload": {"battery": 8.890000000000004, "lifetime": 1796.3999999999992, "position": [118, 63]}, "schema_version": 1, "seq": 27, "t_sim": 3.5999999999999996, "type": "MoveExecuted"}
+{"payload": {"battery": 8.890000000000004, "lifetime": 1796.3999999999992}, "schema_version": 1, "seq": 28, "t_sim": 3.5999999999999996, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 64], [118, 64], [119, 64]]}, "schema_version": 1, "seq": 29, "t_sim": 3.5999999999999996, "type": "CellsCleaned"}
+{"payload": {"battery": 8.780000000000005, "lifetime": 1795.999999999999, "position": [118, 64]}, "schema_version": 1, "seq": 30, "t_sim": 3.9999999999999996, "type": "MoveExecuted"}
+{"payload": {"battery": 8.780000000000005, "lifetime": 1795.999999999999}, "schema_version": 1, "seq": 31, "t_sim": 3.9999999999999996, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 65], [118, 65], [119, 65]]}, "schema_version": 1, "seq": 32, "t_sim": 3.9999999999999996, "type": "CellsCleaned"}
+{"payload": {"battery": 8.670000000000005, "lifetime": 1795.599999999999, "position": [118, 65]}, "schema_version": 1, "seq": 33, "t_sim": 4.3999999999999995, "type": "MoveExecuted"}
+{"payload": {"battery": 8.670000000000005, "lifetime": 1795.599999999999}, "schema_version": 1, "seq": 34, "t_sim": 4.3999999999999995, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 66], [118, 66], [119, 66]]}, "schema_version": 1, "seq": 35, "t_sim": 4.3999999999999995, "type": "CellsCleaned"}
+{"payload": {"battery": 8.560000000000006, "lifetime": 1795.199999999999, "position": [118, 66]}, "schema_version": 1, "seq": 36, "t_sim": 4.8, "type": "MoveExecuted"}
+{"payload": {"battery": 8.560000000000006, "lifetime": 1795.199999999999}, "schema_version": 1, "seq": 37, "t_sim": 4.8, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 67], [118, 67], [119, 67]]}, "schema_version": 1, "seq": 38, "t_sim": 4.8, "type": "CellsCleaned"}
+{"payload": {"battery": 8.450000000000006, "lifetime": 1794.7999999999988, "position": [118, 67]}, "schema_version": 1, "seq": 39, "t_sim": 5.2, "type": "MoveExecuted"}
+{"payload": {"battery": 8.450000000000006, "lifetime": 1794.7999999999988}, "schema_version": 1, "seq": 40, "t_sim": 5.2, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 68], [118, 68], [119, 68]]}, "schema_version": 1, "seq": 41, "t_sim": 5.2, "type": "CellsCleaned"}
+{"payload": {"battery": 8.340000000000007, "lifetime": 1794.3999999999987, "position": [118, 68]}, "schema_version": 1, "seq": 42, "t_sim": 5.6000000000000005, "type": "MoveExecuted"}
+{"payload": {"battery": 8.340000000000007, "lifetime": 1794.3999999999987}, "schema_version": 1, "seq": 43, "t_sim": 5.6000000000000005, "type": "ResourceUpdated"}
+{"payload": {"cells": [[117, 69], [118, 69], [119, 69]]}, "schema_version": 1, "seq": 44, "t_sim": 5.6000000000000005, "type": "CellsCleaned"}
+{"payload": {"reason": "mission_complete"}, "schema_version": 1, "seq": 45, "t_sim": 5.6000000000000005, "type": "RunStopped"}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "run_record",
+  "created_utc": "2026-11-11T14:23:43.428229+00:00",
+  "map_version": "1.0-draft",
+  "algorithm": "bfs",
+  "mode": "coverage",
+  "start": [
+    118,
+    54
+  ],
+  "goal": null,
+  "robot": {
+    "diameter_m": 0.35,
+    "cleaning_width_m": 0.3,
+    "speed_m_per_s": 0.25,
+    "battery_capacity_units": 100.0,
+    "operational_lifetime_s": 1800.0,
+    "move_energy_units_per_step": 0.05,
+    "clean_energy_units_per_cell": 0.02,
+    "idle_energy_units_per_s": 0.001,
+    "safety_reserve_units": 0.0,
+    "move_energy_units_per_m": null,
+    "clean_energy_units_per_s": null,
+    "cleaning_seconds_per_cell": 0.0,
+    "turn_energy_units": 0.0,
+    "turn_time_s": 0.0,
+    "charge_recleaned_cells": false,
+    "provisional": true,
+    "editable_in_ui": true
+  },
+  "steps": 0,
+  "energy_used": 0.18000000000000682,
+  "simulated_time_s": 0.0,
+  "coverage_percent": 0.09610250934329952,
+  "raw_coverage_percent": 0.08842601689919434,
+  "stop_reason": "user_stop",
+  "planner_wall_time_s": 0.0,
+  "map_path": "C:\\Users\\HP\\Desktop\\ISA\\data\\maps\\department_v1"
+}

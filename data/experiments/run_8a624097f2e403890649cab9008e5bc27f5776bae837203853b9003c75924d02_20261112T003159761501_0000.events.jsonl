@@ -1,0 +1,4 @@
+{"payload": {"algorithm": "bfs", "run_id": "ce659bdcd9f6b470b8cc224a2b71140e6e26e8479d8f120fcdf7da34e1f1389e"}, "schema_version": 1, "seq": 0, "t_sim": 0.0, "type": "RunStarted"}
+{"payload": {"cells": [[117, 53], [117, 54], [117, 55], [118, 53], [118, 54], [118, 55], [119, 53], [119, 54], [119, 55]]}, "schema_version": 1, "seq": 1, "t_sim": 0.0, "type": "CellsCleaned"}
+{"payload": {"battery": 99.82, "lifetime": 1800.0}, "schema_version": 1, "seq": 2, "t_sim": 0.0, "type": "ResourceUpdated"}
+{"payload": {"reason": "user_stop"}, "schema_version": 1, "seq": 3, "t_sim": 0.0, "type": "RunStopped"}

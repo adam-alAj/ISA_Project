@@ -22,3 +22,6 @@ Each ADR records context, decision, consequences, and status. Human decisions re
 | ADR-0016 | Simulation event/snapshot contract | Accepted; Freeze point 4 |
 | ADR-0017 | Safe-action pause and single-step control | Accepted for P6 integration |
 | ADR-0018 | QGraphicsView map renderer | Accepted for P6 |
+| ADR-0019 | Metrics and run-record contract (Freeze point 5) | Accepted |
+| ADR-0020 | Start-reachable robot centres for achievable coverage | Accepted |
+| ADR-0021 | Raw planner summaries in SearchFinished events | Accepted; additive schema-1 payload |

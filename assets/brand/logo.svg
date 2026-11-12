@@ -1,0 +1,7 @@
+<svg width="512" height="140" viewBox="0 0 512 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="12" width="116" height="116" rx="26" fill="#0E7490"/>
+  <circle cx="66" cy="70" r="31" fill="#E6F3F6"/>
+  <path d="M42 90C54 78 66 78 78 66C86 58 94 50 102 50" stroke="#0E7490" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="66" cy="70" r="8" fill="#0E7490"/>
+  <text x="150" y="82" fill="#0F172A" font-size="44" font-family="Segoe UI, Arial, sans-serif" font-weight="700">Smart Vacuum</text>
+</svg>
