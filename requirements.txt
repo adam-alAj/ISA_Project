@@ -1,11 +1,10 @@
-# Versions remain unpinned until P0 smoke checks pass in the target Python environment.
+﻿# Versions remain unpinned until P0 smoke checks pass in the target Python environment.
 PySide6
 opencv-python
 numpy
 shapely
 matplotlib
 pandas
-ursina
 reportlab
 pypdf
 jsonschema
@@ -14,3 +13,4 @@ networkx
 pytest
 pytest-qt
 ruff
+

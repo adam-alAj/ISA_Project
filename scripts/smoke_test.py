@@ -1,4 +1,4 @@
-"""Exercise each P0 dependency and print an individual pass/fail result."""
+﻿"""Exercise each P0 dependency and print an individual pass/fail result."""
 
 from __future__ import annotations
 
@@ -81,9 +81,6 @@ def main() -> int:
             pdf.save()
             assert target.is_file() and target.stat().st_size > 0
 
-    def ursina_check() -> None:
-        import ursina  # noqa: F401
-
     def docx_check() -> None:
         from docx import Document
 
@@ -110,7 +107,6 @@ def main() -> int:
         ("matplotlib PNG output", matplotlib_check),
         ("pandas DataFrame", pandas_check),
         ("reportlab one-page PDF", reportlab_check),
-        ("ursina import", ursina_check),
         ("python-docx import", docx_check),
         ("networkx graph", networkx_check),
         ("pytest import", pytest_check),
@@ -119,7 +115,7 @@ def main() -> int:
     for name, check in checks:
         results.append(run_check(name, check))
 
-    for distribution in ("PySide6", "opencv-python", "numpy", "shapely", "matplotlib", "pandas", "ursina", "reportlab", "python-docx", "networkx", "pytest", "ruff"):
+    for distribution in ("PySide6", "opencv-python", "numpy", "shapely", "matplotlib", "pandas", "reportlab", "python-docx", "networkx", "pytest", "ruff"):
         try:
             version = importlib.metadata.version(distribution)
         except importlib.metadata.PackageNotFoundError:
@@ -133,3 +129,6 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+

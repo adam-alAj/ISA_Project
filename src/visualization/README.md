@@ -1,1 +1,1 @@
-﻿2D and 3D views over shared simulation state.
+﻿2D map views over shared simulation state; presentation adapters do not own search or simulation policy.

@@ -1,4 +1,4 @@
-"""Lightweight guard against UI/graphics imports in core packages."""
+﻿"""Lightweight guard against UI/graphics imports in core packages."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE_DIRS = ("environment", "robot", "algorithms", "coverage", "simulation")
-FORBIDDEN = re.compile(r"^\s*(?:from|import)\s+(?:PySide6|ursina|matplotlib)(?:\.|\s|$)", re.MULTILINE | re.IGNORECASE)
+FORBIDDEN = re.compile(r"^\s*(?:from|import)\s+(?:PySide6|matplotlib)(?:\.|\s|$)", re.MULTILINE | re.IGNORECASE)
 
 
 def main() -> int:
@@ -27,3 +27,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
